@@ -333,6 +333,7 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_btnLogoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -345,6 +346,11 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
         // TODO add your handling code here:
+    Carrito c = new Carrito();
+    c.setVisible(true);
+    c.setLocationRelativeTo(this);
+    this.dispose();
+        
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto1ActionPerformed
@@ -365,6 +371,10 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
+    Perfil p = new Perfil();
+    p.setVisible(true);
+    p.setLocationRelativeTo(this);
+    this.dispose();     
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnProducto4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto4ActionPerformed

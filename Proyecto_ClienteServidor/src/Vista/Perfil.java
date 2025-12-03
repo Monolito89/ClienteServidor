@@ -1,6 +1,7 @@
 package Vista;
 
-
+import javax.swing.ImageIcon;
+import java.awt.Image;
 
 /**
  *
@@ -14,8 +15,9 @@ public class Perfil extends javax.swing.JFrame {
     public Perfil() {
         initComponents();
         setResizable(false);
+        
     }
-    
+     
     public void limpiar(){
 
     }
@@ -138,13 +140,13 @@ public class Perfil extends javax.swing.JFrame {
                         .addComponent(btnAdministrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlSuperiorLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addGroup(pnlSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnlSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlSuperiorLayout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addGroup(pnlSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtBarraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -212,12 +214,16 @@ public class Perfil extends javax.swing.JFrame {
         tlbProducto.setPreferredSize(new java.awt.Dimension(1280, 60));
 
         btnAtras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Atras.png"))); // NOI18N
         btnAtras.setText("Atras");
         btnAtras.setFocusable(false);
         btnAtras.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnAtras.setMaximumSize(new java.awt.Dimension(200, 60));
         btnAtras.setPreferredSize(new java.awt.Dimension(200, 60));
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
         tlbProducto.add(btnAtras);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -297,7 +303,7 @@ public class Perfil extends javax.swing.JFrame {
         pnlPantalla.setLayout(pnlPantallaLayout);
         pnlPantallaLayout.setHorizontalGroup(
             pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
+            .addComponent(pnlSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, 1379, Short.MAX_VALUE)
             .addComponent(tlbOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlPantallaLayout.createSequentialGroup()
                 .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +325,7 @@ public class Perfil extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 567, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pnlPantallaLayout.createSequentialGroup()
                 .addGap(428, 428, 428)
@@ -366,6 +372,10 @@ public class Perfil extends javax.swing.JFrame {
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
         // TODO add your handling code here:
+    MenuInicio menu = new MenuInicio();
+    menu.setLocationRelativeTo(null); // Centra la ventana
+    menu.setVisible(true);            // Muestra el menú
+    this.dispose();                   // Cierra la ventana actual (Perfil)
     }//GEN-LAST:event_btnLogoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -395,6 +405,14 @@ public class Perfil extends javax.swing.JFrame {
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHistorialActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
+    MenuInicio menu = new MenuInicio();
+    menu.setLocationRelativeTo(null);
+    menu.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,27 +1,14 @@
-package Main;
+package Main; 
 
+import Vista.MenuInicio;
 
-import Vista.Carrito;
-
-/**
- *
- * @author Dilan
- */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
-    
-    
     public static void main(String[] args) {
-        
-        // Muestra interfaz principal
-        Carrito menuInicio = new Carrito();
+
+        // Mostrar la interfaz principal
+        MenuInicio menuInicio = new MenuInicio();
         menuInicio.setVisible(true);
         menuInicio.setLocationRelativeTo(null);
-        
-        
     }
-    
 }

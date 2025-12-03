@@ -145,7 +145,7 @@ public class Carrito extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carrito De Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 153))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carrito De Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 0, 13), new java.awt.Color(0, 51, 153))); // NOI18N
         jPanel3.setPreferredSize(new java.awt.Dimension(1240, 720));
 
         lblCliente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -320,12 +320,16 @@ public class Carrito extends javax.swing.JFrame {
         tlbProducto.setPreferredSize(new java.awt.Dimension(1280, 60));
 
         btnAtras.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Atras.png"))); // NOI18N
         btnAtras.setText("Atras");
         btnAtras.setFocusable(false);
         btnAtras.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnAtras.setMaximumSize(new java.awt.Dimension(200, 60));
         btnAtras.setPreferredSize(new java.awt.Dimension(200, 60));
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
         tlbProducto.add(btnAtras);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -370,6 +374,10 @@ public class Carrito extends javax.swing.JFrame {
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
         // TODO add your handling code here:
+    MenuInicio menu = new MenuInicio();
+    menu.setLocationRelativeTo(null);
+    menu.setVisible(true);
+    this.dispose();   // Cierra el carrito 
     }//GEN-LAST:event_btnLogoActionPerformed
 
     private void txtBarraBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBarraBusquedaActionPerformed
@@ -387,6 +395,14 @@ public class Carrito extends javax.swing.JFrame {
     private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClienteActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
+    MenuInicio menu = new MenuInicio();
+    menu.setLocationRelativeTo(null);
+    menu.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**
      * @param args the command line arguments
