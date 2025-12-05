@@ -252,7 +252,6 @@ public class Carrito extends javax.swing.JFrame {
         txtTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnComprar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnComprar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Venta.png"))); // NOI18N
         btnComprar.setText("Comprar");
         btnComprar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnComprar.setPreferredSize(new java.awt.Dimension(120, 60));
@@ -264,7 +263,6 @@ public class Carrito extends javax.swing.JFrame {
         });
 
         btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Historial.png"))); // NOI18N
         btnEliminar.setText("Eliminar Articulos");
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminar.setPreferredSize(new java.awt.Dimension(120, 60));
