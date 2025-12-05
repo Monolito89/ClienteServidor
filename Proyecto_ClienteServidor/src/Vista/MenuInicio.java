@@ -1,6 +1,5 @@
 package Vista;
-
-
+import Controlador.CtrlVista;
 
 /**
  *
@@ -11,15 +10,37 @@ public class MenuInicio extends javax.swing.JFrame {
     /**
      * Creates new form MenuInicio
      */
+    
+    private boolean sesion = false;
+    private CtrlVista controlador;
+    
+    public boolean getSesion() {
+        return sesion;
+    }
+
+    public void setSesion(boolean sesion) {
+        this.sesion = sesion;
+    }
+    
+    public CtrlVista getControlador() {
+        return controlador;
+    }
+
+    public void setControlador(CtrlVista controlador) {
+        this.controlador = controlador;
+    }
+    
     public MenuInicio() {
         initComponents();
         setResizable(false);
     }
     
-    public void limpiar(){
-
+    public MenuInicio(CtrlVista controlador) {
+        this.controlador = controlador;
+        initComponents();
+        setResizable(false);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,6 +63,7 @@ public class MenuInicio extends javax.swing.JFrame {
         btnCategorias = new javax.swing.JButton();
         tlbProducto = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
+        temporal = new javax.swing.JButton();
         btnProducto1 = new javax.swing.JButton();
         btnProducto3 = new javax.swing.JButton();
         btnProducto2 = new javax.swing.JButton();
@@ -86,7 +108,6 @@ public class MenuInicio extends javax.swing.JFrame {
         });
 
         btnCarrito.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnCarrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Carrito.png"))); // NOI18N
         btnCarrito.setText("Carrito");
         btnCarrito.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCarrito.setMaximumSize(new java.awt.Dimension(170, 80));
@@ -99,7 +120,6 @@ public class MenuInicio extends javax.swing.JFrame {
         });
 
         btnAdministrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Historial.png"))); // NOI18N
         btnAdministrar.setText("Administrar");
         btnAdministrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdministrar.setMaximumSize(new java.awt.Dimension(120, 60));
@@ -215,6 +235,17 @@ public class MenuInicio extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(200, 60));
         tlbProducto.add(jLabel1);
 
+        temporal.setText("Temporal_CambiaElValor_DeSesion");
+        temporal.setFocusable(false);
+        temporal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        temporal.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        temporal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                temporalActionPerformed(evt);
+            }
+        });
+        tlbProducto.add(temporal);
+
         btnProducto1.setText("Producto1");
         btnProducto1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnProducto1.setMaximumSize(new java.awt.Dimension(296, 202));
@@ -329,6 +360,10 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
         // TODO add your handling code here:
+        controlador.getOferta().setFrameAnterior(this);
+        controlador.getOferta().setVisible(true);
+        controlador.getOferta().setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_btnOfertasActionPerformed
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
@@ -346,11 +381,10 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
         // TODO add your handling code here:
-    Carrito c = new Carrito();
-    c.setVisible(true);
-    c.setLocationRelativeTo(this);
-    this.dispose();
-        
+        controlador.getCarrito().setFrameAnterior(this);
+        controlador.getCarrito().setVisible(true);
+        controlador.getCarrito().setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto1ActionPerformed
@@ -367,14 +401,24 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         // TODO add your handling code here:
+        controlador.getCategoria().setFrameAnterior(this);
+        controlador.getCategoria().setVisible(true);
+        controlador.getCategoria().setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
-    Perfil p = new Perfil();
-    p.setVisible(true);
-    p.setLocationRelativeTo(this);
-    this.dispose();     
+        if (sesion == true){
+                controlador.getPerfil().setFrameAnterior(this);
+                controlador.getPerfil().setVisible(true);
+                controlador.getPerfil().setLocationRelativeTo(this);
+        } else {
+                controlador.getRegistro().setFrameAnterior(this);
+                controlador.getRegistro().setVisible(true);
+                controlador.getRegistro().setLocationRelativeTo(this);
+        } 
+        this.dispose();     
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnProducto4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto4ActionPerformed
@@ -388,6 +432,12 @@ public class MenuInicio extends javax.swing.JFrame {
     private void btnProducto6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnProducto6ActionPerformed
+
+    private void temporalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_temporalActionPerformed
+        // TODO add your handling code here:
+        if (sesion == false) {sesion = true;}
+        else {sesion = false;}
+    }//GEN-LAST:event_temporalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,8 +491,10 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel pnlPantalla;
     private javax.swing.JPanel pnlSuperior;
+    private javax.swing.JButton temporal;
     private javax.swing.JToolBar tlbOpciones;
     private javax.swing.JToolBar tlbProducto;
     private javax.swing.JTextField txtBarraBusqueda;
     // End of variables declaration//GEN-END:variables
+
 }
