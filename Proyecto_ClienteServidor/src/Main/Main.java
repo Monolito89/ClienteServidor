@@ -1,14 +1,13 @@
 package Main; 
 
-import Vista.MenuInicio;
+import Vista.*;
+import Controlador.*;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        // Mostrar la interfaz principal
-        MenuInicio menuInicio = new MenuInicio();
-        menuInicio.setVisible(true);
-        menuInicio.setLocationRelativeTo(null);
+        CtrlVista ctrlVista = new CtrlVista();
+    
+        
     }
 }

@@ -1,5 +1,7 @@
 package Vista;
 
+import javax.swing.JFrame;
+import Controlador.CtrlVista;
 
 
 /**
@@ -11,13 +13,35 @@ public class Producto extends javax.swing.JFrame {
     /**
      * Creates new form MenuInicio
      */
-    public Producto() {
+    
+    private JFrame frameAnterior;
+    private CtrlVista controlador;
+    
+    public JFrame getFrameAnterior() {
+        return frameAnterior;
+    }
+
+    public void setFrameAnterior(JFrame frameAnterior) {
+        this.frameAnterior = frameAnterior;
+    }
+    
+    public CtrlVista getControlador() {
+        return controlador;
+    }
+
+    public void setControlador(CtrlVista controlador) {
+        this.controlador = controlador;
+    }
+    
+    public Producto(CtrlVista controlador) {
+        this.controlador = controlador;
         initComponents();
         setResizable(false);
     }
     
-    public void limpiar(){
-
+    public Producto() {
+        initComponents();
+        setResizable(false);
     }
 
     /**
@@ -233,6 +257,11 @@ public class Producto extends javax.swing.JFrame {
         btnAtras.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnAtras.setMaximumSize(new java.awt.Dimension(200, 60));
         btnAtras.setPreferredSize(new java.awt.Dimension(200, 60));
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
         tlbAtras.add(btnAtras);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -466,7 +495,7 @@ public class Producto extends javax.swing.JFrame {
             .addGroup(pnlPantallaLayout.createSequentialGroup()
                 .addComponent(pnlSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(tlbOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tlbOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tlbAtras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,7 +527,7 @@ public class Producto extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
@@ -513,10 +542,17 @@ public class Producto extends javax.swing.JFrame {
 
     private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
         // TODO add your handling code here:
+        controlador.getOferta().setFrameAnterior(this);
+        controlador.getOferta().setVisible(true);
+        controlador.getOferta().setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_btnOfertasActionPerformed
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
         // TODO add your handling code here:
+        controlador.getMenuInicio().setVisible(true);
+        controlador.getMenuInicio().setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_btnLogoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -529,10 +565,18 @@ public class Producto extends javax.swing.JFrame {
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
         // TODO add your handling code here:
+        controlador.getCarrito().setFrameAnterior(this);
+        controlador.getCarrito().setVisible(true);
+        controlador.getCarrito().setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         // TODO add your handling code here:
+        controlador.getCategoria().setFrameAnterior(this);
+        controlador.getCategoria().setVisible(true);
+        controlador.getCategoria().setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
@@ -546,6 +590,13 @@ public class Producto extends javax.swing.JFrame {
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnComprarActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
+        this.frameAnterior.setLocationRelativeTo(null);
+        this.frameAnterior.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**
      * @param args the command line arguments
