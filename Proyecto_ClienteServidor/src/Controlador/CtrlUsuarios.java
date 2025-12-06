@@ -198,6 +198,64 @@ public class CtrlUsuarios {
             return null;
         }
     }
+    
+    //metodo para iniciar sesion por nombre de usuario
+    public Usuario iniciarSesionPorUsuario(String nombreUsuario, char[] contrasena){
+        //si los espacios se dejan en blanco, este mostrara un error
+        if (nombreUsuario == null ||nombreUsuario.isBlank()||contrasena == null){
+            System.out.println("Error: nombre de usuario o contraseña vacios");
+            Arrays.fill(contrasena, '\0');
+            return null;
+        }
+        
+        String sql = "SELECT id_cliente, nombre, correo, password FROM clientes WHERE nombre = ?";
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, nombreUsuario);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    System.out.println("Error: usuario no encontrado");
+                    Arrays.fill(contrasena, '\0');
+                    return null;
+                }
+
+                String storedHashHex = rs.getString("password");
+                if (storedHashHex == null || storedHashHex.isBlank()) {
+                    Arrays.fill(contrasena, '\0');
+                    return null;
+                }
+                
+                 // Calcula el hash de la contraseña ingresada
+                String computedHashHex = hashPassword(contrasena);
+
+                // Limpiar contraseña
+                Arrays.fill(contrasena, '\0');
+
+                // Comparar en tiempo constante
+                if (constantTimeEquals(storedHashHex, computedHashHex)) {
+                    Usuario u = new Usuario();
+                    u.setIdUsuario(rs.getInt("id_cliente"));
+                    u.setNombre(rs.getString("nombre"));
+                    u.setCorreo(rs.getString("correo"));
+                    this.usuarioActual = u;
+                    System.out.println("Login exitoso para: " + u.getNombre());
+                    return u;
+                } else {
+                    System.out.println("Error: contraseña incorrecta");
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Arrays.fill(contrasena, '\0');
+            return null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Arrays.fill(contrasena, '\0');
+            return null;
+        }
+    }
 
     public Usuario getUsuarioActual() {
         return usuarioActual;
