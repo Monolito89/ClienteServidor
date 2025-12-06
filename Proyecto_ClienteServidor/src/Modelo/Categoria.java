@@ -2,21 +2,21 @@ package Modelo;
 
 /**
  *
- * @author melic
+ * @author ...
  */
 public class Categoria {
     
     private int idCategoria;
-    private String nomCategoria;
+    private String nombre;
 
     public Categoria() {
         this.idCategoria = 0;
-        this.nomCategoria = "";
+        this.nombre = "";
     }
 
-    public Categoria(int idCategoria, String nomCategoria) {
+    public Categoria(int idCategoria, String nombre) {
         this.idCategoria = idCategoria;
-        this.nomCategoria = nomCategoria;
+        this.nombre = nombre;
     }
 
     public int getIdCategoria() {
@@ -27,14 +27,11 @@ public class Categoria {
         this.idCategoria = idCategoria;
     }
 
-    public String getNomCategoria() {
-        return nomCategoria;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNomCategoria(String nomCategoria) {
-        this.nomCategoria = nomCategoria;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
-    
-    
-    
 }
