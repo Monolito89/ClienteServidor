@@ -4,6 +4,7 @@
  */
 package Controlador;
 import Vista.*;
+import Controlador.CtrlUsuarios;
 
 
 /**
@@ -18,6 +19,8 @@ public class CtrlVista {
     private Registro registro = new Registro(this);
     private Oferta oferta = new Oferta(this);
     private Categoria categoria = new Categoria(this);
+    //Se agrega una instancia de ctrlUsuarios
+    private CtrlUsuarios ctrlUsuarios = new CtrlUsuarios();
 
     public CtrlVista() {
         menuInicio.setVisible(true);
@@ -71,6 +74,11 @@ public class CtrlVista {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    
-    
+
+    //Getter de CtrlUsuarios
+    public CtrlUsuarios getCtrlUsuarios() {
+        return ctrlUsuarios;
+    }
+
+  
 }
