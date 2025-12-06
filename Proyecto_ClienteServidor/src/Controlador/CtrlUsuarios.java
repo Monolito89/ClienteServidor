@@ -1,13 +1,147 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
 
+import Modelo.Usuario;
+import Modelo.Conexion;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 /**
  *
  * @author roman
  */
 public class CtrlUsuarios {
     //Aqui se trabajara todo lo relacionado con el login y el registro
+    private final Conexion conexion = new Conexion();
+    private Usuario usuarioActual = null;
+    
+    //metodo que valida que el correo tenga un @ y un .
+    private boolean validarCorreo(String correo) {
+        return correo != null && correo.contains("@") && correo.contains(".");
+    }
+    
+    //metodo que valida que el correo existe
+    private boolean correoExiste(String correo) {
+       String sql = "SELECT 1 FROM clientes WHERE correo = ? LIMIT 1";
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, correo);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return true;
+        }
+    }
+    
+    //metodo para guardar el usuario en la base de datos
+    private boolean guardarUsuarioEnBD(String nombre, String correo, String passwordHash) {
+        String sql = "INSERT INTO clientes (nombre, correo, password) VALUES (?, ?, ?)";
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, nombre);
+            ps.setString(2, correo);
+            ps.setString(3, passwordHash);
+
+            int filas = ps.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    //metodo para calcular el hash en SHA-256
+    private String hashPassword(char[] password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] pwdBytes = new String(password).getBytes(StandardCharsets.UTF_8);
+            byte[] digest = md.digest(pwdBytes);
+            return bytesToHex(digest);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al hashear", e);
+        }
+    }
+
+    //metodo que a partir del hash lo convierte en hexadecimal, se ocupa para la Base de Datos en esta forma
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder(bytes.length * 2);
+        for (byte b : bytes) sb.append(String.format("%02x", b));
+        return sb.toString();
+    }
+
+    //metodo que compara dos hashes diferentes
+    private static boolean constantTimeEquals(String aHex, String bHex) {
+        if (aHex == null || bHex == null) return false;
+        if (aHex.length() != bHex.length()) return false;
+        int result = 0;
+        for (int i = 0; i < aHex.length(); i++) {
+            result |= aHex.charAt(i) ^ bHex.charAt(i);
+        }
+        return result == 0;
+    }
+    
+    public boolean registrarUsuarios(String nombre, String correo, char[] contrasena, char[] confirmar){
+        
+        //validacion para que no este vacio
+        if (nombre == null || nombre.isBlank()||
+                correo == null || correo.isBlank()||
+                contrasena == null || contrasena.length == 0 
+                ||confirmar == null || confirmar.length == 0){
+            System.out.println("Error: Los campos se encuentran vacíos");
+            return false;
+        }
+        
+        //Validacion para que coincidan las contraseñas
+        if (!Arrays.equals(contrasena, confirmar)){
+            System.out.println("Error: Las contraseñas no coinciden");
+            Arrays.fill(contrasena, '\0');
+            Arrays.fill(confirmar, '\0');
+            return false;
+        }
+        
+        //Validacion para el correo electronico
+        if(!(validarCorreo(correo))){
+            System.out.println("Erro: Correo Invalido");
+            Arrays.fill(contrasena, '\0');
+            Arrays.fill(confirmar, '\0');
+            return false;
+        }
+        
+       //validacion para saber si el correo ya esta registrado 
+       if(correoExiste(correo)){
+           System.out.println("Error: El correo ya se encuentra registrado");
+           Arrays.fill(contrasena, '\0');
+           Arrays.fill(confirmar, '\0');
+           return false;
+       }
+       
+       try {
+           //Generacion del hash para la contraseña
+           String hashHex = hashPassword(contrasena);
+           
+           //Limpiar la contraseña que se encuentre en memoria
+           Arrays.fill(contrasena, '\0');
+           Arrays.fill(confirmar, '\0');
+           
+           //Finalmente, se guarda en la base de datos
+           return guardarUsuarioEnBD(nombre, correo, hashHex);
+       } catch (Exception e) {
+           e.printStackTrace();
+           Arrays.fill(contrasena, '\0');
+           Arrays.fill(confirmar, '\0');
+           return false;
+       }
+    }
+    
+    public void iniciarSesion(){
+        //estoy en ello
+    }
 }
