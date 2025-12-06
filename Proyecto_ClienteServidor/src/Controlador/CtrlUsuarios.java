@@ -16,6 +16,7 @@ import java.util.Arrays;
  * @author roman
  */
 public class CtrlUsuarios {
+ 
     //Aqui se trabajara todo lo relacionado con el login y el registro
     private final Conexion conexion = new Conexion();
     private Usuario usuarioActual = null;
@@ -141,7 +142,70 @@ public class CtrlUsuarios {
        }
     }
     
-    public void iniciarSesion(){
-        //estoy en ello
+    public Usuario iniciarSesion(String correo, char[] contrasena){
+        //si los espacios se dejan en blanco, este mostrara un error
+        if (correo == null ||correo.isBlank()||contrasena == null){
+            System.out.println("Error: correo o contraseña vacios");
+            Arrays.fill(contrasena, '\0');
+            return null;
+        }
+        
+        String sql = "SELECT id_cliente, nombre, password FROM clientes WHERE correo = ?";
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, correo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    System.out.println("Error: correo no encontrado");
+                    Arrays.fill(contrasena, '\0');
+                    return null;
+                }
+
+                String storedHashHex = rs.getString("password");
+                if (storedHashHex == null || storedHashHex.isBlank()) {
+                    Arrays.fill(contrasena, '\0');
+                    return null;
+                }
+                
+                 // Calcula el hash de la contraseña ingresada
+                String computedHashHex = hashPassword(contrasena);
+
+                // Limpiar contraseña
+                Arrays.fill(contrasena, '\0');
+
+                // Comparar en tiempo constante
+                if (constantTimeEquals(storedHashHex, computedHashHex)) {
+                    Usuario u = new Usuario();
+                    u.setIdUsuario(rs.getInt("id_cliente"));
+                    u.setNombre(rs.getString("nombre"));
+                    u.setCorreo(correo);
+                    this.usuarioActual = u;
+                    System.out.println("Login exitoso para: " + u.getNombre());
+                    return u;
+                } else {
+                    System.out.println("Error: contraseña incorrecta");
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Arrays.fill(contrasena, '\0');
+            return null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Arrays.fill(contrasena, '\0');
+            return null;
+        }
     }
+
+    public Usuario getUsuarioActual() {
+        return usuarioActual;
+    }
+
+    public void setUsuarioActual(Usuario usuarioActual) {
+        this.usuarioActual = usuarioActual;
+    }
+    
+    
 }
