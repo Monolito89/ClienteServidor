@@ -281,10 +281,8 @@ public class Registro extends javax.swing.JFrame {
         jLabel4.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel4.setPreferredSize(new java.awt.Dimension(175, 24));
 
-        txtCorreo.setBackground(new java.awt.Color(255, 255, 255));
         txtCorreo.setPreferredSize(new java.awt.Dimension(192, 24));
 
-        txtUsuario.setBackground(new java.awt.Color(255, 255, 255));
         txtUsuario.setPreferredSize(new java.awt.Dimension(192, 24));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -306,10 +304,8 @@ public class Registro extends javax.swing.JFrame {
         jLabel5.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel5.setPreferredSize(new java.awt.Dimension(175, 24));
 
-        txtConfirmar.setBackground(new java.awt.Color(255, 255, 255));
         txtConfirmar.setPreferredSize(new java.awt.Dimension(192, 24));
 
-        txtContra.setBackground(new java.awt.Color(255, 255, 255));
         txtContra.setPreferredSize(new java.awt.Dimension(192, 24));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -395,10 +391,8 @@ public class Registro extends javax.swing.JFrame {
         jLabel7.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel7.setPreferredSize(new java.awt.Dimension(175, 24));
 
-        txtIniciarCorreo.setBackground(new java.awt.Color(255, 255, 255));
         txtIniciarCorreo.setPreferredSize(new java.awt.Dimension(192, 24));
 
-        txtIniciarUsuario.setBackground(new java.awt.Color(255, 255, 255));
         txtIniciarUsuario.setPreferredSize(new java.awt.Dimension(192, 24));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -562,18 +556,79 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarseActionPerformed
+    String nombre = txtUsuario.getText();
+    String correo = txtCorreo.getText();
+    String passStr = txtContra.getText();
+    String confirmStr = txtConfirmar.getText();
+
+    // Se convierte a char[] las contrasenas
+    char[] pwd = passStr.toCharArray();
+    char[] confirm = confirmStr.toCharArray();
+
+    // Se llama al controlador
+    boolean ok = controlador.getCtrlUsuarios().registrarUsuarios(nombre, correo, pwd, confirm);
+
+    // se limpian los arrays 
+    java.util.Arrays.fill(pwd, '\0');
+    java.util.Arrays.fill(confirm, '\0');
+
+    if (ok) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso");
+        // limpia campos
+        txtUsuario.setText("");
+        txtCorreo.setText("");
+        txtContra.setText("");
+        txtConfirmar.setText("");
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al registrar");
+    }
+}//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        // TODO add your handling code here:
+        String nombreUsuario = txtIniciarUsuario.getText();
+        String correo = txtIniciarCorreo.getText();
+        
+        // Intenta con nombre de usuario primero
+        if (!nombreUsuario.isBlank()) {
+            char[] pwd = nombreUsuario.toCharArray();
+            Modelo.Usuario usuario = controlador.getCtrlUsuarios().iniciarSesionPorUsuario(nombreUsuario, pwd);
+            java.util.Arrays.fill(pwd, '\0');
+            
+            if (usuario != null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "✅ Bienvenido " + usuario.getNombre());
+                this.setVisible(false);
+                controlador.setSesion(true);
+                controlador.getMenuInicio().setVisible(true);
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "❌ Usuario o contraseña incorrectos");
+            }
+        } 
+        // Si no hay usuario, intenta con correo
+        else if (!correo.isBlank()) {
+            char[] pwd = correo.toCharArray();
+            Modelo.Usuario usuario = controlador.getCtrlUsuarios().iniciarSesion(correo, pwd);
+            java.util.Arrays.fill(pwd, '\0');
+            
+            if (usuario != null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "✅ Bienvenido " + usuario.getNombre());
+                this.setVisible(false);
+                controlador.setSesion(true);
+                controlador.getMenuInicio().setVisible(true);
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "❌ Correo o contraseña incorrectos");
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "❌ Ingresa usuario o correo");
+        }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        // TODO add your handling code here:
-    this.frameAnterior.setLocationRelativeTo(null);
-    this.frameAnterior.setLocationRelativeTo(null);
-    this.frameAnterior.setVisible(true);
-    this.dispose();
+//        // TODO add your handling code here:
+//  Comentado xq marca error, esto es de dilan, att @roman
+//    this.frameAnterior.setLocationRelativeTo(null);
+//    this.frameAnterior.setLocationRelativeTo(null);
+//    this.frameAnterior.setVisible(true);
+//    this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**
