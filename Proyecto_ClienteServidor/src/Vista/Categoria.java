@@ -2,16 +2,14 @@ package Vista;
 
 import javax.swing.JFrame;
 import Controlador.CtrlVista;
+import Modelo.ConsultasCategoria;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-/**
- *
- * @author barre
- */
 public class Categoria extends javax.swing.JFrame {
 
     /**
@@ -41,11 +39,13 @@ public class Categoria extends javax.swing.JFrame {
         this.controlador = controlador;
         initComponents();
         this.setResizable(false);
+        cargarCategorias();
     }
     
     public Categoria() {
         initComponents();
         this.setResizable(false);
+        cargarCategorias();
     }
 
     /**
@@ -66,7 +66,7 @@ public class Categoria extends javax.swing.JFrame {
         btnCarrito = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblCarrito = new javax.swing.JTable();
+        tblCategorias = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         tlbOpciones = new javax.swing.JToolBar();
         btnPerfil = new javax.swing.JButton();
@@ -171,8 +171,8 @@ public class Categoria extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel3.setPreferredSize(new java.awt.Dimension(1240, 720));
 
-        tblCarrito.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        tblCarrito.setModel(new javax.swing.table.DefaultTableModel(
+        tblCategorias.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tblCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -191,7 +191,7 @@ public class Categoria extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblCarrito);
+        jScrollPane1.setViewportView(tblCategorias);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -373,6 +373,20 @@ public class Categoria extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
+private void cargarCategorias() {
+    DefaultTableModel modelo = (DefaultTableModel) tblCategorias.getModel();
+    modelo.setRowCount(0);
+
+    ConsultasCategoria consultas = new ConsultasCategoria();
+    java.util.List<Modelo.Categoria> lista = consultas.listar();
+
+    for (Modelo.Categoria c : lista) {
+        Object[] fila = new Object[2];
+        fila[0] = c.getIdCategoria();
+        fila[1] = c.getNombre();
+        modelo.addRow(fila);
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -425,7 +439,7 @@ public class Categoria extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblCarrito;
+    private javax.swing.JTable tblCategorias;
     private javax.swing.JToolBar tlbOpciones;
     private javax.swing.JToolBar tlbProducto;
     private javax.swing.JTextField txtBarraBusqueda;
