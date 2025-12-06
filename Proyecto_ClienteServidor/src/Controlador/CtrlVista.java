@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controlador;
+import Vista.Categoria;
 import Vista.*;
-import Controlador.CtrlUsuarios;
-
+import javax.swing.JFrame;
 
 /**
  *
@@ -19,9 +19,10 @@ public class CtrlVista {
     private Registro registro = new Registro(this);
     private Oferta oferta = new Oferta(this);
     private Categoria categoria = new Categoria(this);
-    //Se agrega una instancia de ctrlUsuarios
-    private CtrlUsuarios ctrlUsuarios = new CtrlUsuarios();
-
+    private Administrar administrar = new Administrar(this);
+    private JFrame frameAnterior = menuInicio;
+    private boolean sesion = false;
+    
     public CtrlVista() {
         menuInicio.setVisible(true);
         menuInicio.setLocationRelativeTo(null);
@@ -74,11 +75,89 @@ public class CtrlVista {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-
-    //Getter de CtrlUsuarios
-    public CtrlUsuarios getCtrlUsuarios() {
-        return ctrlUsuarios;
+    
+    public Administrar getAdministrar() {
+        return administrar;
     }
 
-  
+    public void setAdministrar(Administrar administrar) {
+        this.administrar = administrar;
+    }
+    
+    public JFrame getFrameAnterior() {
+        return frameAnterior;
+    }
+
+    public void setFrameAnterior(JFrame frameAnterior) {
+        this.frameAnterior = frameAnterior;
+    }
+    
+    public boolean getSesion() {
+        return sesion;
+    }
+
+    public void setSesion(boolean sesion) {
+        this.sesion = sesion;
+    }
+    
+    public void btnAtras(JFrame actual){
+        frameAnterior.setLocationRelativeTo(null);
+        frameAnterior.setVisible(true);
+        actual.dispose();
+        setFrameAnterior(actual);
+    }
+    
+    public void btnLogo(JFrame actual){
+        menuInicio.setLocationRelativeTo(null);
+        menuInicio.setVisible(true);
+        actual.dispose();
+        setFrameAnterior(actual);
+    }
+
+    public void btnCarrito(JFrame actual){
+        carrito.setLocationRelativeTo(null);
+        carrito.setVisible(true);
+        actual.dispose();
+        setFrameAnterior(actual);
+    }
+    
+    public void btnOferta(JFrame actual){
+        oferta.setLocationRelativeTo(null);
+        oferta.setVisible(true);
+        actual.dispose();
+        setFrameAnterior(actual);
+    }
+    
+    public void btnCategoria(JFrame actual){
+        categoria.setLocationRelativeTo(null);
+        categoria.setVisible(true);
+        actual.dispose();
+        setFrameAnterior(actual);
+    }
+    
+    public void btnPerfil(JFrame actual){
+        if (sesion == true){
+                perfil.setVisible(true);
+                perfil.setLocationRelativeTo(actual);
+        } else {
+                registro.setVisible(true);
+                registro.setLocationRelativeTo(actual);
+        } 
+        actual.dispose();
+        setFrameAnterior(actual);
+    }
+    
+    public void btnBuscar(JFrame actual){
+        menuInicio.setLocationRelativeTo(null);
+        menuInicio.setVisible(true);
+        actual.dispose();
+        setFrameAnterior(actual);
+    }
+    
+    public void btnAdministrar(JFrame actual){
+        administrar.setLocationRelativeTo(null);
+        administrar.setVisible(true);
+        actual.dispose();
+        setFrameAnterior(actual);
+    }
 }
