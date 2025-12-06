@@ -3,9 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controlador;
+import Vista.Registro;
 import Vista.Categoria;
 import Vista.*;
 import javax.swing.JFrame;
+
 
 /**
  *
@@ -22,6 +24,10 @@ public class CtrlVista {
     private Administrar administrar = new Administrar(this);
     private JFrame frameAnterior = menuInicio;
     private boolean sesion = false;
+    
+    private CtrlUsuarios ctrlUsuarios = new CtrlUsuarios();
+    
+    
     
     public CtrlVista() {
         menuInicio.setVisible(true);
@@ -159,5 +165,9 @@ public class CtrlVista {
         administrar.setVisible(true);
         actual.dispose();
         setFrameAnterior(actual);
+    }
+
+    public CtrlUsuarios getCtrlUsuarios() {
+        return ctrlUsuarios;
     }
 }
