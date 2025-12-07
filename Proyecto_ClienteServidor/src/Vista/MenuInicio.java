@@ -26,10 +26,8 @@ public class MenuInicio extends javax.swing.JFrame {
     public MenuInicio() {
         initComponents();
         setResizable(false);
-            // Cuando nadie está logueado: ocultamos botón Administrar
-    btnAdministrar.setVisible(false);
-    // botón "temporal", lo puedes también oculto
-    temporal.setVisible(false);
+        // Cuando nadie está logueado: ocultamos botón Administrar
+        btnAdministrar.setVisible(false);
     }
     
     public MenuInicio(CtrlVista controlador) {
@@ -37,7 +35,10 @@ public class MenuInicio extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         btnAdministrar.setVisible(false);
-        temporal.setVisible(false);
+    }
+    
+    public void MostrarAdmin(){
+        btnAdministrar.setVisible(true);
     }
     
     /**
@@ -62,7 +63,6 @@ public class MenuInicio extends javax.swing.JFrame {
         btnCategorias = new javax.swing.JButton();
         tlbProducto = new javax.swing.JToolBar();
         jLabel1 = new javax.swing.JLabel();
-        temporal = new javax.swing.JButton();
         btnProducto1 = new javax.swing.JButton();
         btnProducto3 = new javax.swing.JButton();
         btnProducto2 = new javax.swing.JButton();
@@ -233,17 +233,6 @@ public class MenuInicio extends javax.swing.JFrame {
         jLabel1.setMaximumSize(new java.awt.Dimension(200, 60));
         jLabel1.setPreferredSize(new java.awt.Dimension(200, 60));
         tlbProducto.add(jLabel1);
-
-        temporal.setText("Temporal_CambiaElValor_DeSesion");
-        temporal.setFocusable(false);
-        temporal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        temporal.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        temporal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                temporalActionPerformed(evt);
-            }
-        });
-        tlbProducto.add(temporal);
 
         btnProducto1.setText("Producto1");
         btnProducto1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -416,19 +405,12 @@ public class MenuInicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnProducto6ActionPerformed
 
-    private void temporalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_temporalActionPerformed
-        // TODO add your handling code here:
-        if (controlador.getSesion() == false) {controlador.setSesion(true);}
-        else {controlador.setSesion(false);}
-    }//GEN-LAST:event_temporalActionPerformed
-
     
     public void ajustarPermisosPorRol(Usuario usuario) {
     // Si por alguna razón no hay usuario, tratamos como NO logueado
     if (usuario == null) {
         btnAdministrar.setVisible(false);
         // el botón temporal no lo queremos en producción
-        temporal.setVisible(false);
         return;
     }
 
@@ -437,9 +419,6 @@ public class MenuInicio extends javax.swing.JFrame {
 
     //  admin ven el botón Administrar
     btnAdministrar.setVisible(esAdmin);
-
-    // botón temporal ya no lo ocupas para cambiar sesión a mano
-    temporal.setVisible(false);
 }
 
     
@@ -495,7 +474,6 @@ public class MenuInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel pnlPantalla;
     private javax.swing.JPanel pnlSuperior;
-    private javax.swing.JButton temporal;
     private javax.swing.JToolBar tlbOpciones;
     private javax.swing.JToolBar tlbProducto;
     private javax.swing.JTextField txtBarraBusqueda;

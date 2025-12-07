@@ -39,18 +39,18 @@ public class CtrlAdmin {
         Connection con = conexion.getConexion();
 
         // SQL 
-        String sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, descuento, stock, id_categoria, id_proveedor) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO productos (nombre, descripcion, precio, descuento, stock, id_categoria, id_proveedor, id_producto) VALUES (?,?,?,?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, pro.getCodigo());
-            ps.setString(2, pro.getNombre());
-            ps.setString(3, pro.getDescripcion());
-            ps.setDouble(4, pro.getPrecio());
-            ps.setDouble(5, pro.getDescuento());
-            ps.setInt(6, pro.getStock());
-            ps.setInt(7, pro.getIdCategoria());
-            ps.setInt(8, pro.getIdProveedor());
+            ps.setString(1, pro.getNombre());
+            ps.setString(2, pro.getDescripcion());
+            ps.setDouble(3, pro.getPrecio());
+            ps.setDouble(4, pro.getDescuento());
+            ps.setInt(5, pro.getStock());
+            ps.setInt(6, pro.getIdCategoria());
+            ps.setInt(7, pro.getIdProveedor());
+            ps.setInt(8, pro.getIdProducto());
             
             ps.execute();
             return true;
@@ -72,19 +72,18 @@ public class CtrlAdmin {
         Connection con = conexion.getConexion();
 
         // SQL
-        String sql = "UPDATE productos SET codigo=?, nombre=?, descripcion=?, precio=?, descuento=?, stock=?, id_categoria=?, id_proveedor=? WHERE id_producto=?";
+        String sql = "UPDATE productos SET nombre=?, descripcion=?, precio=?, descuento=?, stock=?, id_categoria=?, id_proveedor=? WHERE id_producto=?";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, pro.getCodigo());
-            ps.setString(2, pro.getNombre());
-            ps.setString(3, pro.getDescripcion());
-            ps.setDouble(4, pro.getPrecio());
-            ps.setDouble(5, pro.getDescuento());
-            ps.setInt(6, pro.getStock());
-            ps.setInt(7, pro.getIdCategoria());
-            ps.setInt(8, pro.getIdProveedor());
-            ps.setInt(9, pro.getIdProducto());
+            ps.setString(1, pro.getNombre());
+            ps.setString(2, pro.getDescripcion());
+            ps.setDouble(3, pro.getPrecio());
+            ps.setDouble(4, pro.getDescuento());
+            ps.setInt(5, pro.getStock());
+            ps.setInt(6, pro.getIdCategoria());
+            ps.setInt(7, pro.getIdProveedor());
+            ps.setInt(8, pro.getIdProducto());
             
             ps.execute();
             return true;
@@ -132,17 +131,16 @@ public class CtrlAdmin {
         Connection con = conexion.getConexion();
 
         // SQL 
-        String sql = "SELECT * FROM productos WHERE codigo=?";
+        String sql = "SELECT * FROM productos WHERE id_producto=?";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, pro.getCodigo());
+            ps.setInt(1, pro.getIdProducto());
             rs = ps.executeQuery();
 
             if (rs.next()) {
                 // Llenar el objeto Producto con datos de la BD - IGUAL que el ejemplo
                 pro.setIdProducto(rs.getInt("id_producto"));
-                pro.setCodigo(rs.getString("codigo"));
                 pro.setNombre(rs.getString("nombre"));
                 pro.setDescripcion(rs.getString("descripcion"));
                 pro.setPrecio(rs.getDouble("precio"));
@@ -164,5 +162,36 @@ public class CtrlAdmin {
             }
         }
     }
- 
+    
+    public boolean buscarProveedor(Producto pro) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = conexion.getConexion();
+
+        // SQL 
+        String sql = "SELECT * FROM proveedores WHERE id_proveedor=?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, pro.getIdProveedor());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                // Llenar el objeto Producto con datos de la BD - IGUAL que el ejemplo
+                pro.setIdProveedor(rs.getInt("id_proveedor"));
+                pro.setNombreProveedor(rs.getString("nombre"));
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
 }

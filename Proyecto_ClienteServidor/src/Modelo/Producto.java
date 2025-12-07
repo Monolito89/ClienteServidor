@@ -3,18 +3,18 @@ package Modelo;
 
 public class Producto {
     private int idProducto;
-    private String codigo;
     private String nombre;
     private String descripcion;
     private int stock;
     private Double precio;
     private double descuento;
     private int idCategoria;    // lo cambie  a int para que coincida con la BD
-    private int idProveedor;    // Nuevo campo para la BD
+    private int idProveedor;
+    private String nombreProveedor;
+    // Nuevo campo para la BD
 
     public Producto() {
         this.idProducto = 0;
-        this.codigo = "";
         this.nombre = "";
         this.descripcion = "";
         this.stock = 0;
@@ -24,10 +24,9 @@ public class Producto {
         this.idProveedor = 1;    
     }
     
-    public Producto(int idProducto, String codigo, String nombre, String descripcion, 
+    public Producto(int idProducto, String nombre, String descripcion, 
                    int stock, Double precio, Double descuento, int idCategoria, int idProveedor) {
         this.idProducto = idProducto;
-        this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.stock = stock;
@@ -44,14 +43,6 @@ public class Producto {
 
     public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -108,5 +99,13 @@ public class Producto {
 
     public void setIdProveedor(int idProveedor) {
         this.idProveedor = idProveedor;
+    }
+
+    public String getNombreProveedor() {
+        return nombreProveedor;
+    }
+
+    public void setNombreProveedor(String nombreProveedor) {
+        this.nombreProveedor = nombreProveedor;
     }
 }

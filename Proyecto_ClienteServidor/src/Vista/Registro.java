@@ -669,6 +669,8 @@ String nombre = txtUsuario.getText().trim();
                     "Bienvenido administrador " + usuario.getNombre());
             // 🔹 Marcamos en el controlador que es ADMIN
             controlador.setAdmin(true);
+            controlador.getMenuInicio().MostrarAdmin();
+            
         } else {
             javax.swing.JOptionPane.showMessageDialog(this,
                     "Bienvenido " + usuario.getNombre());

@@ -5,6 +5,7 @@
 package Controlador;
 import Vista.*;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -13,6 +14,9 @@ import javax.swing.JFrame;
  */
 
 public class CtrlVista {
+    private Modelo.Producto proTemp = new Modelo.Producto();
+    private CtrlAdmin ctrlAdmin = new CtrlAdmin();
+    
     private MenuInicio menuInicio = new MenuInicio(this);
     private Carrito carrito = new Carrito(this);
     private Perfil perfil = new Perfil(this);
@@ -127,6 +131,7 @@ public class CtrlVista {
     public void setAdmin(boolean esAdmin) {
         this.esAdmin = esAdmin;
     }  
+    
     public void btnAtras(JFrame actual){
         frameAnterior.setLocationRelativeTo(null);
         frameAnterior.setVisible(true);
@@ -209,4 +214,31 @@ public class CtrlVista {
         setFrameAnterior(actual);
     }
     
+    public void btnBuscarID(int id){
+        proTemp.setIdProducto(id);
+        boolean busqueda = ctrlAdmin.buscar(proTemp);
+        if (busqueda == true){
+            JOptionPane.showMessageDialog(null, "Producto Encontrado");
+            administrar.setProducto(proTemp);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: ID no coincide con "
+                    + "ningún Producto Registrado");
+            administrar.setProducto(null);
+        }
+    }
+    
+    
+    public void btnBuscarProveedor(int id){
+        proTemp.setIdProveedor(id);
+        boolean busqueda = ctrlAdmin.buscar(proTemp);
+        if (busqueda == true){
+            administrar.setProducto(proTemp);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: ID_Proveedor no coincide con "
+                    + "ningún Proveedor Registrado");
+            administrar.setProducto(null);
+        }
+    }
 }

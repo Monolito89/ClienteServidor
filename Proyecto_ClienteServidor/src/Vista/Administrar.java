@@ -12,6 +12,7 @@ public class Administrar extends javax.swing.JFrame {
      */
     
     private CtrlVista controlador;
+    private Modelo.Producto producto;
     
     public CtrlVista getControlador() {
         return controlador;
@@ -19,6 +20,14 @@ public class Administrar extends javax.swing.JFrame {
 
     public void setControlador(CtrlVista controlador) {
         this.controlador = controlador;
+    }
+    
+    public Modelo.Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Modelo.Producto producto) {
+        this.producto = producto;
     }
     
     public Administrar(CtrlVista controlador) {
@@ -63,11 +72,8 @@ public class Administrar extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtStock = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtMarca = new javax.swing.JTextField();
         btnEditarProducto = new javax.swing.JButton();
         btnEditarStock = new javax.swing.JButton();
-        btnEditarMarca = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnEditarDescripcion = new javax.swing.JButton();
@@ -80,11 +86,11 @@ public class Administrar extends javax.swing.JFrame {
         txtADescripcion = new javax.swing.JTextArea();
         btnEditarPrecio = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        cmbCategoria = new javax.swing.JComboBox<>();
         btnEditarCategoria = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        cmbProveedor = new javax.swing.JComboBox<>();
         btnEditarProveedor = new javax.swing.JButton();
+        txtProveedor = new javax.swing.JTextField();
+        txtCategoria = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnHistorial = new javax.swing.JButton();
         btnAgregarAdmin = new javax.swing.JButton();
@@ -275,10 +281,20 @@ public class Administrar extends javax.swing.JFrame {
         jPanel1.setRequestFocusEnabled(false);
 
         txtID.setPreferredSize(new java.awt.Dimension(192, 24));
+        txtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDActionPerformed(evt);
+            }
+        });
 
         txtProducto.setEditable(false);
         txtProducto.setBackground(new java.awt.Color(255, 255, 255));
         txtProducto.setPreferredSize(new java.awt.Dimension(192, 24));
+        txtProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProductoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -304,23 +320,15 @@ public class Administrar extends javax.swing.JFrame {
         txtStock.setEditable(false);
         txtStock.setBackground(new java.awt.Color(255, 255, 255));
         txtStock.setPreferredSize(new java.awt.Dimension(192, 24));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Marca:");
-        jLabel5.setMaximumSize(new java.awt.Dimension(100000, 10000));
-        jLabel5.setMinimumSize(new java.awt.Dimension(175, 24));
-        jLabel5.setPreferredSize(new java.awt.Dimension(175, 24));
-
-        txtMarca.setEditable(false);
-        txtMarca.setBackground(new java.awt.Color(255, 255, 255));
-        txtMarca.setPreferredSize(new java.awt.Dimension(192, 24));
+        txtStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockActionPerformed(evt);
+            }
+        });
 
         btnEditarProducto.setText("Editar");
 
         btnEditarStock.setText("Editar");
-
-        btnEditarMarca.setText("Editar");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -343,8 +351,18 @@ public class Administrar extends javax.swing.JFrame {
         txtPrecio.setEditable(false);
         txtPrecio.setBackground(new java.awt.Color(255, 255, 255));
         txtPrecio.setPreferredSize(new java.awt.Dimension(192, 24));
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
 
         btnBuscarID.setText("Buscar");
+        btnBuscarID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarIDActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -356,8 +374,14 @@ public class Administrar extends javax.swing.JFrame {
         txtDescuento.setEditable(false);
         txtDescuento.setBackground(new java.awt.Color(255, 255, 255));
         txtDescuento.setPreferredSize(new java.awt.Dimension(192, 24));
+        txtDescuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescuentoActionPerformed(evt);
+            }
+        });
 
         txtADescripcion.setEditable(false);
+        txtADescripcion.setBackground(new java.awt.Color(255, 255, 255));
         txtADescripcion.setColumns(20);
         txtADescripcion.setRows(5);
         jScrollPane1.setViewportView(txtADescripcion);
@@ -371,8 +395,6 @@ public class Administrar extends javax.swing.JFrame {
         jLabel9.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel9.setPreferredSize(new java.awt.Dimension(175, 24));
 
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnEditarCategoria.setText("Editar");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -382,9 +404,25 @@ public class Administrar extends javax.swing.JFrame {
         jLabel10.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel10.setPreferredSize(new java.awt.Dimension(175, 24));
 
-        cmbProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnEditarProveedor.setText("Editar");
+
+        txtProveedor.setEditable(false);
+        txtProveedor.setBackground(new java.awt.Color(255, 255, 255));
+        txtProveedor.setPreferredSize(new java.awt.Dimension(192, 24));
+        txtProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProveedorActionPerformed(evt);
+            }
+        });
+
+        txtCategoria.setEditable(false);
+        txtCategoria.setBackground(new java.awt.Color(255, 255, 255));
+        txtCategoria.setPreferredSize(new java.awt.Dimension(192, 24));
+        txtCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCategoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -417,24 +455,18 @@ public class Administrar extends javax.swing.JFrame {
                                     .addComponent(btnEditarProducto)
                                     .addComponent(btnEditarStock)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                                    .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEditarMarca)
-                                    .addComponent(btnEditarCategoria)))
+                                .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(btnEditarCategoria))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
                                 .addComponent(btnEditarProveedor)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -456,7 +488,7 @@ public class Administrar extends javax.swing.JFrame {
                             .addComponent(btnEditarDescuento)
                             .addComponent(btnEditarDescripcion)
                             .addComponent(btnEditarPrecio))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -481,19 +513,14 @@ public class Administrar extends javax.swing.JFrame {
                             .addComponent(btnEditarStock))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEditarMarca))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEditarCategoria))
+                            .addComponent(btnEditarCategoria)
+                            .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEditarProveedor)))
+                            .addComponent(btnEditarProveedor)
+                            .addComponent(txtProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -554,7 +581,7 @@ public class Administrar extends javax.swing.JFrame {
         });
 
         btnAgregarProducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAgregarProducto.setText("Agregr Producto");
+        btnAgregarProducto.setText("Agregar Producto");
         btnAgregarProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAgregarProducto.setMaximumSize(new java.awt.Dimension(120, 60));
         btnAgregarProducto.setPreferredSize(new java.awt.Dimension(120, 60));
@@ -732,6 +759,50 @@ public class Administrar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarProducto1ActionPerformed
 
+    private void btnBuscarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarIDActionPerformed
+        // TODO add your handling code here:
+        controlador.btnBuscarID(Integer.parseInt(txtID.getText()));
+        if (producto != null){
+            txtProducto.setText(producto.getNombre());
+            txtPrecio.setText(String.valueOf(producto.getPrecio()));
+            txtStock.setText(String.valueOf(producto.getStock()));
+            txtCategoria.setText(String.valueOf(producto.getIdCategoria()));
+            controlador.btnBuscarProveedor(producto.getIdProveedor());
+            txtProveedor.setText(String.valueOf(producto.getNombreProveedor()));
+            txtDescuento.setText(String.valueOf(producto.getDescuento()));
+            txtADescripcion.setText(String.valueOf(producto.getDescripcion()));
+        }
+        
+    }//GEN-LAST:event_btnBuscarIDActionPerformed
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDActionPerformed
+
+    private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStockActionPerformed
+
+    private void txtProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProductoActionPerformed
+
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void txtDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescuentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescuentoActionPerformed
+
+    private void txtProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProveedorActionPerformed
+
+    private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCategoriaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -786,7 +857,6 @@ public class Administrar extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarCategoria;
     private javax.swing.JButton btnEditarDescripcion;
     private javax.swing.JButton btnEditarDescuento;
-    private javax.swing.JButton btnEditarMarca;
     private javax.swing.JButton btnEditarPrecio;
     private javax.swing.JButton btnEditarProducto;
     private javax.swing.JButton btnEditarProveedor;
@@ -798,13 +868,10 @@ public class Administrar extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevoProducto;
     private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;
-    private javax.swing.JComboBox<String> cmbCategoria;
-    private javax.swing.JComboBox<String> cmbProveedor;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -818,11 +885,15 @@ public class Administrar extends javax.swing.JFrame {
     private javax.swing.JToolBar tlbProducto;
     private javax.swing.JTextArea txtADescripcion;
     private javax.swing.JTextField txtBarraBusqueda;
+    private javax.swing.JTextField txtCategoria;
     private javax.swing.JTextField txtDescuento;
     private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtProducto;
+    private javax.swing.JTextField txtProveedor;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
+
+
+    
 }
