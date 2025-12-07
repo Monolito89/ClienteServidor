@@ -1,8 +1,6 @@
 package Modelo;
-/**
- *
- * @author barre
- */
+
+
 public class Producto {
     private int idProducto;
     private String codigo;
@@ -11,7 +9,8 @@ public class Producto {
     private int stock;
     private Double precio;
     private double descuento;
-    private String categoria;
+    private int idCategoria;    // lo cambie  a int para que coincida con la BD
+    private int idProveedor;    // Nuevo campo para la BD
 
     public Producto() {
         this.idProducto = 0;
@@ -21,10 +20,12 @@ public class Producto {
         this.stock = 0;
         this.precio = 0.0d;
         this.descuento = 0.0d;
-        this.categoria = "";
+        this.idCategoria = 1;     
+        this.idProveedor = 1;    
     }
     
-    public Producto(int idProducto, String codigo, String nombre, String descripcion, int stock, Double precio, Double descuento, String categoria) {
+    public Producto(int idProducto, String codigo, String nombre, String descripcion, 
+                   int stock, Double precio, Double descuento, int idCategoria, int idProveedor) {
         this.idProducto = idProducto;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -32,9 +33,11 @@ public class Producto {
         this.stock = stock;
         this.precio = precio;
         this.descuento = descuento;
-        this.categoria = categoria;
-        }
+        this.idCategoria = idCategoria;
+        this.idProveedor = idProveedor;
+    }
 
+    // GETTERS Y SETTERS 
     public int getIdProducto() {
         return idProducto;
     }
@@ -91,11 +94,19 @@ public class Producto {
         this.descuento = descuento;
     }
     
-    public String getCategoria() {
-        return categoria;
+    public int getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    } 
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+    
+    public int getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
 }
