@@ -95,61 +95,69 @@ public class CtrlUsuarios {
         }
     }
     
-      // Método para registrar administradores (usa la misma lógica que registrarUsuarios)
-    public boolean registrarAdmin(String nombre, String correo, char[] contrasena, char[] confirmar) {
 
-        // Validación de campos vacíos
-        if (nombre == null || nombre.isBlank()
-                || correo == null || correo.isBlank()
-                || contrasena == null || contrasena.length == 0
-                || confirmar == null || confirmar.length == 0) {
-            System.out.println("Error: Los campos se encuentran vacíos");
-            return false;
-        }
+   // Método para registrar administradores (usa la misma lógica que registrarUsuarios)
+public boolean registrarAdmin(String nombre, String correo, char[] contrasena, char[] confirmar) {
 
-        // Validación de coincidencia de contraseñas
-        if (!Arrays.equals(contrasena, confirmar)) {
-            System.out.println("Error: Las contraseñas no coinciden");
-            Arrays.fill(contrasena, '\0');
-            Arrays.fill(confirmar, '\0');
-            return false;
-        }
-
-        // Validación de formato de correo
-        if (!validarCorreo(correo)) {
-            System.out.println("Error: Correo inválido");
-            Arrays.fill(contrasena, '\0');
-            Arrays.fill(confirmar, '\0');
-            return false;
-        }
-
-        // Validación de correo ya registrado como colaborador
-        if (correoColaboradorExiste(correo)) {
-            System.out.println("Error: El correo de administrador ya se encuentra registrado");
-            Arrays.fill(contrasena, '\0');
-            Arrays.fill(confirmar, '\0');
-            return false;
-        }
-
-        try {
-            // Generación del hash de la contraseña
-            String hashHex = hashPassword(contrasena);
-
-            // Limpiar contraseñas en memoria
-            Arrays.fill(contrasena, '\0');
-            Arrays.fill(confirmar, '\0');
-
-            // Guardar admin en base de datos
-            return guardarAdminEnBD(nombre, correo, hashHex);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Arrays.fill(contrasena, '\0');
-            Arrays.fill(confirmar, '\0');
-            return false;
-        }
+    // Validación de campos vacíos
+    if (nombre == null || nombre.isBlank()
+            || correo == null || correo.isBlank()
+            || contrasena == null || contrasena.length == 0
+            || confirmar == null || confirmar.length == 0) {
+        System.out.println("Error: Los campos se encuentran vacíos");
+        return false;
     }
- 
 
+    // Validación de coincidencia de contraseñas
+    if (!Arrays.equals(contrasena, confirmar)) {
+        System.out.println("Error: Las contraseñas no coinciden");
+        Arrays.fill(contrasena, '\0');
+        Arrays.fill(confirmar, '\0');
+        return false;
+    }
+
+    // Validación de formato de correo
+    if (!validarCorreo(correo)) {
+        System.out.println("Error: Correo inválido");
+        Arrays.fill(contrasena, '\0');
+        Arrays.fill(confirmar, '\0');
+        return false;
+    }
+
+    // 🔹 NUEVO: validar que el correo sea corporativo @tienda.com
+    String correoLower = correo.toLowerCase();
+    if (!correoLower.endsWith("@tienda.com")) {
+        System.out.println("Error: Solo se permiten correos @tienda.com para administradores");
+        Arrays.fill(contrasena, '\0');
+        Arrays.fill(confirmar, '\0');
+        return false;
+    }
+
+    // Validación de correo ya registrado como colaborador
+    if (correoColaboradorExiste(correo)) {
+        System.out.println("Error: El correo de administrador ya se encuentra registrado");
+        Arrays.fill(contrasena, '\0');
+        Arrays.fill(confirmar, '\0');
+        return false;
+    }
+
+    try {
+        // Generación del hash de la contraseña
+        String hashHex = hashPassword(contrasena);
+
+        // Limpiar contraseñas en memoria
+        Arrays.fill(contrasena, '\0');
+        Arrays.fill(confirmar, '\0');
+
+        // Guardar admin en base de datos
+        return guardarAdminEnBD(nombre, correo, hashHex);
+    } catch (Exception e) {
+        e.printStackTrace();
+        Arrays.fill(contrasena, '\0');
+        Arrays.fill(confirmar, '\0');
+        return false;
+    }
+}
     //metodo para calcular el hash en SHA-256
     private String hashPassword(char[] password) {
         try {

@@ -459,7 +459,7 @@ public class AgregarAdmin extends javax.swing.JFrame {
 
     private void btnRegistrarse1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarse1ActionPerformed
         // TODO add your handling code here:
-            String nombre = txtUsuario.getText().trim();
+        String nombre = txtUsuario.getText().trim();
     String correo = txtCorreo.getText().trim();
     String contra = txtContra.getText();
     String confirmar = txtConfirmar.getText();
@@ -472,28 +472,59 @@ public class AgregarAdmin extends javax.swing.JFrame {
     char[] pwd = contra.toCharArray();
     char[] pwdConfirm = confirmar.toCharArray();
 
-    boolean exito = false;
-    if (controlador != null && controlador.getCtrlUsuarios() != null) {
-        exito = controlador.getCtrlUsuarios().registrarAdmin(nombre, correo, pwd, pwdConfirm);
-    } else {
+    if (controlador == null || controlador.getCtrlUsuarios() == null) {
         System.out.println("Error: controlador o CtrlUsuarios es null");
+        javax.swing.JOptionPane.showMessageDialog(this, "Error interno al registrar. Consulte al administrador.");
+        java.util.Arrays.fill(pwd, '\0');
+        java.util.Arrays.fill(pwdConfirm, '\0');
+        return;
     }
 
-    // Por seguridad, limpiar contraseñas en memoria
+    boolean exito = false;
+    String correoLower = correo.toLowerCase();
+
+    // CASO 1: correo corporativo -> registrar como ADMIN
+    if (correoLower.endsWith("@tienda.com")) {
+        exito = controlador.getCtrlUsuarios().registrarAdmin(nombre, correo, pwd, pwdConfirm);
+
+        // limpiar contraseñas en memoria
+        java.util.Arrays.fill(pwd, '\0');
+        java.util.Arrays.fill(pwdConfirm, '\0');
+
+        if (exito) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Administrador registrado correctamente.");
+            txtUsuario.setText("");
+            txtCorreo.setText("");
+            txtContra.setText("");
+            txtConfirmar.setText("");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar el administrador. Revisa los datos.");
+        }
+        return;
+    }
+
+    //CASO 2: NO es @tienda.com -> mensaje y registrar como CLIENTE
+    javax.swing.JOptionPane.showMessageDialog(this,
+            "El correo ingresado no pertenece al dominio @tienda.com.\n"
+          + "No se puede registrar como administrador.\n"
+          + "Se registrará como cliente en el sistema.");
+
+    exito = controlador.getCtrlUsuarios().registrarUsuarios(nombre, correo, pwd, pwdConfirm);
+
+    // limpiar contraseñas en memoria
     java.util.Arrays.fill(pwd, '\0');
     java.util.Arrays.fill(pwdConfirm, '\0');
 
     if (exito) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Administrador registrado correctamente.");
-
-        // Limpiar campos
+        javax.swing.JOptionPane.showMessageDialog(this, "Cliente registrado correctamente.");
         txtUsuario.setText("");
         txtCorreo.setText("");
         txtContra.setText("");
         txtConfirmar.setText("");
     } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar el administrador. Revisa los datos.");
-    }//Hasta aqui llega el metodo de ese boton
+        javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar el cliente. Revisa los datos.");
+    }
+
     }//GEN-LAST:event_btnRegistrarse1ActionPerformed
 
     /**
