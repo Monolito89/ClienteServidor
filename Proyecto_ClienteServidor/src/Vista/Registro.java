@@ -636,26 +636,53 @@ String nombre = txtUsuario.getText().trim();
 }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        String nombreUsuario = txtIniciarUsuario.getText();
-        String contrasena = txtIniciarContra.getText();
+       // Ahora txtIniciarUsuario lo usamos como CORREO
+    String correo = txtIniciarUsuario.getText().trim();
+    String contrasena = txtIniciarContra.getText();
 
-        if (nombreUsuario.isBlank() || contrasena.isBlank()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ingresa usuario y contraseña");
-            return;
-        }
+    if (correo.isBlank() || contrasena.isBlank()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Ingresa correo y contraseña");
+        return;
+    }
 
-        char[] pwd = contrasena.toCharArray();
-        Modelo.Usuario usuario = controlador.getCtrlUsuarios().iniciarSesionPorUsuario(nombreUsuario, pwd);
-        java.util.Arrays.fill(pwd, '\0');
+    char[] pwd = contrasena.toCharArray();
+    Modelo.Usuario usuario = null;
 
-        if (usuario != null) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido " + usuario.getNombre());
-            this.setVisible(false);
-            controlador.setSesion(true);
-            controlador.getMenuInicio().setVisible(true);
+    // Vemos el dominio del correo
+    String correoLower = correo.toLowerCase();
+
+    if (correoLower.endsWith("@tienda.com")) {
+        // LOGIN DE ADMIN (colaborador)
+        usuario = controlador.getCtrlUsuarios().iniciarSesionAdminPorCorreo(correo, pwd);
+    } else {
+        // LOGIN DE CLIENTE (tabla clientes, usando el método que ya tenías)
+        usuario = controlador.getCtrlUsuarios().iniciarSesion(correo, pwd);
+    }
+
+    // Limpiar la contraseña en memoria
+    java.util.Arrays.fill(pwd, '\0');
+
+    if (usuario != null) {
+        if (correoLower.endsWith("@tienda.com")) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Bienvenido administrador " + usuario.getNombre());
+            // Aquí podrías abrir una vista especial de admin si la tienen
+            // por ahora dejamos el mismo menú:
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Bienvenido " + usuario.getNombre());
         }
+
+        this.setVisible(false);
+        controlador.setSesion(true);
+        controlador.getMenuInicio().setVisible(true);
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "Correo o contraseña incorrectos");
+    } 
+
+     
+        
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed

@@ -355,6 +355,64 @@ public boolean registrarAdmin(String nombre, String correo, char[] contrasena, c
             return null;
         }
     }
+    
+     // --- INICIO DE SESIÓN PARA ADMIN (colaboradores) POR CORREO ---
+    public Usuario iniciarSesionAdminPorCorreo(String correo, char[] contrasena) {
+        // Validar vacíos
+        if (correo == null || correo.isBlank() || contrasena == null) {
+            System.out.println("Error: correo o contraseña vacíos (admin)");
+            Arrays.fill(contrasena, '\0');
+            return null;
+        }
+
+        String sql = "SELECT id_colaborador, nombre, correo, password FROM colaboradores WHERE correo = ?";
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, correo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    System.out.println("Error: admin no encontrado");
+                    Arrays.fill(contrasena, '\0');
+                    return null;
+                }
+
+                String storedHashHex = rs.getString("password");
+                if (storedHashHex == null || storedHashHex.isBlank()) {
+                    Arrays.fill(contrasena, '\0');
+                    return null;
+                }
+
+                // Hash de la contraseña que digita el admin
+                String computedHashHex = hashPassword(contrasena);
+
+                // Limpiar contraseña en memoria
+                Arrays.fill(contrasena, '\0');
+
+                // Comparar hashes
+                if (constantTimeEquals(storedHashHex, computedHashHex)) {
+                    Usuario u = new Usuario();
+                    u.setIdUsuario(rs.getInt("id_colaborador")); // id_colaborador en la tabla colaboradores
+                    u.setNombre(rs.getString("nombre"));
+                    u.setCorreo(rs.getString("correo"));
+                    this.usuarioActual = u;
+                    System.out.println("Login admin exitoso para: " + u.getNombre());
+                    return u;
+                } else {
+                    System.out.println("Error: contraseña incorrecta (admin)");
+                    return null;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Arrays.fill(contrasena, '\0');
+            return null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Arrays.fill(contrasena, '\0');
+            return null;
+        }
+    }   
 
     public Usuario getUsuarioActual() {
         return usuarioActual;
