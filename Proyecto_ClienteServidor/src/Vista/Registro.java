@@ -569,31 +569,69 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
         // TODO add your handling code here:
-    String nombre = txtUsuario.getText();
-    String correo = txtCorreo.getText();
+String nombre = txtUsuario.getText().trim();
+    String correo = txtCorreo.getText().trim();
     String passStr = txtContra.getText();
     String confirmStr = txtConfirmar.getText();
 
-    // Se convierte a char[] las contrasenas
+    if (nombre.isBlank() || correo.isBlank() || passStr.isBlank() || confirmStr.isBlank()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Completa todos los campos.");
+        return;
+    }
+
+    // Se convierte a char[] las contraseñas
     char[] pwd = passStr.toCharArray();
     char[] confirm = confirmStr.toCharArray();
 
-    // Se llama al controlador
-    boolean ok = controlador.getCtrlUsuarios().registrarUsuarios(nombre, correo, pwd, confirm);
+    if (controlador == null || controlador.getCtrlUsuarios() == null) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error interno. Consulte al administrador.");
+        java.util.Arrays.fill(pwd, '\0');
+        java.util.Arrays.fill(confirm, '\0');
+        return;
+    }
 
-    // se limpian los arrays 
+    String correoLower = correo.toLowerCase();
+    boolean ok;
+
+    // CASO 1: correo @tienda.com  ADMIN
+    if (correoLower.endsWith("@tienda.com")) {
+        ok = controlador.getCtrlUsuarios().registrarAdmin(nombre, correo, pwd, confirm);
+
+        // limpiar arrays
+        java.util.Arrays.fill(pwd, '\0');
+        java.util.Arrays.fill(confirm, '\0');
+
+        if (ok) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Registro exitoso.\nHas sido registrado como ADMINISTRADOR de la tienda.");
+            txtUsuario.setText("");
+            txtCorreo.setText("");
+            txtContra.setText("");
+            txtConfirmar.setText("");
+            // txtRol lo puedes ignorar o llenar si lo usan después
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "No se pudo registrar como administrador. Revisa los datos.");
+        }
+        return; 
+    }
+
+    // CASO 2: cualquier otro dominio → CLIENTE
+    ok = controlador.getCtrlUsuarios().registrarUsuarios(nombre, correo, pwd, confirm);
+
+    // limpiar arrays
     java.util.Arrays.fill(pwd, '\0');
     java.util.Arrays.fill(confirm, '\0');
 
     if (ok) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso");
-        // limpia campos
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "Registro exitoso.\nHas sido registrado como CLIENTE de la tienda.");
         txtUsuario.setText("");
         txtCorreo.setText("");
         txtContra.setText("");
         txtConfirmar.setText("");
     } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Error al registrar");
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al registrar. Revisa los datos.");
     }
 }//GEN-LAST:event_btnRegistrarseActionPerformed
 
