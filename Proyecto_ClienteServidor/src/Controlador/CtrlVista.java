@@ -228,17 +228,16 @@ public class CtrlVista {
         }
     }
     
-    
-    public void btnBuscarProveedor(int id){
-        proTemp.setIdProveedor(id);
-        boolean busqueda = ctrlAdmin.buscar(proTemp);
-        if (busqueda == true){
+    public void btnAgregarProducto(Modelo.Producto producto){
+        boolean registro = ctrlAdmin.registrar(producto);
+        if (registro== true){
+            JOptionPane.showMessageDialog(null, "Producto Agregado a la Base de Datos");
             administrar.setProducto(proTemp);
             
         } else {
-            JOptionPane.showMessageDialog(null, "Error: ID_Proveedor no coincide con "
-                    + "ningún Proveedor Registrado");
+            JOptionPane.showMessageDialog(null, "Error: El Producto no pudo ser Registrado");
             administrar.setProducto(null);
         }
     }
+    
 }

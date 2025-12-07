@@ -10,7 +10,6 @@ public class Producto {
     private double descuento;
     private int idCategoria;    // lo cambie  a int para que coincida con la BD
     private int idProveedor;
-    private String nombreProveedor;
     // Nuevo campo para la BD
 
     public Producto() {
@@ -101,11 +100,4 @@ public class Producto {
         this.idProveedor = idProveedor;
     }
 
-    public String getNombreProveedor() {
-        return nombreProveedor;
-    }
-
-    public void setNombreProveedor(String nombreProveedor) {
-        this.nombreProveedor = nombreProveedor;
-    }
 }

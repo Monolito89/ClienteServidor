@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controlador;
+
 import Modelo.*;
 import java.sql.*;
 
@@ -11,9 +12,10 @@ import java.sql.*;
  * @author Dilan
  */
 public class CtrlAdmin {
+
     private Producto proTemp = new Producto();
     private Conexion conexion = new Conexion();
-    
+
     public CtrlAdmin() {
     }
 
@@ -24,7 +26,7 @@ public class CtrlAdmin {
     public void setProTemp(Producto proTemp) {
         this.proTemp = proTemp;
     }
-    
+
     public Conexion getConexion() {
         return conexion;
     }
@@ -33,16 +35,15 @@ public class CtrlAdmin {
         this.conexion = conexion;
     }
     
-    // MÉTODO 1: REGISTRAR (INSERTAR) PRODUCTO - IGUAL que el ejemplo de la profe
+    // MÉTODO 1: Registrar PRODUCTO 
     public boolean registrar(Producto pro) {
-        PreparedStatement ps = null;
-        Connection con = conexion.getConexion();
 
-        // SQL 
-        String sql = "INSERT INTO productos (nombre, descripcion, precio, descuento, stock, id_categoria, id_proveedor, id_producto) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO productos (nombre, descripcion, precio, descuento, stock, id_categoria, id_proveedor) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try {
-            ps = con.prepareStatement(sql);
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
             ps.setString(1, pro.getNombre());
             ps.setString(2, pro.getDescripcion());
             ps.setDouble(3, pro.getPrecio());
@@ -50,22 +51,17 @@ public class CtrlAdmin {
             ps.setInt(5, pro.getStock());
             ps.setInt(6, pro.getIdCategoria());
             ps.setInt(7, pro.getIdProveedor());
-            ps.setInt(8, pro.getIdProducto());
-            
-            ps.execute();
-            return true;
+
+            int filas = ps.executeUpdate();
+            return filas > 0;
+
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();    // Te muestra el error real
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
         }
     }
 
+    
     // MÉTODO 2: MODIFICAR (ACTUALIZAR) PRODUCTO 
     public boolean modificar(Producto pro) {
         PreparedStatement ps = null;
@@ -84,7 +80,7 @@ public class CtrlAdmin {
             ps.setInt(6, pro.getIdCategoria());
             ps.setInt(7, pro.getIdProveedor());
             ps.setInt(8, pro.getIdProducto());
-            
+
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -148,38 +144,6 @@ public class CtrlAdmin {
                 pro.setStock(rs.getInt("stock"));
                 pro.setIdCategoria(rs.getInt("id_categoria"));
                 pro.setIdProveedor(rs.getInt("id_proveedor"));
-                return true;
-            }
-            return false;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
-    }
-    
-    public boolean buscarProveedor(Producto pro) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = conexion.getConexion();
-
-        // SQL 
-        String sql = "SELECT * FROM proveedores WHERE id_proveedor=?";
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, pro.getIdProveedor());
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                // Llenar el objeto Producto con datos de la BD - IGUAL que el ejemplo
-                pro.setIdProveedor(rs.getInt("id_proveedor"));
-                pro.setNombreProveedor(rs.getString("nombre"));
                 return true;
             }
             return false;
