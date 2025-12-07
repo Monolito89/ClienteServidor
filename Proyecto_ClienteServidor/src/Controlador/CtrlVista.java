@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controlador;
-import Vista.Registro;
-import Vista.Categoria;
 import Vista.*;
 import javax.swing.JFrame;
 
@@ -22,6 +20,7 @@ public class CtrlVista {
     private Oferta oferta = new Oferta(this);
     private Categoria categoria = new Categoria(this);
     private Administrar administrar = new Administrar(this);
+    private AgregarAdmin agregarAdmin = new AgregarAdmin(this);
     private JFrame frameAnterior = menuInicio;
     private boolean sesion = false;
     
@@ -88,6 +87,18 @@ public class CtrlVista {
 
     public void setAdministrar(Administrar administrar) {
         this.administrar = administrar;
+    }
+    
+    public AgregarAdmin getAgregarAdmin() {
+        return agregarAdmin;
+    }
+
+    public void setAgregarAdmin(AgregarAdmin agregarAdmin) {
+        this.agregarAdmin = agregarAdmin;
+    }
+    
+    public CtrlUsuarios getCtrlUsuarios() {
+        return ctrlUsuarios;
     }
     
     public JFrame getFrameAnterior() {
@@ -167,7 +178,11 @@ public class CtrlVista {
         setFrameAnterior(actual);
     }
 
-    public CtrlUsuarios getCtrlUsuarios() {
-        return ctrlUsuarios;
+    public void btnAgregarAdmin(JFrame actual){
+        agregarAdmin.setLocationRelativeTo(null);
+        agregarAdmin.setVisible(true);
+        actual.dispose();
+        setFrameAnterior(actual);
     }
+    
 }
