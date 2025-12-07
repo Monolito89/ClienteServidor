@@ -1,5 +1,6 @@
 package Vista;
 import Controlador.CtrlVista;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,16 +12,7 @@ public class MenuInicio extends javax.swing.JFrame {
      * Creates new form MenuInicio
      */
     
-    private boolean sesion = false;
     private CtrlVista controlador;
-    
-    public boolean getSesion() {
-        return sesion;
-    }
-
-    public void setSesion(boolean sesion) {
-        this.sesion = sesion;
-    }
     
     public CtrlVista getControlador() {
         return controlador;
@@ -360,31 +352,27 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
         // TODO add your handling code here:
-        controlador.getOferta().setFrameAnterior(this);
-        controlador.getOferta().setVisible(true);
-        controlador.getOferta().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnOferta(this);
     }//GEN-LAST:event_btnOfertasActionPerformed
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
         // TODO add your handling code here:
-
+        JOptionPane.showMessageDialog(null, "Ya se encuentra en el Menu Principal");
     }//GEN-LAST:event_btnLogoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        controlador.btnBuscar(this);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministrarActionPerformed
         // TODO add your handling code here:
+        controlador.btnAdministrar(this);
     }//GEN-LAST:event_btnAdministrarActionPerformed
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
         // TODO add your handling code here:
-        controlador.getCarrito().setFrameAnterior(this);
-        controlador.getCarrito().setVisible(true);
-        controlador.getCarrito().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnCarrito(this);
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto1ActionPerformed
@@ -401,24 +389,12 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         // TODO add your handling code here:
-        controlador.getCategoria().setFrameAnterior(this);
-        controlador.getCategoria().setVisible(true);
-        controlador.getCategoria().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnCategoria(this);
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
-        if (sesion == true){
-                controlador.getPerfil().setFrameAnterior(this);
-                controlador.getPerfil().setVisible(true);
-                controlador.getPerfil().setLocationRelativeTo(this);
-        } else {
-                controlador.getRegistro().setFrameAnterior(this);
-                controlador.getRegistro().setVisible(true);
-                controlador.getRegistro().setLocationRelativeTo(this);
-        } 
-        this.dispose();     
+        controlador.btnPerfil(this);     
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnProducto4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto4ActionPerformed
@@ -435,8 +411,8 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void temporalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_temporalActionPerformed
         // TODO add your handling code here:
-        if (sesion == false) {sesion = true;}
-        else {sesion = false;}
+        if (controlador.getSesion() == false) {controlador.setSesion(true);}
+        else {controlador.setSesion(false);}
     }//GEN-LAST:event_temporalActionPerformed
 
     /**

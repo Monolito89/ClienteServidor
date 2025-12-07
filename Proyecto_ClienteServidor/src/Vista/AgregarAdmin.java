@@ -13,16 +13,7 @@ public class AgregarAdmin extends javax.swing.JFrame {
      * Creates new form MenuInicio
      */
     
-    private JFrame frameAnterior;
     private CtrlVista controlador;
-    
-    public JFrame getFrameAnterior() {
-        return frameAnterior;
-    }
-
-    public void setFrameAnterior(JFrame frameAnterior) {
-        this.frameAnterior = frameAnterior;
-    }
     
     public CtrlVista getControlador() {
         return controlador;
@@ -77,9 +68,8 @@ public class AgregarAdmin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtConfirmar = new javax.swing.JTextField();
         txtContra = new javax.swing.JTextField();
+        btnRegistrarse1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        btnRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(854, 480));
@@ -262,7 +252,6 @@ public class AgregarAdmin extends javax.swing.JFrame {
         jPanel1.setRequestFocusEnabled(false);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Correo Electrónico:");
         jLabel2.setMaximumSize(new java.awt.Dimension(100000, 10000));
@@ -270,7 +259,6 @@ public class AgregarAdmin extends javax.swing.JFrame {
         jLabel2.setPreferredSize(new java.awt.Dimension(175, 24));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Nombre de Usuario:");
         jLabel4.setMaximumSize(new java.awt.Dimension(100000, 10000));
@@ -282,13 +270,11 @@ public class AgregarAdmin extends javax.swing.JFrame {
         txtUsuario.setPreferredSize(new java.awt.Dimension(192, 24));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Registrar Nuevo Administrador");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Confirmar Contraseña:");
         jLabel3.setMaximumSize(new java.awt.Dimension(100000, 10000));
@@ -296,7 +282,6 @@ public class AgregarAdmin extends javax.swing.JFrame {
         jLabel3.setPreferredSize(new java.awt.Dimension(175, 24));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Contraseña:");
         jLabel5.setMaximumSize(new java.awt.Dimension(100000, 10000));
@@ -307,14 +292,27 @@ public class AgregarAdmin extends javax.swing.JFrame {
 
         txtContra.setPreferredSize(new java.awt.Dimension(192, 24));
 
+        btnRegistrarse1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRegistrarse1.setText("Registrarse");
+        btnRegistrarse1.setActionCommand("Agregar");
+        btnRegistrarse1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrarse1.setMaximumSize(new java.awt.Dimension(120, 60));
+        btnRegistrarse1.setPreferredSize(new java.awt.Dimension(120, 60));
+        btnRegistrarse1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRegistrarse1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarse1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -323,7 +321,6 @@ public class AgregarAdmin extends javax.swing.JFrame {
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -332,13 +329,18 @@ public class AgregarAdmin extends javax.swing.JFrame {
                             .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
+                        .addGap(81, 81, 81)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(168, 168, 168)
+                .addComponent(btnRegistrarse1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -356,54 +358,24 @@ public class AgregarAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(btnRegistrarse1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(102, 102, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel2.setPreferredSize(new java.awt.Dimension(360, 266));
         jPanel2.setRequestFocusEnabled(false);
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("--------------- O ---------------");
-        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnRegistrarse.setText("Registrarse");
-        btnRegistrarse.setActionCommand("Agregar");
-        btnRegistrarse.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnRegistrarse.setMaximumSize(new java.awt.Dimension(120, 60));
-        btnRegistrarse.setPreferredSize(new java.awt.Dimension(120, 60));
-        btnRegistrarse.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarseActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(133, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+            .addGap(0, 98, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlPantallaLayout = new javax.swing.GroupLayout(pnlPantalla);
@@ -413,15 +385,14 @@ public class AgregarAdmin extends javax.swing.JFrame {
             .addComponent(pnlSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
             .addComponent(tlbOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlPantallaLayout.createSequentialGroup()
+                .addGap(388, 388, 388)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlPantallaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tlbProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(449, 449, 449))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
         );
         pnlPantallaLayout.setVerticalGroup(
             pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,11 +402,10 @@ public class AgregarAdmin extends javax.swing.JFrame {
                 .addComponent(tlbOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tlbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(pnlPantalla, java.awt.BorderLayout.CENTER);
@@ -449,85 +419,47 @@ public class AgregarAdmin extends javax.swing.JFrame {
 
     private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
         // TODO add your handling code here:
-        controlador.getOferta().setFrameAnterior(this);
-        controlador.getOferta().setVisible(true);
-        controlador.getOferta().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnOferta(this);
     }//GEN-LAST:event_btnOfertasActionPerformed
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
         // TODO add your handling code here:
-        controlador.getMenuInicio().setVisible(true);
-        controlador.getMenuInicio().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnLogo(this);
     }//GEN-LAST:event_btnLogoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        controlador.btnBuscar(this);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministrarActionPerformed
         // TODO add your handling code here:
+        controlador.btnAdministrar(this);
     }//GEN-LAST:event_btnAdministrarActionPerformed
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
         // TODO add your handling code here:
-        controlador.getCarrito().setFrameAnterior(this);
-        controlador.getCarrito().setVisible(true);
-        controlador.getCarrito().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnCarrito(this);
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         // TODO add your handling code here:
-        controlador.getCategoria().setFrameAnterior(this);
-        controlador.getCategoria().setVisible(true);
-        controlador.getCategoria().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnCategoria(this);
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
+        controlador.btnBuscar(this);
     }//GEN-LAST:event_btnPerfilActionPerformed
 
-    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        // TODO add your handling code here:
-    String nombre = txtUsuario.getText();
-    String correo = txtCorreo.getText();
-    String passStr = txtContra.getText();
-    String confirmStr = txtConfirmar.getText();
-
-    // Se convierte a char[] las contrasenas
-    char[] pwd = passStr.toCharArray();
-    char[] confirm = confirmStr.toCharArray();
-
-    // Se llama al controlador
-    boolean ok = controlador.getCtrlUsuarios().registrarUsuarios(nombre, correo, pwd, confirm);
-
-    // se limpian los arrays 
-    java.util.Arrays.fill(pwd, '\0');
-    java.util.Arrays.fill(confirm, '\0');
-
-    if (ok) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Registro exitoso");
-        // limpia campos
-        txtUsuario.setText("");
-        txtCorreo.setText("");
-        txtContra.setText("");
-        txtConfirmar.setText("");
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Error al registrar");
-    }
-}//GEN-LAST:event_btnRegistrarseActionPerformed
-
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-//        // TODO add your handling code here:
-//  Comentado xq marca error, esto es de dilan, att @roman
-//    this.frameAnterior.setLocationRelativeTo(null);
-//    this.frameAnterior.setLocationRelativeTo(null);
-//    this.frameAnterior.setVisible(true);
-//    this.dispose();
+        // TODO add your handling code here:
+        controlador.btnAtras(this);
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnRegistrarse1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarse1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarse1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -580,13 +512,12 @@ public class AgregarAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnLogo;
     private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;
-    private javax.swing.JButton btnRegistrarse;
+    private javax.swing.JButton btnRegistrarse1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel pnlPantalla;

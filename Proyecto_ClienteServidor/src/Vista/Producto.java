@@ -14,16 +14,7 @@ public class Producto extends javax.swing.JFrame {
      * Creates new form MenuInicio
      */
     
-    private JFrame frameAnterior;
     private CtrlVista controlador;
-    
-    public JFrame getFrameAnterior() {
-        return frameAnterior;
-    }
-
-    public void setFrameAnterior(JFrame frameAnterior) {
-        this.frameAnterior = frameAnterior;
-    }
     
     public CtrlVista getControlador() {
         return controlador;
@@ -542,45 +533,37 @@ public class Producto extends javax.swing.JFrame {
 
     private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
         // TODO add your handling code here:
-        controlador.getOferta().setFrameAnterior(this);
-        controlador.getOferta().setVisible(true);
-        controlador.getOferta().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnOferta(this);
     }//GEN-LAST:event_btnOfertasActionPerformed
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
         // TODO add your handling code here:
-        controlador.getMenuInicio().setVisible(true);
-        controlador.getMenuInicio().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnLogo(this);
     }//GEN-LAST:event_btnLogoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        controlador.btnBuscar(this);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministrarActionPerformed
         // TODO add your handling code here:
+        controlador.btnAdministrar(this);
     }//GEN-LAST:event_btnAdministrarActionPerformed
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
         // TODO add your handling code here:
-        controlador.getCarrito().setFrameAnterior(this);
-        controlador.getCarrito().setVisible(true);
-        controlador.getCarrito().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnCarrito(this);
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         // TODO add your handling code here:
-        controlador.getCategoria().setFrameAnterior(this);
-        controlador.getCategoria().setVisible(true);
-        controlador.getCategoria().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnCategoria(this);
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
+        controlador.btnPerfil(this);
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnAñadirCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirCarritoActionPerformed
@@ -593,9 +576,7 @@ public class Producto extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        this.frameAnterior.setLocationRelativeTo(null);
-        this.frameAnterior.setVisible(true);
-        this.dispose();
+        controlador.btnAtras(this);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**

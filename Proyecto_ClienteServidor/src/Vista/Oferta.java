@@ -2,6 +2,7 @@ package Vista;
 
 import javax.swing.JFrame;
 import Controlador.CtrlVista;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,16 +19,7 @@ public class Oferta extends javax.swing.JFrame {
      * Creates new form MenuInicio
      */
     
-    private JFrame frameAnterior;
     private CtrlVista controlador;
-    
-    public JFrame getFrameAnterior() {
-        return frameAnterior;
-    }
-
-    public void setFrameAnterior(JFrame frameAnterior) {
-        this.frameAnterior = frameAnterior;
-    }
     
     public CtrlVista getControlador() {
         return controlador;
@@ -105,6 +97,11 @@ public class Oferta extends javax.swing.JFrame {
 
         btnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/buscar 2.png"))); // NOI18N
         btnBuscar1.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar1ActionPerformed(evt);
+            }
+        });
 
         btnAdministrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Historial.png"))); // NOI18N
@@ -326,9 +323,7 @@ public class Oferta extends javax.swing.JFrame {
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
         // TODO add your handling code here:
-        controlador.getMenuInicio().setVisible(true);
-        controlador.getMenuInicio().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnLogo(this);
     }//GEN-LAST:event_btnLogoActionPerformed
 
     private void txtBarraBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBarraBusquedaActionPerformed
@@ -337,38 +332,33 @@ public class Oferta extends javax.swing.JFrame {
 
     private void btnAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministrarActionPerformed
         // TODO add your handling code here:
+        controlador.btnAdministrar(this);
     }//GEN-LAST:event_btnAdministrarActionPerformed
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
         // TODO add your handling code here:
-        controlador.getCarrito().setFrameAnterior(this);
-        controlador.getCarrito().setVisible(true);
-        controlador.getCarrito().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnCarrito(this);
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        this.frameAnterior.setLocationRelativeTo(null);
-        this.frameAnterior.setVisible(true);
-        this.dispose();
+        controlador.btnAtras(this);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         // TODO add your handling code here:
-        controlador.getCategoria().setFrameAnterior(this);
-        controlador.getCategoria().setVisible(true);
-        controlador.getCategoria().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnCategoria(this);
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
         // TODO add your handling code here:
-        controlador.getOferta().setFrameAnterior(this);
-        controlador.getOferta().setVisible(true);
-        controlador.getOferta().setLocationRelativeTo(this);
-        this.dispose();
+        JOptionPane.showMessageDialog(null, "Ya se encuentra en el Menu De Ofertas");
     }//GEN-LAST:event_btnOfertasActionPerformed
+
+    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
+        // TODO add your handling code here:
+        controlador.btnBuscar(this);
+    }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -3,6 +3,7 @@ package Vista;
 import javax.swing.JFrame;
 import Controlador.CtrlVista;
 import Modelo.ConsultasCategoria;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -16,16 +17,7 @@ public class Categoria extends javax.swing.JFrame {
      * Creates new form MenuInicio
      */
     
-    private JFrame frameAnterior;
     private CtrlVista controlador;
-    
-    public JFrame getFrameAnterior() {
-        return frameAnterior;
-    }
-
-    public void setFrameAnterior(JFrame frameAnterior) {
-        this.frameAnterior = frameAnterior;
-    }
     
     public CtrlVista getControlador() {
         return controlador;
@@ -65,8 +57,8 @@ public class Categoria extends javax.swing.JFrame {
         btnAdministrar = new javax.swing.JButton();
         btnCarrito = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblCategorias = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblCategoria = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         tlbOpciones = new javax.swing.JToolBar();
         btnPerfil = new javax.swing.JButton();
@@ -74,6 +66,8 @@ public class Categoria extends javax.swing.JFrame {
         btnCategorias = new javax.swing.JButton();
         tlbProducto = new javax.swing.JToolBar();
         btnAtras = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        cmbCategoria = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -171,27 +165,27 @@ public class Categoria extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel3.setPreferredSize(new java.awt.Dimension(1240, 720));
 
-        tblCategorias.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        tblCategorias.setModel(new javax.swing.table.DefaultTableModel(
+        tblCategoria.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tblCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Categoria"
+                "Producto", "Precio Unitario", "Descuento", "Nuevo Precio"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblCategorias);
+        jScrollPane2.setViewportView(tblCategoria);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -199,15 +193,15 @@ public class Categoria extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-                .addGap(1, 1, 1))
+                .addGap(2, 2, 2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addGap(3, 3, 3))
         );
 
         jPanel5.setBackground(new java.awt.Color(102, 102, 255));
@@ -295,6 +289,14 @@ public class Categoria extends javax.swing.JFrame {
         });
         tlbProducto.add(btnAtras);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Categoria:");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setVerifyInputWhenFocusTarget(false);
+
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -307,6 +309,12 @@ public class Categoria extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tlbOpciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tlbProducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(415, 415, 415)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,8 +325,12 @@ public class Categoria extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(tlbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
-                .addGap(1, 1, 1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -340,41 +352,31 @@ public class Categoria extends javax.swing.JFrame {
 
     private void btnAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministrarActionPerformed
         // TODO add your handling code here:
+        controlador.btnAdministrar(this);
     }//GEN-LAST:event_btnAdministrarActionPerformed
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
         // TODO add your handling code here:
-        controlador.getCarrito().setFrameAnterior(this);
-        controlador.getCarrito().setVisible(true);
-        controlador.getCarrito().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnCarrito(this);
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        this.frameAnterior.setLocationRelativeTo(null);
-        this.frameAnterior.setVisible(true);
-        this.dispose();
+        controlador.btnAtras(this);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
         // TODO add your handling code here:
-        controlador.getOferta().setFrameAnterior(this);
-        controlador.getOferta().setVisible(true);
-        controlador.getOferta().setLocationRelativeTo(this);
-        this.dispose();
+        controlador.btnOferta(this);
     }//GEN-LAST:event_btnOfertasActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         // TODO add your handling code here:
-        controlador.getCategoria().setFrameAnterior(this);
-        controlador.getCategoria().setVisible(true);
-        controlador.getCategoria().setLocationRelativeTo(this);
-        this.dispose();
+        JOptionPane.showMessageDialog(null, "Ya se encuentra en el Menu De Categorias");
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
 private void cargarCategorias() {
-    DefaultTableModel modelo = (DefaultTableModel) tblCategorias.getModel();
+    DefaultTableModel modelo = (DefaultTableModel) tblCategoria.getModel();
     modelo.setRowCount(0);
 
     ConsultasCategoria consultas = new ConsultasCategoria();
@@ -434,12 +436,14 @@ private void cargarCategorias() {
     private javax.swing.JButton btnLogo;
     private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;
+    private javax.swing.JComboBox<String> cmbCategoria;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblCategorias;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblCategoria;
     private javax.swing.JToolBar tlbOpciones;
     private javax.swing.JToolBar tlbProducto;
     private javax.swing.JTextField txtBarraBusqueda;
