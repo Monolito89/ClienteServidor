@@ -82,12 +82,16 @@ public class Administrar extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         cmbCategoria = new javax.swing.JComboBox<>();
         btnEditarCategoria = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        cmbProveedor = new javax.swing.JComboBox<>();
+        btnEditarProveedor = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnHistorial = new javax.swing.JButton();
-        btnAgregarAdmin1 = new javax.swing.JButton();
-        btnInventario1 = new javax.swing.JButton();
+        btnAgregarAdmin = new javax.swing.JButton();
+        btnInventario = new javax.swing.JButton();
         btnAgregarProducto = new javax.swing.JButton();
-        btnEliminarProducto = new javax.swing.JButton();
+        btnNuevoProducto = new javax.swing.JButton();
+        btnEliminarProducto1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(854, 480));
@@ -270,8 +274,6 @@ public class Administrar extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(360, 266));
         jPanel1.setRequestFocusEnabled(false);
 
-        txtID.setEditable(false);
-        txtID.setBackground(new java.awt.Color(255, 255, 255));
         txtID.setPreferredSize(new java.awt.Dimension(192, 24));
 
         txtProducto.setEditable(false);
@@ -355,6 +357,7 @@ public class Administrar extends javax.swing.JFrame {
         txtDescuento.setBackground(new java.awt.Color(255, 255, 255));
         txtDescuento.setPreferredSize(new java.awt.Dimension(192, 24));
 
+        txtADescripcion.setEditable(false);
         txtADescripcion.setColumns(20);
         txtADescripcion.setRows(5);
         jScrollPane1.setViewportView(txtADescripcion);
@@ -371,6 +374,17 @@ public class Administrar extends javax.swing.JFrame {
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnEditarCategoria.setText("Editar");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Proveedor:");
+        jLabel10.setMaximumSize(new java.awt.Dimension(100000, 10000));
+        jLabel10.setMinimumSize(new java.awt.Dimension(175, 24));
+        jLabel10.setPreferredSize(new java.awt.Dimension(175, 24));
+
+        cmbProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnEditarProveedor.setText("Editar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -413,8 +427,14 @@ public class Administrar extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnEditarMarca)
-                                    .addComponent(btnEditarCategoria))))
-                        .addGap(80, 80, 80)
+                                    .addComponent(btnEditarCategoria)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEditarProveedor)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -468,7 +488,12 @@ public class Administrar extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEditarCategoria)))
+                            .addComponent(btnEditarCategoria))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditarProveedor)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -504,32 +529,32 @@ public class Administrar extends javax.swing.JFrame {
             }
         });
 
-        btnAgregarAdmin1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAgregarAdmin1.setText("Agregar Admin");
-        btnAgregarAdmin1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAgregarAdmin1.setMaximumSize(new java.awt.Dimension(120, 60));
-        btnAgregarAdmin1.setPreferredSize(new java.awt.Dimension(120, 60));
-        btnAgregarAdmin1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnAgregarAdmin1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarAdmin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAgregarAdmin.setText("Agregar Admin");
+        btnAgregarAdmin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAgregarAdmin.setMaximumSize(new java.awt.Dimension(120, 60));
+        btnAgregarAdmin.setPreferredSize(new java.awt.Dimension(120, 60));
+        btnAgregarAdmin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAgregarAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarAdmin1ActionPerformed(evt);
+                btnAgregarAdminActionPerformed(evt);
             }
         });
 
-        btnInventario1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnInventario1.setText("Inventario");
-        btnInventario1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnInventario1.setMaximumSize(new java.awt.Dimension(120, 60));
-        btnInventario1.setPreferredSize(new java.awt.Dimension(120, 60));
-        btnInventario1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnInventario1.addActionListener(new java.awt.event.ActionListener() {
+        btnInventario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnInventario.setText("Inventario");
+        btnInventario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnInventario.setMaximumSize(new java.awt.Dimension(120, 60));
+        btnInventario.setPreferredSize(new java.awt.Dimension(120, 60));
+        btnInventario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInventario1ActionPerformed(evt);
+                btnInventarioActionPerformed(evt);
             }
         });
 
         btnAgregarProducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAgregarProducto.setText("Nuevo Producto");
+        btnAgregarProducto.setText("Agregr Producto");
         btnAgregarProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAgregarProducto.setMaximumSize(new java.awt.Dimension(120, 60));
         btnAgregarProducto.setPreferredSize(new java.awt.Dimension(120, 60));
@@ -540,15 +565,27 @@ public class Administrar extends javax.swing.JFrame {
             }
         });
 
-        btnEliminarProducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnEliminarProducto.setText("Eliminar Producto");
-        btnEliminarProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEliminarProducto.setMaximumSize(new java.awt.Dimension(120, 60));
-        btnEliminarProducto.setPreferredSize(new java.awt.Dimension(120, 60));
-        btnEliminarProducto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevoProducto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnNuevoProducto.setText("Nuevo Producto");
+        btnNuevoProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnNuevoProducto.setMaximumSize(new java.awt.Dimension(120, 60));
+        btnNuevoProducto.setPreferredSize(new java.awt.Dimension(120, 60));
+        btnNuevoProducto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarProductoActionPerformed(evt);
+                btnNuevoProductoActionPerformed(evt);
+            }
+        });
+
+        btnEliminarProducto1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEliminarProducto1.setText("Eliminar Producto");
+        btnEliminarProducto1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEliminarProducto1.setMaximumSize(new java.awt.Dimension(120, 60));
+        btnEliminarProducto1.setPreferredSize(new java.awt.Dimension(120, 60));
+        btnEliminarProducto1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEliminarProducto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarProducto1ActionPerformed(evt);
             }
         });
 
@@ -558,26 +595,29 @@ public class Administrar extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(btnAgregarAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAgregarAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnInventario1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(222, 222, 222)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEliminarProducto1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnNuevoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarProducto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregarAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnInventario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38))
         );
@@ -586,14 +626,14 @@ public class Administrar extends javax.swing.JFrame {
         pnlPantalla.setLayout(pnlPantallaLayout);
         pnlPantallaLayout.setHorizontalGroup(
             pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
+            .addComponent(pnlSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, 1299, Short.MAX_VALUE)
             .addComponent(tlbOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlPantallaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tlbProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tlbProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 1287, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1299, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1299, Short.MAX_VALUE)
         );
         pnlPantallaLayout.setVerticalGroup(
             pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -663,7 +703,7 @@ public class Administrar extends javax.swing.JFrame {
         controlador.btnAtras(this);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
-    private void btnAgregarAdmin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAdmin1ActionPerformed
+    private void btnAgregarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAdminActionPerformed
         // TODO add your handling code here:
         // Verificamos que el controlador no sea null
     if (controlador != null) {
@@ -673,20 +713,24 @@ public class Administrar extends javax.swing.JFrame {
         // Solo por si acaso, para depurar si algo falla
         javax.swing.JOptionPane.showMessageDialog(this, 
                 "Error: el controlador no está inicializado.");
-    }//GEN-LAST:event_btnAgregarAdmin1ActionPerformed
-    }//GEN-LAST:event_btnAgregarAdmin1ActionPerformed
+    }                                                
+    }//GEN-LAST:event_btnAgregarAdminActionPerformed
 
-    private void btnInventario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventario1ActionPerformed
+    private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnInventario1ActionPerformed
+    }//GEN-LAST:event_btnInventarioActionPerformed
 
     private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
-    private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
+    private void btnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarProductoActionPerformed
+    }//GEN-LAST:event_btnNuevoProductoActionPerformed
+
+    private void btnEliminarProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProducto1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarProducto1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -732,7 +776,7 @@ public class Administrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdministrar;
-    private javax.swing.JButton btnAgregarAdmin1;
+    private javax.swing.JButton btnAgregarAdmin;
     private javax.swing.JButton btnAgregarProducto;
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnBuscar;
@@ -745,14 +789,18 @@ public class Administrar extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarMarca;
     private javax.swing.JButton btnEditarPrecio;
     private javax.swing.JButton btnEditarProducto;
+    private javax.swing.JButton btnEditarProveedor;
     private javax.swing.JButton btnEditarStock;
-    private javax.swing.JButton btnEliminarProducto;
+    private javax.swing.JButton btnEliminarProducto1;
     private javax.swing.JButton btnHistorial;
-    private javax.swing.JButton btnInventario1;
+    private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnLogo;
+    private javax.swing.JButton btnNuevoProducto;
     private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;
     private javax.swing.JComboBox<String> cmbCategoria;
+    private javax.swing.JComboBox<String> cmbProveedor;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
