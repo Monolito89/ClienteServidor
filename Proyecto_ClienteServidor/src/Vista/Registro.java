@@ -81,7 +81,7 @@ public class Registro extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtIniciarCorreo = new javax.swing.JTextField();
+        txtIniciarContra = new javax.swing.JTextField();
         txtIniciarUsuario = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -379,7 +379,7 @@ public class Registro extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Correo Electrónico:");
+        jLabel6.setText("Contraseña");
         jLabel6.setMaximumSize(new java.awt.Dimension(100000, 10000));
         jLabel6.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel6.setPreferredSize(new java.awt.Dimension(175, 24));
@@ -391,7 +391,12 @@ public class Registro extends javax.swing.JFrame {
         jLabel7.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel7.setPreferredSize(new java.awt.Dimension(175, 24));
 
-        txtIniciarCorreo.setPreferredSize(new java.awt.Dimension(192, 24));
+        txtIniciarContra.setPreferredSize(new java.awt.Dimension(192, 24));
+        txtIniciarContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIniciarContraActionPerformed(evt);
+            }
+        });
 
         txtIniciarUsuario.setPreferredSize(new java.awt.Dimension(192, 24));
 
@@ -419,7 +424,7 @@ public class Registro extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtIniciarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIniciarCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtIniciarContra, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,7 +446,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIniciarCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIniciarContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -586,39 +591,24 @@ public class Registro extends javax.swing.JFrame {
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         String nombreUsuario = txtIniciarUsuario.getText();
-        String correo = txtIniciarCorreo.getText();
-        
-        // Intenta con nombre de usuario primero
-        if (!nombreUsuario.isBlank()) {
-            char[] pwd = nombreUsuario.toCharArray();
-            Modelo.Usuario usuario = controlador.getCtrlUsuarios().iniciarSesionPorUsuario(nombreUsuario, pwd);
-            java.util.Arrays.fill(pwd, '\0');
-            
-            if (usuario != null) {
-                javax.swing.JOptionPane.showMessageDialog(this, "✅ Bienvenido " + usuario.getNombre());
-                this.setVisible(false);
-                controlador.setSesion(true);
-                controlador.getMenuInicio().setVisible(true);
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "❌ Usuario o contraseña incorrectos");
-            }
-        } 
-        // Si no hay usuario, intenta con correo
-        else if (!correo.isBlank()) {
-            char[] pwd = correo.toCharArray();
-            Modelo.Usuario usuario = controlador.getCtrlUsuarios().iniciarSesion(correo, pwd);
-            java.util.Arrays.fill(pwd, '\0');
-            
-            if (usuario != null) {
-                javax.swing.JOptionPane.showMessageDialog(this, "✅ Bienvenido " + usuario.getNombre());
-                this.setVisible(false);
-                controlador.setSesion(true);
-                controlador.getMenuInicio().setVisible(true);
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "❌ Correo o contraseña incorrectos");
-            }
+        String contrasena = txtIniciarContra.getText();
+
+        if (nombreUsuario.isBlank() || contrasena.isBlank()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ingresa usuario y contraseña");
+            return;
+        }
+
+        char[] pwd = contrasena.toCharArray();
+        Modelo.Usuario usuario = controlador.getCtrlUsuarios().iniciarSesionPorUsuario(nombreUsuario, pwd);
+        java.util.Arrays.fill(pwd, '\0');
+
+        if (usuario != null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Bienvenido " + usuario.getNombre());
+            this.setVisible(false);
+            controlador.setSesion(true);
+            controlador.getMenuInicio().setVisible(true);
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "❌ Ingresa usuario o correo");
+            javax.swing.JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
         }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
@@ -630,6 +620,10 @@ public class Registro extends javax.swing.JFrame {
 //    this.frameAnterior.setVisible(true);
 //    this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void txtIniciarContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIniciarContraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIniciarContraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -699,7 +693,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JTextField txtConfirmar;
     private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtIniciarCorreo;
+    private javax.swing.JTextField txtIniciarContra;
     private javax.swing.JTextField txtIniciarUsuario;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
