@@ -4,10 +4,7 @@ import javax.swing.JFrame;
 import Controlador.CtrlVista;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author barre
- */
+
 public class Administrar extends javax.swing.JFrame {
 
     /**
@@ -668,6 +665,15 @@ public class Administrar extends javax.swing.JFrame {
 
     private void btnAgregarAdmin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAdmin1ActionPerformed
         // TODO add your handling code here:
+        // Verificamos que el controlador no sea null
+    if (controlador != null) {
+        // Le pedimos al controlador que abra la ventana AgregarAdmin
+        controlador.btnAgregarAdmin(this);
+    } else {
+        // Solo por si acaso, para depurar si algo falla
+        javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error: el controlador no está inicializado.");
+    }//GEN-LAST:event_btnAgregarAdmin1ActionPerformed
     }//GEN-LAST:event_btnAgregarAdmin1ActionPerformed
 
     private void btnInventario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventario1ActionPerformed

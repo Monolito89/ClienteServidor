@@ -459,6 +459,41 @@ public class AgregarAdmin extends javax.swing.JFrame {
 
     private void btnRegistrarse1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarse1ActionPerformed
         // TODO add your handling code here:
+            String nombre = txtUsuario.getText().trim();
+    String correo = txtCorreo.getText().trim();
+    String contra = txtContra.getText();
+    String confirmar = txtConfirmar.getText();
+
+    if (nombre.isBlank() || correo.isBlank() || contra.isBlank() || confirmar.isBlank()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Completa todos los campos.");
+        return;
+    }
+
+    char[] pwd = contra.toCharArray();
+    char[] pwdConfirm = confirmar.toCharArray();
+
+    boolean exito = false;
+    if (controlador != null && controlador.getCtrlUsuarios() != null) {
+        exito = controlador.getCtrlUsuarios().registrarAdmin(nombre, correo, pwd, pwdConfirm);
+    } else {
+        System.out.println("Error: controlador o CtrlUsuarios es null");
+    }
+
+    // Por seguridad, limpiar contraseñas en memoria
+    java.util.Arrays.fill(pwd, '\0');
+    java.util.Arrays.fill(pwdConfirm, '\0');
+
+    if (exito) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Administrador registrado correctamente.");
+
+        // Limpiar campos
+        txtUsuario.setText("");
+        txtCorreo.setText("");
+        txtContra.setText("");
+        txtConfirmar.setText("");
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "No se pudo registrar el administrador. Revisa los datos.");
+    }//Hasta aqui llega el metodo de ese boton
     }//GEN-LAST:event_btnRegistrarse1ActionPerformed
 
     /**

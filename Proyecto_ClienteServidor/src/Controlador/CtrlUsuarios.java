@@ -41,6 +41,42 @@ public class CtrlUsuarios {
         }
     }
     
+      // Método que valida si el correo ya existe en la tabla colaboradores
+    private boolean correoColaboradorExiste(String correo) {
+        String sql = "SELECT 1 FROM colaboradores WHERE correo = ? LIMIT 1";
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, correo);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // En caso de error, devolvemos true para no permitir el registro
+            return true;
+        }
+    }
+  
+        // Método para guardar un administrador en la tabla colaboradores
+    private boolean guardarAdminEnBD(String nombre, String correo, String passwordHash) {
+        String sql = "INSERT INTO colaboradores (nombre, correo, password, rol) VALUES (?, ?, ?, ?)";
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, nombre);
+            ps.setString(2, correo);
+            ps.setString(3, passwordHash);
+            ps.setString(4, "admin"); // rol fijo para administradores
+
+            int filas = ps.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     //metodo para guardar el usuario en la base de datos
     private boolean guardarUsuarioEnBD(String nombre, String correo, String passwordHash) {
         String sql = "INSERT INTO clientes (nombre, correo, password) VALUES (?, ?, ?)";
@@ -58,6 +94,61 @@ public class CtrlUsuarios {
             return false;
         }
     }
+    
+      // Método para registrar administradores (usa la misma lógica que registrarUsuarios)
+    public boolean registrarAdmin(String nombre, String correo, char[] contrasena, char[] confirmar) {
+
+        // Validación de campos vacíos
+        if (nombre == null || nombre.isBlank()
+                || correo == null || correo.isBlank()
+                || contrasena == null || contrasena.length == 0
+                || confirmar == null || confirmar.length == 0) {
+            System.out.println("Error: Los campos se encuentran vacíos");
+            return false;
+        }
+
+        // Validación de coincidencia de contraseñas
+        if (!Arrays.equals(contrasena, confirmar)) {
+            System.out.println("Error: Las contraseñas no coinciden");
+            Arrays.fill(contrasena, '\0');
+            Arrays.fill(confirmar, '\0');
+            return false;
+        }
+
+        // Validación de formato de correo
+        if (!validarCorreo(correo)) {
+            System.out.println("Error: Correo inválido");
+            Arrays.fill(contrasena, '\0');
+            Arrays.fill(confirmar, '\0');
+            return false;
+        }
+
+        // Validación de correo ya registrado como colaborador
+        if (correoColaboradorExiste(correo)) {
+            System.out.println("Error: El correo de administrador ya se encuentra registrado");
+            Arrays.fill(contrasena, '\0');
+            Arrays.fill(confirmar, '\0');
+            return false;
+        }
+
+        try {
+            // Generación del hash de la contraseña
+            String hashHex = hashPassword(contrasena);
+
+            // Limpiar contraseñas en memoria
+            Arrays.fill(contrasena, '\0');
+            Arrays.fill(confirmar, '\0');
+
+            // Guardar admin en base de datos
+            return guardarAdminEnBD(nombre, correo, hashHex);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Arrays.fill(contrasena, '\0');
+            Arrays.fill(confirmar, '\0');
+            return false;
+        }
+    }
+ 
 
     //metodo para calcular el hash en SHA-256
     private String hashPassword(char[] password) {
