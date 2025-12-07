@@ -637,6 +637,7 @@ String nombre = txtUsuario.getText().trim();
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
        // Ahora txtIniciarUsuario lo usamos como CORREO
+ // Ahora txtIniciarUsuario lo usamos como CORREO
     String correo = txtIniciarUsuario.getText().trim();
     String contrasena = txtIniciarContra.getText();
 
@@ -655,7 +656,7 @@ String nombre = txtUsuario.getText().trim();
         // LOGIN DE ADMIN (colaborador)
         usuario = controlador.getCtrlUsuarios().iniciarSesionAdminPorCorreo(correo, pwd);
     } else {
-        // LOGIN DE CLIENTE (tabla clientes, usando el método que ya tenías)
+        // LOGIN DE CLIENTE (tabla clientes)
         usuario = controlador.getCtrlUsuarios().iniciarSesion(correo, pwd);
     }
 
@@ -666,22 +667,22 @@ String nombre = txtUsuario.getText().trim();
         if (correoLower.endsWith("@tienda.com")) {
             javax.swing.JOptionPane.showMessageDialog(this,
                     "Bienvenido administrador " + usuario.getNombre());
-            // Aquí podrías abrir una vista especial de admin si la tienen
-            // por ahora dejamos el mismo menú:
+            // 🔹 Marcamos en el controlador que es ADMIN
+            controlador.setAdmin(true);
         } else {
             javax.swing.JOptionPane.showMessageDialog(this,
                     "Bienvenido " + usuario.getNombre());
+            // 🔹 Marcamos en el controlador que es CLIENTE
+            controlador.setAdmin(false);
         }
 
         this.setVisible(false);
-        controlador.setSesion(true);
+        controlador.setSesion(true);              // ya lo tenías
         controlador.getMenuInicio().setVisible(true);
     } else {
         javax.swing.JOptionPane.showMessageDialog(this,
                 "Correo o contraseña incorrectos");
     } 
-
-     
         
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 

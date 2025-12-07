@@ -24,6 +24,8 @@ public class CtrlVista {
     private JFrame frameAnterior = menuInicio;
     private boolean sesion = false;
     
+    private boolean esAdmin = false;
+    
     private CtrlUsuarios ctrlUsuarios = new CtrlUsuarios();
     
     
@@ -117,6 +119,14 @@ public class CtrlVista {
         this.sesion = sesion;
     }
     
+  // getter y setter para el rol admin/cliente
+    public boolean isAdmin() {
+        return esAdmin;
+    }
+
+    public void setAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
+    }  
     public void btnAtras(JFrame actual){
         frameAnterior.setLocationRelativeTo(null);
         frameAnterior.setVisible(true);
@@ -172,6 +182,13 @@ public class CtrlVista {
     }
     
     public void btnAdministrar(JFrame actual){
+        // Solo si hay sesión y es admin
+        if (!sesion || !esAdmin) {
+            javax.swing.JOptionPane.showMessageDialog(actual,
+                    "Solo los administradores pueden acceder a esta sección.");
+            return;
+        }
+        
         administrar.setLocationRelativeTo(null);
         administrar.setVisible(true);
         actual.dispose();
@@ -179,6 +196,13 @@ public class CtrlVista {
     }
 
     public void btnAgregarAdmin(JFrame actual){
+        // Solo admins pueden entrar aquí también
+        if (!sesion || !isAdmin()) {
+            javax.swing.JOptionPane.showMessageDialog(actual,
+                    "Solo los administradores pueden gestionar otros administradores.");
+            return;
+        }
+        
         agregarAdmin.setLocationRelativeTo(null);
         agregarAdmin.setVisible(true);
         actual.dispose();

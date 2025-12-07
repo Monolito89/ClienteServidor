@@ -124,7 +124,7 @@ public boolean registrarAdmin(String nombre, String correo, char[] contrasena, c
         return false;
     }
 
-    // 🔹 NUEVO: validar que el correo sea corporativo @tienda.com
+    // NUEVO: validar que el correo sea corporativo @tienda.com
     String correoLower = correo.toLowerCase();
     if (!correoLower.endsWith("@tienda.com")) {
         System.out.println("Error: Solo se permiten correos @tienda.com para administradores");
@@ -242,177 +242,202 @@ public boolean registrarAdmin(String nombre, String correo, char[] contrasena, c
     }
     
     public Usuario iniciarSesion(String correo, char[] contrasena){
-        //si los espacios se dejan en blanco, este mostrara un error
-        if (correo == null ||correo.isBlank()||contrasena == null){
-            System.out.println("Error: correo o contraseña vacios");
-            Arrays.fill(contrasena, '\0');
-            return null;
-        }
-        
-        String sql = "SELECT id_cliente, nombre, password FROM clientes WHERE correo = ?";
-        try (Connection con = conexion.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setString(1, correo);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (!rs.next()) {
-                    System.out.println("Error: correo no encontrado");
-                    Arrays.fill(contrasena, '\0');
-                    return null;
-                }
-
-                String storedHashHex = rs.getString("password");
-                if (storedHashHex == null || storedHashHex.isBlank()) {
-                    Arrays.fill(contrasena, '\0');
-                    return null;
-                }
-                
-                 // Calcula el hash de la contraseña ingresada
-                String computedHashHex = hashPassword(contrasena);
-
-                // Limpiar contraseña
-                Arrays.fill(contrasena, '\0');
-
-                // Comparar en tiempo constante
-                if (constantTimeEquals(storedHashHex, computedHashHex)) {
-                    Usuario u = new Usuario();
-                    u.setIdUsuario(rs.getInt("id_cliente"));
-                    u.setNombre(rs.getString("nombre"));
-                    u.setCorreo(correo);
-                    this.usuarioActual = u;
-                    System.out.println("Login exitoso para: " + u.getNombre());
-                    return u;
-                } else {
-                    System.out.println("Error: contraseña incorrecta");
-                    return null;
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            Arrays.fill(contrasena, '\0');
-            return null;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Arrays.fill(contrasena, '\0');
-            return null;
-        }
+    // Validación de campos vacíos
+    if (correo == null || correo.isBlank() || contrasena == null || contrasena.length == 0) {
+        System.out.println("Error: correo o contraseña vacíos");
+        Arrays.fill(contrasena, '\0');
+        return null;
     }
+
+    String sql = "SELECT id_cliente, nombre, password FROM clientes WHERE correo = ?";
+    try (Connection con = conexion.getConexion();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setString(1, correo);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            if (!rs.next()) {
+                System.out.println("Error: correo no encontrado");
+                Arrays.fill(contrasena, '\0');
+                return null;
+            }
+
+            String storedHashHex = rs.getString("password");
+            if (storedHashHex == null || storedHashHex.isBlank()) {
+                Arrays.fill(contrasena, '\0');
+                return null;
+            }
+
+            // Calcula el hash de la contraseña ingresada
+            String computedHashHex = hashPassword(contrasena);
+
+            // Limpiar contraseña en memoria
+            Arrays.fill(contrasena, '\0');
+
+            // Comparar en tiempo constante
+            if (constantTimeEquals(storedHashHex, computedHashHex)) {
+                Usuario u = new Usuario();
+                u.setIdUsuario(rs.getInt("id_cliente"));
+                u.setNombre(rs.getString("nombre"));
+                u.setCorreo(correo);
+
+                // 🔹 Marcamos el rol como CLIENTE
+                u.setRol("cliente");
+
+                this.usuarioActual = u;
+                System.out.println("Login exitoso para CLIENTE: " + u.getNombre());
+                return u;
+            } else {
+                System.out.println("Error: contraseña incorrecta");
+                return null;
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        Arrays.fill(contrasena, '\0');
+        return null;
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        Arrays.fill(contrasena, '\0');
+        return null;
+    }
+}
     
     //metodo para iniciar sesion por nombre de usuario
-    public Usuario iniciarSesionPorUsuario(String nombreUsuario, char[] contrasena){
-        //si los espacios se dejan en blanco, este mostrara un error
-        if (nombreUsuario == null ||nombreUsuario.isBlank()||contrasena == null){
-            System.out.println("Error: nombre de usuario o contraseña vacios");
-            Arrays.fill(contrasena, '\0');
-            return null;
-        }
-        
-        String sql = "SELECT id_cliente, nombre, correo, password FROM clientes WHERE nombre = ?";
-        try (Connection con = conexion.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setString(1, nombreUsuario);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (!rs.next()) {
-                    System.out.println("Error: usuario no encontrado");
-                    Arrays.fill(contrasena, '\0');
-                    return null;
-                }
-
-                String storedHashHex = rs.getString("password");
-                if (storedHashHex == null || storedHashHex.isBlank()) {
-                    Arrays.fill(contrasena, '\0');
-                    return null;
-                }
-                
-                 // Calcula el hash de la contraseña ingresada
-                String computedHashHex = hashPassword(contrasena);
-
-                // Limpiar contraseña
-                Arrays.fill(contrasena, '\0');
-
-                // Comparar en tiempo constante
-                if (constantTimeEquals(storedHashHex, computedHashHex)) {
-                    Usuario u = new Usuario();
-                    u.setIdUsuario(rs.getInt("id_cliente"));
-                    u.setNombre(rs.getString("nombre"));
-                    u.setCorreo(rs.getString("correo"));
-                    this.usuarioActual = u;
-                    System.out.println("Login exitoso para: " + u.getNombre());
-                    return u;
-                } else {
-                    System.out.println("Error: contraseña incorrecta");
-                    return null;
-                }
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            Arrays.fill(contrasena, '\0');
-            return null;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Arrays.fill(contrasena, '\0');
-            return null;
-        }
+    
+    
+    public Usuario iniciarSesionPorUsuario(String nombreUsuario, char[] contrasena) {
+    // Validación de campos vacíos
+    if (nombreUsuario == null || nombreUsuario.isBlank() || contrasena == null || contrasena.length == 0) {
+        System.out.println("Error: nombre de usuario o contraseña vacíos");
+        Arrays.fill(contrasena, '\0');
+        return null;
     }
+
+    String sql = "SELECT id_cliente, nombre, correo, password FROM clientes WHERE nombre = ?";
+    try (Connection con = conexion.getConexion();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setString(1, nombreUsuario);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            if (!rs.next()) {
+                System.out.println("Error: usuario no encontrado");
+                Arrays.fill(contrasena, '\0');
+                return null;
+            }
+
+            String storedHashHex = rs.getString("password");
+            if (storedHashHex == null || storedHashHex.isBlank()) {
+                Arrays.fill(contrasena, '\0');
+                return null;
+            }
+
+            // Calcula el hash de la contraseña ingresada
+            String computedHashHex = hashPassword(contrasena);
+
+            // Limpiar memoria
+            Arrays.fill(contrasena, '\0');
+
+            // Comparación segura
+            if (constantTimeEquals(storedHashHex, computedHashHex)) {
+                Usuario u = new Usuario();
+                u.setIdUsuario(rs.getInt("id_cliente"));
+                u.setNombre(rs.getString("nombre"));
+                u.setCorreo(rs.getString("correo"));
+
+                // 🔹 Asigna el rol CLIENTE
+                u.setRol("cliente");
+
+                this.usuarioActual = u;
+                System.out.println("Login exitoso para CLIENTE (usuario): " + u.getNombre());
+                return u;
+            } else {
+                System.out.println("Error: contraseña incorrecta");
+                return null;
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        Arrays.fill(contrasena, '\0');
+        return null;
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        Arrays.fill(contrasena, '\0');
+        return null;
+    }
+}
+
     
      // --- INICIO DE SESIÓN PARA ADMIN (colaboradores) POR CORREO ---
     public Usuario iniciarSesionAdminPorCorreo(String correo, char[] contrasena) {
-        // Validar vacíos
-        if (correo == null || correo.isBlank() || contrasena == null) {
-            System.out.println("Error: correo o contraseña vacíos (admin)");
-            Arrays.fill(contrasena, '\0');
-            return null;
-        }
+    // Validar campos vacíos
+    if (correo == null || correo.isBlank() || contrasena == null || contrasena.length == 0) {
+        System.out.println("Error: correo o contraseña vacíos (admin)");
+        Arrays.fill(contrasena, '\0');
+        return null;
+    }
 
-        String sql = "SELECT id_colaborador, nombre, correo, password FROM colaboradores WHERE correo = ?";
-        try (Connection con = conexion.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+    String sql = "SELECT id_colaborador, nombre, correo, password FROM colaboradores WHERE correo = ?";
+    try (Connection con = conexion.getConexion();
+         PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, correo);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (!rs.next()) {
-                    System.out.println("Error: admin no encontrado");
-                    Arrays.fill(contrasena, '\0');
-                    return null;
-                }
+        ps.setString(1, correo);
 
-                String storedHashHex = rs.getString("password");
-                if (storedHashHex == null || storedHashHex.isBlank()) {
-                    Arrays.fill(contrasena, '\0');
-                    return null;
-                }
+        try (ResultSet rs = ps.executeQuery()) {
 
-                // Hash de la contraseña que digita el admin
-                String computedHashHex = hashPassword(contrasena);
-
-                // Limpiar contraseña en memoria
+            if (!rs.next()) {
+                System.out.println("Error: admin no encontrado");
                 Arrays.fill(contrasena, '\0');
-
-                // Comparar hashes
-                if (constantTimeEquals(storedHashHex, computedHashHex)) {
-                    Usuario u = new Usuario();
-                    u.setIdUsuario(rs.getInt("id_colaborador")); // id_colaborador en la tabla colaboradores
-                    u.setNombre(rs.getString("nombre"));
-                    u.setCorreo(rs.getString("correo"));
-                    this.usuarioActual = u;
-                    System.out.println("Login admin exitoso para: " + u.getNombre());
-                    return u;
-                } else {
-                    System.out.println("Error: contraseña incorrecta (admin)");
-                    return null;
-                }
+                return null;
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+
+            String storedHashHex = rs.getString("password");
+            if (storedHashHex == null || storedHashHex.isBlank()) {
+                Arrays.fill(contrasena, '\0');
+                return null;
+            }
+
+            // Hash de la contraseña digitada
+            String computedHashHex = hashPassword(contrasena);
+
+            // Limpiar contraseña de memoria
             Arrays.fill(contrasena, '\0');
-            return null;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Arrays.fill(contrasena, '\0');
-            return null;
+
+            // Comparación segura de hashes
+            if (constantTimeEquals(storedHashHex, computedHashHex)) {
+
+                Usuario u = new Usuario();
+                u.setIdUsuario(rs.getInt("id_colaborador"));
+                u.setNombre(rs.getString("nombre"));
+                u.setCorreo(rs.getString("correo"));
+
+                // 🔹 Asignar el rol ADMIN
+                u.setRol("admin");
+
+                this.usuarioActual = u;
+                System.out.println("Login admin exitoso para: " + u.getNombre());
+
+                return u;
+
+            } else {
+                System.out.println("Error: contraseña incorrecta (admin)");
+                return null;
+            }
         }
-    }   
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        Arrays.fill(contrasena, '\0');
+        return null;
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        Arrays.fill(contrasena, '\0');
+        return null;
+    }
+}
+
 
     public Usuario getUsuarioActual() {
         return usuarioActual;

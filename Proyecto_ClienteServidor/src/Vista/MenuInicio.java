@@ -1,6 +1,7 @@
 package Vista;
 import Controlador.CtrlVista;
 import javax.swing.JOptionPane;
+import Modelo.Usuario;
 
 /**
  *
@@ -25,12 +26,18 @@ public class MenuInicio extends javax.swing.JFrame {
     public MenuInicio() {
         initComponents();
         setResizable(false);
+            // Cuando nadie está logueado: ocultamos botón Administrar
+    btnAdministrar.setVisible(false);
+    // botón "temporal", lo puedes también oculto
+    temporal.setVisible(false);
     }
     
     public MenuInicio(CtrlVista controlador) {
         this.controlador = controlador;
         initComponents();
         setResizable(false);
+        btnAdministrar.setVisible(false);
+        temporal.setVisible(false);
     }
     
     /**
@@ -415,6 +422,27 @@ public class MenuInicio extends javax.swing.JFrame {
         else {controlador.setSesion(false);}
     }//GEN-LAST:event_temporalActionPerformed
 
+    
+    public void ajustarPermisosPorRol(Usuario usuario) {
+    // Si por alguna razón no hay usuario, tratamos como NO logueado
+    if (usuario == null) {
+        btnAdministrar.setVisible(false);
+        // el botón temporal no lo queremos en producción
+        temporal.setVisible(false);
+        return;
+    }
+
+    // Revisamos el rol del usuario
+    boolean esAdmin = "admin".equalsIgnoreCase(usuario.getRol());
+
+    //  admin ven el botón Administrar
+    btnAdministrar.setVisible(esAdmin);
+
+    // botón temporal ya no lo ocupas para cambiar sesión a mano
+    temporal.setVisible(false);
+}
+
+    
     /**
      * @param args the command line arguments
      */
