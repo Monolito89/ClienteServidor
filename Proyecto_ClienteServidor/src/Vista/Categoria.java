@@ -37,7 +37,7 @@ public class Categoria extends javax.swing.JFrame {
     public Categoria() {
         initComponents();
         this.setResizable(false);
-        cargarCategorias();
+        //cargarCategorias();
     }
 
     /**
@@ -376,7 +376,7 @@ public class Categoria extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
 private void cargarCategorias() {
-    DefaultTableModel modelo = (DefaultTableModel) tblCategoria.getModel();
+    /*DefaultTableModel modelo = (DefaultTableModel) tblCategoria.getModel();
     modelo.setRowCount(0);
 
     ConsultasCategoria consultas = new ConsultasCategoria();
@@ -387,7 +387,7 @@ private void cargarCategorias() {
         fila[0] = c.getIdCategoria();
         fila[1] = c.getNombre();
         modelo.addRow(fila);
-    }
+    }*/
 }
     /**
      * @param args the command line arguments
