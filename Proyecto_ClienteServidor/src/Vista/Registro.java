@@ -68,7 +68,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtContra = new javax.swing.JTextField();
         txtRol = new javax.swing.JTextField();
-        txtConfirmar2 = new javax.swing.JTextField();
+        txtConfirmar = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btnRegistrarse = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -301,7 +301,7 @@ public class Registro extends javax.swing.JFrame {
 
         txtRol.setPreferredSize(new java.awt.Dimension(192, 24));
 
-        txtConfirmar2.setPreferredSize(new java.awt.Dimension(192, 24));
+        txtConfirmar.setPreferredSize(new java.awt.Dimension(192, 24));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -340,7 +340,7 @@ public class Registro extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtRol, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtConfirmar2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -362,7 +362,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtConfirmar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
@@ -695,7 +695,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JToolBar tlbOpciones;
     private javax.swing.JToolBar tlbProducto;
     private javax.swing.JTextField txtBarraBusqueda;
-    private javax.swing.JTextField txtConfirmar2;
+    private javax.swing.JTextField txtConfirmar;
     private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtIniciarContra;
