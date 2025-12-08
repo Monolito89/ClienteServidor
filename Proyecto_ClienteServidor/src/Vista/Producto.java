@@ -100,6 +100,26 @@ public class Producto extends javax.swing.JFrame {
         txtFecha.setText(Fecha.toString());
     }
     
+    public void ProductoDestacado(Modelo.Producto producto){
+        setProducto(producto);
+        this.descuento = producto.getPrecio() * producto.getDescuento();
+        
+        txtProducto.setText(producto.getNombre());
+        txtPrecioUnit.setText(String.valueOf(producto.getPrecio()));
+        txtDescuento.setText(String.valueOf(producto.getDescuento() * 100));
+        txtADescripcion.setText(producto.getDescripcion());
+        txtCantidad.setText("1");
+        
+        this.precioConDescuento = producto.getPrecio() - descuento;
+        txtPrecio.setText(String.valueOf(precioConDescuento));
+        
+        this.precio = precioConDescuento * Double.parseDouble(txtCantidad.getText());
+        txtSubtotal.setText(String.valueOf(precio));
+        
+        this.Fecha = LocalDate.now();
+        txtFecha.setText(Fecha.toString());
+    }
+    
     public void actualizarSubtotal(){
         
         if (txtCantidad.getText().isEmpty() || !txtCantidad.getText().matches("\\d+")) {

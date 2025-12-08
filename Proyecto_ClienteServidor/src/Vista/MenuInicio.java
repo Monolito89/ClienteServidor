@@ -234,7 +234,7 @@ public class MenuInicio extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(200, 60));
         tlbProducto.add(jLabel1);
 
-        btnProducto1.setText("Producto1");
+        btnProducto1.setText("Laptop HP");
         btnProducto1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnProducto1.setMaximumSize(new java.awt.Dimension(296, 202));
         btnProducto1.setPreferredSize(new java.awt.Dimension(296, 202));
@@ -244,7 +244,7 @@ public class MenuInicio extends javax.swing.JFrame {
             }
         });
 
-        btnProducto3.setText("Producto3");
+        btnProducto3.setText("Laptop Gamer 15\"");
         btnProducto3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnProducto3.setMaximumSize(new java.awt.Dimension(296, 202));
         btnProducto3.setPreferredSize(new java.awt.Dimension(296, 202));
@@ -254,7 +254,8 @@ public class MenuInicio extends javax.swing.JFrame {
             }
         });
 
-        btnProducto2.setText("Producto2");
+        btnProducto2.setText("Mouse inalámbrico");
+        btnProducto2.setActionCommand("Mouse inalámbrico");
         btnProducto2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnProducto2.setMaximumSize(new java.awt.Dimension(296, 202));
         btnProducto2.setPreferredSize(new java.awt.Dimension(296, 202));
@@ -264,7 +265,7 @@ public class MenuInicio extends javax.swing.JFrame {
             }
         });
 
-        btnProducto4.setText("Producto4");
+        btnProducto4.setText("Teclado Mecánico");
         btnProducto4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnProducto4.setMaximumSize(new java.awt.Dimension(296, 202));
         btnProducto4.setPreferredSize(new java.awt.Dimension(296, 202));
@@ -274,7 +275,7 @@ public class MenuInicio extends javax.swing.JFrame {
             }
         });
 
-        btnProducto5.setText("Producto5");
+        btnProducto5.setText("Monitor 27\" Full HD");
         btnProducto5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnProducto5.setMaximumSize(new java.awt.Dimension(296, 202));
         btnProducto5.setPreferredSize(new java.awt.Dimension(296, 202));
@@ -284,7 +285,8 @@ public class MenuInicio extends javax.swing.JFrame {
             }
         });
 
-        btnProducto6.setText("Producto6");
+        btnProducto6.setText("Audífonos Bluetooth");
+        btnProducto6.setActionCommand("Audífonos Bluetooth");
         btnProducto6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnProducto6.setMaximumSize(new java.awt.Dimension(296, 202));
         btnProducto6.setPreferredSize(new java.awt.Dimension(296, 202));
@@ -372,15 +374,15 @@ public class MenuInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto1ActionPerformed
-        // TODO add your handling code here:
+        controlador.btnProductoDestacado(1, this);
     }//GEN-LAST:event_btnProducto1ActionPerformed
 
     private void btnProducto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto2ActionPerformed
-        // TODO add your handling code here:
+        controlador.btnProductoDestacado(2, this);
     }//GEN-LAST:event_btnProducto2ActionPerformed
 
     private void btnProducto3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto3ActionPerformed
-        // TODO add your handling code here:
+        controlador.btnProductoDestacado(9, this);
     }//GEN-LAST:event_btnProducto3ActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
@@ -394,15 +396,15 @@ public class MenuInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnProducto4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto4ActionPerformed
-        // TODO add your handling code here:
+        controlador.btnProductoDestacado(11, this);
     }//GEN-LAST:event_btnProducto4ActionPerformed
 
     private void btnProducto5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto5ActionPerformed
-        // TODO add your handling code here:
+        controlador.btnProductoDestacado(12, this);
     }//GEN-LAST:event_btnProducto5ActionPerformed
 
     private void btnProducto6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto6ActionPerformed
-        // TODO add your handling code here:
+        controlador.btnProductoDestacado(13, this);
     }//GEN-LAST:event_btnProducto6ActionPerformed
 
     

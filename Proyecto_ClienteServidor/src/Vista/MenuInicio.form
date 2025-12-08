@@ -388,7 +388,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnProducto1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Producto1"/>
+            <Property name="text" type="java.lang.String" value="Laptop HP"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
@@ -407,7 +407,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnProducto3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Producto3"/>
+            <Property name="text" type="java.lang.String" value="Laptop Gamer 15&quot;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
@@ -426,7 +426,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnProducto2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Producto2"/>
+            <Property name="text" type="java.lang.String" value="Mouse inal&#xe1;mbrico"/>
+            <Property name="actionCommand" type="java.lang.String" value="Mouse inal&#xe1;mbrico"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
@@ -445,7 +446,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnProducto4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Producto4"/>
+            <Property name="text" type="java.lang.String" value="Teclado Mec&#xe1;nico"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
@@ -464,7 +465,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnProducto5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Producto5"/>
+            <Property name="text" type="java.lang.String" value="Monitor 27&quot; Full HD"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
@@ -483,7 +484,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnProducto6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Producto6"/>
+            <Property name="text" type="java.lang.String" value="Aud&#xed;fonos Bluetooth"/>
+            <Property name="actionCommand" type="java.lang.String" value="Aud&#xed;fonos Bluetooth"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
