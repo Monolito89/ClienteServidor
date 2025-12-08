@@ -179,4 +179,43 @@ public class CtrlAdmin {
         }
         return lista;
     }
+     // MÉTODO 6: LISTAR PRODUCTOS POR CATEGORÍA
+    public java.util.List<Producto> listarProductosPorCategoria(int idCategoria) {
+        java.util.List<Producto> lista = new java.util.ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = conexion.getConexion();
+
+        String sql = "SELECT id_producto, nombre, descripcion, stock, precio, descuento, id_categoria, id_proveedor "
+                   + "FROM productos WHERE id_categoria = ?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idCategoria);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Producto pro = new Producto();
+                pro.setIdProducto(rs.getInt("id_producto"));
+                pro.setNombre(rs.getString("nombre"));
+                pro.setDescripcion(rs.getString("descripcion"));
+                pro.setStock(rs.getInt("stock"));
+                pro.setPrecio(rs.getDouble("precio"));
+                pro.setDescuento(rs.getDouble("descuento"));
+                pro.setIdCategoria(rs.getInt("id_categoria"));
+                pro.setIdProveedor(rs.getInt("id_proveedor"));
+                lista.add(pro);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar productos por categoría: " + e);
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return lista;
+    }   
+    
 }

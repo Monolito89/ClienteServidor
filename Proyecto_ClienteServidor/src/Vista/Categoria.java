@@ -19,6 +19,9 @@ public class Categoria extends javax.swing.JFrame {
     
     private CtrlVista controlador;
     
+    // Aquí se guardan los IDs de las categorías que están en el combo
+    private java.util.List<Integer> idsCategorias = new java.util.ArrayList<>();
+    
     public CtrlVista getControlador() {
         return controlador;
     }
@@ -31,7 +34,23 @@ public class Categoria extends javax.swing.JFrame {
         this.controlador = controlador;
         initComponents();
         this.setResizable(false);
-        cargarCategorias();
+
+        // Esto llena combo con categorías desde la BD
+        cargarComboCategorias();
+
+        // Si hay al menos una categoría, seleccionamos la primera y cargamos la tabla
+        if (cmbCategoria.getItemCount() > 0) {
+            cmbCategoria.setSelectedIndex(0);
+            actualizarTablaSegunCombo();
+        }
+
+        // Cada vez que cambie el combo, actualizamos los productos
+        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarTablaSegunCombo();
+            }
+        });
     }
     
     public Categoria() {
@@ -375,21 +394,61 @@ public class Categoria extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Ya se encuentra en el Menu De Categorias");
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
-private void cargarCategorias() {
-    /*DefaultTableModel modelo = (DefaultTableModel) tblCategoria.getModel();
-    modelo.setRowCount(0);
+// Llena el combo con los nombres de las categorías desde la BD
+private void cargarComboCategorias() {
+    try {
+        // Limpiar combo y lista de IDs
+        cmbCategoria.removeAllItems();
+        idsCategorias.clear();
 
-    ConsultasCategoria consultas = new ConsultasCategoria();
-    java.util.List<Modelo.Categoria> lista = consultas.listar();
+        ConsultasCategoria consultas = new ConsultasCategoria();
+        java.util.List<Modelo.Categoria> lista = consultas.listar();
 
-    for (Modelo.Categoria c : lista) {
-        Object[] fila = new Object[2];
-        fila[0] = c.getIdCategoria();
-        fila[1] = c.getNombre();
-        modelo.addRow(fila);
-    }*/
+        for (Modelo.Categoria c : lista) {
+            // Mostramos el nombre en el combo
+            cmbCategoria.addItem(c.getNombre());
+            // Guardamos el id en la lista paralela
+            idsCategorias.add(c.getIdCategoria());
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,
+                "Error al cargar categorías: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+    }
 }
-    /**
+
+// Lee la categoría seleccionada en el combo, busca sus productos y llena la tabla
+    private void actualizarTablaSegunCombo() {
+    int index = cmbCategoria.getSelectedIndex();
+    if (index < 0) {
+        return; // nada seleccionado
+    }
+
+    // Recuperamos el id_categoria correspondiente a la opción del combo
+    int idCategoria = idsCategorias.get(index);
+
+    // Pedir los productos al CtrlAdmin
+    java.util.List<Modelo.Producto> lista = controlador.getCtrlAdmin().listarProductosPorCategoria(idCategoria);
+
+    DefaultTableModel modelo = (DefaultTableModel) tblCategoria.getModel();
+    modelo.setRowCount(0); // limpiar tabla
+
+    for (Modelo.Producto p : lista) {
+        Object[] fila = new Object[4];
+        fila[0] = p.getNombre();          // "Producto"
+        fila[1] = p.getPrecio();          // "Precio Unitario"
+        fila[2] = p.getDescuento();       // "Descuento"
+
+        // Si 'descuento' es un PORCENTAJE:
+        double nuevoPrecio = p.getPrecio() - (p.getPrecio() * p.getDescuento() / 100.0);
+        // Si fuera un MONTO FIJO, usarías: double nuevoPrecio = p.getPrecio() - p.getDescuento();
+
+        fila[3] = nuevoPrecio;            // "Nuevo Precio"
+
+        modelo.addRow(fila);
+    }
+}   /**   
      * @param args the command line arguments
      */
     public static void main(String args[]) {

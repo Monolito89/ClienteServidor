@@ -32,6 +32,8 @@ public class CtrlVista {
     private boolean esAdmin = false;
     
     private CtrlUsuarios ctrlUsuarios = new CtrlUsuarios();
+   
+
     
     
     
@@ -40,9 +42,6 @@ public class CtrlVista {
         menuInicio.setLocationRelativeTo(null);
     }
 
-    public CtrlAdmin getCtrlAdmin() {
-        return ctrlAdmin;
-    }
 
     public void setCtrlAdmin(CtrlAdmin ctrlAdmin) {
         this.ctrlAdmin = ctrlAdmin;
@@ -124,6 +123,9 @@ public class CtrlVista {
         return ctrlUsuarios;
     }
     
+    public CtrlAdmin getCtrlAdmin() {
+        return ctrlAdmin;
+    }  
     public JFrame getFrameAnterior() {
         return frameAnterior;
     }
@@ -136,6 +138,7 @@ public class CtrlVista {
         return sesion;
     }
 
+    
     public void setSesion(boolean sesion) {
         this.sesion = sesion;
     }
