@@ -1,33 +1,38 @@
 package Modelo;
 
+import java.util.*;
+
 /**
  *
  * @author melic
  */
 public class CarritoProducto {
     
-    private int idCarrito;
     private int idProducto;
+    private String nombreProducto;
     private int cantidad;
+    private double precio;
+    private double subtotal;
+    
+    private List<Producto> productos = new ArrayList<>();
+
+    public CarritoProducto(int idProducto, String nombreProducto, int cantidad, double precio, double subtotal) {
+        this.idProducto = idProducto;
+        this.nombreProducto = nombreProducto;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.subtotal = subtotal;
+    }
 
     public CarritoProducto() {
-        this.idCarrito = 0;
-        this.idProducto = 0;
-        this.cantidad = 0;
+    }
+       
+    public void agregarProducto(Producto p) {
+        productos.add(p);
     }
 
-    public CarritoProducto(int idCarrito, int idProducto, int cantidad) {
-        this.idCarrito = idCarrito;
-        this.idProducto = idProducto;
-        this.cantidad = cantidad;
-    }
-
-    public int getIdCarrito() {
-        return idCarrito;
-    }
-
-    public void setIdCarrito(int idCarrito) {
-        this.idCarrito = idCarrito;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
     public int getIdProducto() {
@@ -44,6 +49,30 @@ public class CarritoProducto {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
     }
     
     

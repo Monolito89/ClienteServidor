@@ -201,6 +201,7 @@ public class CtrlVista {
     public void btnCarrito(JFrame actual){
         carrito.setLocationRelativeTo(null);
         carrito.setVisible(true);
+        carrito.setUsuario(ctrlUsuarios.getUsuarioActual());
         actual.dispose();
         setFrameAnterior(actual);
     }
@@ -324,10 +325,10 @@ public class CtrlVista {
         proTemp.setNombre(nombre);
         boolean busqueda = ctrlAdmin.buscarProducto(proTemp);
         if (busqueda == true){
-            JOptionPane.showMessageDialog(null, "Producto Encontrado");
             administrar.setProducto(proTemp);
             producto.setLocationRelativeTo(null);
             producto.setVisible(true);
+            producto.setCarrito(carrito);
             producto.Iniciar(proTemp);
             actual.dispose();
             setFrameAnterior(actual);

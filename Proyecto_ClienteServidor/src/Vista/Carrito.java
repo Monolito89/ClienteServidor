@@ -20,6 +20,16 @@ public class Carrito extends javax.swing.JFrame {
      */
     
     private CtrlVista controlador;
+    private Modelo.CarritoProducto carrito = new Modelo.CarritoProducto();
+    private Modelo.Usuario usuario;
+    
+    public Modelo.CarritoProducto getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(Modelo.CarritoProducto carrito) {
+        this.carrito = carrito;
+    }
     
     public CtrlVista getControlador() {
         return controlador;
@@ -39,7 +49,13 @@ public class Carrito extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
     }
-
+    
+    public void Iniciar(Modelo.Usuario usuario){
+        this.usuario = usuario;
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -189,17 +205,17 @@ public class Carrito extends javax.swing.JFrame {
         tblCarrito.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         tblCarrito.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "Producto", "Cantidad", "Precio"
+                "Producto", "Cantidad", "Precio"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -514,6 +530,16 @@ public class Carrito extends javax.swing.JFrame {
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
+
+    public Modelo.Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Modelo.Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    
 
     
 }

@@ -16,6 +16,7 @@ public class Producto extends javax.swing.JFrame {
      */
     
     private CtrlVista controlador;
+    private JFrame Carrito;
     private Modelo.Producto producto;
     private double descuento;
     private double precio;
@@ -28,6 +29,14 @@ public class Producto extends javax.swing.JFrame {
 
     public void setControlador(CtrlVista controlador) {
         this.controlador = controlador;
+    }
+    
+    public JFrame getCarrito() {
+        return Carrito;
+    }
+
+    public void setCarrito(JFrame Carrito) {
+        this.Carrito = Carrito;
     }
     
     public void setProducto(Modelo.Producto producto) {
@@ -60,17 +69,19 @@ public class Producto extends javax.swing.JFrame {
     public void Iniciar(Modelo.Producto producto){
         setProducto(producto);
         this.descuento = producto.getPrecio() * producto.getDescuento();
+        
         txtProducto.setText(producto.getNombre());
         txtPrecioUnit.setText(String.valueOf(producto.getPrecio()));
         txtDescuento.setText(String.valueOf(producto.getDescuento() * 100));
         txtADescripcion.setText(producto.getDescripcion());
         txtCantidad.setText("1");
+        
         this.precio = (producto.getPrecio() - descuento) * Double.parseDouble(txtCantidad.getText());
         txtPrecio.setText(String.valueOf(precio));
         txtSubtotal.setText(String.valueOf(precio));
+        
         this.Fecha = LocalDate.now();
         txtFecha.setText(Fecha.toString());
-
     }
 
     /**
@@ -735,6 +746,5 @@ public class Producto extends javax.swing.JFrame {
     private javax.swing.JTextField txtProducto;
     private javax.swing.JTextField txtSubtotal;
     // End of variables declaration//GEN-END:variables
-
-    
+  
 }
