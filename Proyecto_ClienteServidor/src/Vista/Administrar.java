@@ -694,7 +694,12 @@ public class Administrar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarAdminActionPerformed
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
-        // TODO add your handling code here:
+        // Abrir la ventana de Inventario usando el controlador
+        if (controlador != null) {
+            controlador.btnInventario(this);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: controlador no inicializado.");
+        }
     }//GEN-LAST:event_btnInventarioActionPerformed
 
     private void btnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProductoActionPerformed
