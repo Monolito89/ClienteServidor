@@ -429,7 +429,7 @@ public class AgregarAdmin extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        controlador.btnBuscar(this);
+        controlador.btnBuscar(txtBarraBusqueda.getText(), this);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministrarActionPerformed
@@ -449,7 +449,7 @@ public class AgregarAdmin extends javax.swing.JFrame {
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
-        controlador.btnBuscar(this);
+        controlador.btnPerfil(this);
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed

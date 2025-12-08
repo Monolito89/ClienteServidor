@@ -103,6 +103,11 @@ public class Carrito extends javax.swing.JFrame {
 
         btnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/buscar 2.png"))); // NOI18N
         btnBuscar1.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar1ActionPerformed(evt);
+            }
+        });
 
         btnAdministrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Historial.png"))); // NOI18N
@@ -442,6 +447,11 @@ public class Carrito extends javax.swing.JFrame {
         // TODO add your handling code here:
         controlador.btnCategoria(this);
     }//GEN-LAST:event_btnCategoriasActionPerformed
+
+    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
+        // TODO add your handling code here:
+        controlador.btnBuscar(txtBarraBusqueda.getText(), this);
+    }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     /**
      * @param args the command line arguments

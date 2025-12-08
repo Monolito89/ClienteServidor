@@ -16,28 +16,58 @@ import javax.swing.JOptionPane;
 public class CtrlVista {
     private Modelo.Producto proTemp = new Modelo.Producto();
     private CtrlAdmin ctrlAdmin = new CtrlAdmin();
+    private CtrlUsuarios ctrlUsuarios = new CtrlUsuarios();
     
     private MenuInicio menuInicio = new MenuInicio(this);
+    private Producto producto = new Producto(this);
     private Carrito carrito = new Carrito(this);
     private Perfil perfil = new Perfil(this);
     private Registro registro = new Registro(this);
-    private Oferta oferta = new Oferta(this);
+    private Filtro oferta = new Filtro(this);
     private Categoria categoria = new Categoria(this);
     private Administrar administrar = new Administrar(this);
     private AgregarAdmin agregarAdmin = new AgregarAdmin(this);
     private Inventario inventario = new Inventario(this);
+    
     private JFrame frameAnterior = menuInicio;
     private boolean sesion = false;
-    
     private boolean esAdmin = false;
     
-    private CtrlUsuarios ctrlUsuarios = new CtrlUsuarios();
+    
     
     
     
     public CtrlVista() {
         menuInicio.setVisible(true);
         menuInicio.setLocationRelativeTo(null);
+    }
+    
+    
+    
+    
+    
+    public Modelo.Producto getProTemp() {
+        return proTemp;
+    }
+
+    public void setProTemp(Modelo.Producto proTemp) {
+        this.proTemp = proTemp;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public boolean isEsAdmin() {
+        return esAdmin;
+    }
+
+    public void setEsAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
     }
 
     public CtrlAdmin getCtrlAdmin() {
@@ -80,11 +110,11 @@ public class CtrlVista {
         this.registro = registro;
     }
 
-    public Oferta getOferta() {
+    public Filtro getOferta() {
         return oferta;
     }
 
-    public void setOferta(Oferta oferta) {
+    public void setOferta(Filtro oferta) {
         this.oferta = oferta;
     }
 
@@ -149,6 +179,10 @@ public class CtrlVista {
         this.esAdmin = esAdmin;
     }  
     
+    
+    
+    
+    
     public void btnAtras(JFrame actual){
         frameAnterior.setLocationRelativeTo(null);
         frameAnterior.setVisible(true);
@@ -192,13 +226,6 @@ public class CtrlVista {
                 registro.setVisible(true);
                 registro.setLocationRelativeTo(actual);
         } 
-        actual.dispose();
-        setFrameAnterior(actual);
-    }
-    
-    public void btnBuscar(JFrame actual){
-        menuInicio.setLocationRelativeTo(null);
-        menuInicio.setVisible(true);
         actual.dispose();
         setFrameAnterior(actual);
     }
@@ -291,4 +318,26 @@ public class CtrlVista {
             administrar.setProducto(null);
         }
     }
+    
+    public void btnBuscar(String nombre, JFrame actual){
+        proTemp.setNombre(nombre);
+        boolean busqueda = ctrlAdmin.buscarProducto(proTemp);
+        if (busqueda == true){
+            JOptionPane.showMessageDialog(null, "Producto Encontrado");
+            administrar.setProducto(proTemp);
+            producto.setLocationRelativeTo(null);
+            producto.setVisible(true);
+            producto.Iniciar(proTemp);
+            actual.dispose();
+            setFrameAnterior(actual);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: ID no coincide con "
+                    + "ningún Producto Registrado");
+            administrar.setProducto(null);
+        }
+    }
+
+    
+    
 }
