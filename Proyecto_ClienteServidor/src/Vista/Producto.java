@@ -55,6 +55,14 @@ public class Producto extends javax.swing.JFrame {
         this.descuento = descuento;
     }
     
+    public LocalDate getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(LocalDate Fecha) {
+        this.Fecha = Fecha;
+    }
+    
     public Producto(CtrlVista controlador) {
         this.controlador = controlador;
         initComponents();
@@ -633,6 +641,8 @@ public class Producto extends javax.swing.JFrame {
 
     private void btnAñadirCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirCarritoActionPerformed
         // TODO add your handling code here:
+        controlador.getCarrito().Agregar(producto.getIdProducto(), producto.getNombre(), producto.getPrecio(), Integer.parseInt(txtCantidad.getText()), precio, getFecha());
+        controlador.getCarrito().cargarTablaCarrito();
     }//GEN-LAST:event_btnAñadirCarritoActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
@@ -746,5 +756,7 @@ public class Producto extends javax.swing.JFrame {
     private javax.swing.JTextField txtProducto;
     private javax.swing.JTextField txtSubtotal;
     // End of variables declaration//GEN-END:variables
+
+    
   
 }

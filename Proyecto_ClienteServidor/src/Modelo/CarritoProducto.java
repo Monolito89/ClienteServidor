@@ -13,8 +13,6 @@ public class CarritoProducto {
     private int cantidad;
     private double precio;
     private double subtotal;
-    
-    private List<Producto> productos = new ArrayList<>();
 
     public CarritoProducto(int idProducto, String nombreProducto, int cantidad, double precio, double subtotal) {
         this.idProducto = idProducto;
@@ -25,14 +23,6 @@ public class CarritoProducto {
     }
 
     public CarritoProducto() {
-    }
-       
-    public void agregarProducto(Producto p) {
-        productos.add(p);
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
     }
 
     public int getIdProducto() {
@@ -74,7 +64,5 @@ public class CarritoProducto {
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
-    
-    
-    
+
 }

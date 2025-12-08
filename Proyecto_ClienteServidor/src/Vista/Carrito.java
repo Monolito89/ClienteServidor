@@ -3,6 +3,9 @@ package Vista;
 import javax.swing.JFrame;
 import Controlador.CtrlVista;
 import javax.swing.JOptionPane;
+import Modelo.CarritoProducto;
+import java.time.LocalDate;
+import java.util.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,7 +25,18 @@ public class Carrito extends javax.swing.JFrame {
     private CtrlVista controlador;
     private Modelo.CarritoProducto carrito = new Modelo.CarritoProducto();
     private Modelo.Usuario usuario;
+    private List<CarritoProducto> listaCarrito = new ArrayList<>();
+    private LocalDate Fecha;
     
+    
+    public List<CarritoProducto> getListaCarrito() {
+        return listaCarrito;
+    }
+
+    public void setListaCarrito(List<CarritoProducto> listaCarrito) {
+        this.listaCarrito = listaCarrito;
+    }
+
     public Modelo.CarritoProducto getCarrito() {
         return carrito;
     }
@@ -50,11 +64,40 @@ public class Carrito extends javax.swing.JFrame {
         this.setResizable(false);
     }
     
-    public void Iniciar(Modelo.Usuario usuario){
-        this.usuario = usuario;
+    public void Agregar(int id, String nombre, double precio, int cantidad, double subtotal ,LocalDate fecha){
+        CarritoProducto item = new CarritoProducto(id, nombre, cantidad, precio, subtotal);
+        listaCarrito.add(item);
+        this.Fecha = fecha;
+        javax.swing.JOptionPane.showMessageDialog(null,
+                    "Compra Agregada Al Carrito");
     }
     
     
+    public void cargarTablaCarrito() {
+
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Producto", "Cantidad", "Precio", "Subtotal"});
+
+        double CostoTotal = 0;
+
+        for (CarritoProducto item : listaCarrito) {
+
+            modelo.addRow(new Object[]{
+                item.getNombreProducto(),
+                item.getCantidad(),
+                item.getPrecio(),
+                item.getSubtotal()
+            });
+
+            CostoTotal += item.getSubtotal();
+        }
+
+        tblCarrito.setModel(modelo);
+
+        txtTotal.setText(String.valueOf(CostoTotal));
+        txtCliente.setText(usuario.getNombre());
+    }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
