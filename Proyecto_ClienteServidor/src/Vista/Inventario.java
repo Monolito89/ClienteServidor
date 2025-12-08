@@ -474,4 +474,32 @@ public class Inventario extends javax.swing.JFrame {
         });
     }
     
+    public void mostrarAlertaStockBajo() {
+        // Método para mostrar una alerta de advertencia con los productos que tienen stock bajo (< 6)
+        // Se ejecuta cuando el usuario presiona el botón de Inventario
+        
+        // Obtener lista de productos
+        java.util.List<Modelo.Producto> productos = controlador.getCtrlAdmin().listarProductos();
+        StringBuilder productosAlerta = new StringBuilder();
+        boolean hayProductosBajos = false;
+        
+        // Verificar cuáles tienen stock < 6
+        for (Modelo.Producto p : productos) {
+            if (p.getStock() < 6) {
+                hayProductosBajos = true;
+                productosAlerta.append(p.getNombre())
+                               .append(" - Stock: ")
+                               .append(p.getStock())
+                               .append("\n");
+            }
+        }
+        
+        // Si hay productos con stock bajo, mostrar alerta
+        if (hayProductosBajos) {
+            String mensaje = "⚠️ ALERTA: Los siguientes productos tienen stock bajo (< 6):\n\n" 
+                           + productosAlerta.toString();
+            JOptionPane.showMessageDialog(this, mensaje, "Alerta de Stock Bajo", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
 }
