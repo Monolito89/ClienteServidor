@@ -24,6 +24,7 @@ public class Venta extends javax.swing.JFrame {
     
     private CtrlVista controlador;
     private LocalDate Fecha;
+    javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
     
     
     public CtrlVista getControlador() {
@@ -46,8 +47,6 @@ public class Venta extends javax.swing.JFrame {
     }
 
     public void cargarVenta(List<Object[]> datos) {
-
-        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
         modelo.setColumnIdentifiers(new Object[]{"Cliente", "Productos", "Subtotal", "Fecha"});
 
         for (Object[] fila : datos) {
@@ -57,8 +56,9 @@ public class Venta extends javax.swing.JFrame {
         tblVenta.setModel(modelo);
     }
     
-    public void cargarVentaDirecta(String cliente, String producto, double subtotal, LocalDate fecha) {
-        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
+    public void cargarVentaDirecta(String cliente, String producto, double subtotal, LocalDate fecha, int id, int Cantidad) {
+        controlador.getCtrlAdmin().actualizarStock(id, Cantidad);
+        
         modelo.setColumnIdentifiers(new Object[]{"Cliente", "Producto", "Subtotal", "Fecha"});
 
         modelo.addRow(new Object[]{

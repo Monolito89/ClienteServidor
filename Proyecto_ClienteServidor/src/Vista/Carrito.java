@@ -74,12 +74,13 @@ public class Carrito extends javax.swing.JFrame {
     }
     
     public void cargarCliente(){
+        this.usuario = controlador.getCtrlUsuarios().getUsuarioActual();
         txtCliente.setText(usuario.getNombre());
     }
     
     public void Agregar(int id, String nombre, double precio, int cantidad, double subtotal ,LocalDate fecha){
-        CarritoProducto item = new CarritoProducto(id, nombre, cantidad, precio, subtotal);
-        listaCarrito.add(item);
+        CarritoProducto producto = new CarritoProducto(id, nombre, cantidad, precio, subtotal);
+        listaCarrito.add(producto);
         this.Fecha = fecha;
         javax.swing.JOptionPane.showMessageDialog(null,
                     "Compra Agregada Al Carrito");
@@ -93,16 +94,16 @@ public class Carrito extends javax.swing.JFrame {
 
         double CostoTotal = 0;
 
-        for (CarritoProducto item : listaCarrito) {
+        for (CarritoProducto producto : listaCarrito) {
 
             modelo.addRow(new Object[]{
-                item.getNombreProducto(),
-                item.getCantidad(),
-                item.getPrecio(),
-                item.getSubtotal()
+                producto.getNombreProducto(),
+                producto.getCantidad(),
+                producto.getPrecio(),
+                producto.getSubtotal()
             });
 
-            CostoTotal += item.getSubtotal();
+            CostoTotal += producto.getSubtotal();
         }
 
         tblCarrito.setModel(modelo);
@@ -112,29 +113,37 @@ public class Carrito extends javax.swing.JFrame {
     }
     
     public List<Object[]> Venta() {
-    List<Object[]> listaVenta = new ArrayList<>();
+        List<Object[]> listaVenta = new ArrayList<>();
 
-    String correoCliente = usuario.getCorreo();
+        String correoCliente = usuario.getCorreo();
+        
+        for (int i = 0; i < tblCarrito.getRowCount(); i++) {
 
-    for (int i = 0; i < tblCarrito.getRowCount(); i++) {
+            String nombre = tblCarrito.getValueAt(i, 0).toString();
+            double subtotal = Double.parseDouble(tblCarrito.getValueAt(i, 3).toString());
 
-        String nombre = tblCarrito.getValueAt(i, 0).toString();
-        double subtotal = Double.parseDouble(tblCarrito.getValueAt(i, 3).toString());
+            listaVenta.add(new Object[]{
+                correoCliente,
+                nombre,
+                subtotal,
+                Fecha
+            });
+        }
 
-        listaVenta.add(new Object[]{
-            correoCliente,
-            nombre,
-            subtotal,
-            Fecha
-        });
+        return listaVenta;
+    }
+    
+    public void actualizarStock() {
+        
+        for (CarritoProducto producto : listaCarrito) {
+            int id = producto.getIdProducto();
+            int cantidad = producto.getCantidad();
+
+            controlador.getCtrlAdmin().actualizarStock(id, cantidad);
+        }
     }
 
-    return listaVenta;
-}
 
-
-
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -160,7 +169,6 @@ public class Carrito extends javax.swing.JFrame {
         lblTotal = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         btnComprar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         tlbOpciones = new javax.swing.JToolBar();
         btnPerfil = new javax.swing.JButton();
         btnOfertas = new javax.swing.JButton();
@@ -354,17 +362,6 @@ public class Carrito extends javax.swing.JFrame {
             }
         });
 
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEliminar.setText("Eliminar Articulos");
-        btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEliminar.setPreferredSize(new java.awt.Dimension(120, 60));
-        btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -376,21 +373,17 @@ public class Carrito extends javax.swing.JFrame {
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137)
                 .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnComprar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnComprar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36))
         );
 
@@ -497,13 +490,10 @@ public class Carrito extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
         controlador.getVenta().cargarVenta(Venta());
+        actualizarStock();
         javax.swing.JOptionPane.showMessageDialog(null, 
                 "Compra Exitosa de Los Productos");
     }//GEN-LAST:event_btnComprarActionPerformed
@@ -594,7 +584,6 @@ public class Carrito extends javax.swing.JFrame {
     private javax.swing.JButton btnCarrito;
     private javax.swing.JButton btnCategorias;
     private javax.swing.JButton btnComprar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLogo;
     private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;

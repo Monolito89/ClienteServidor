@@ -353,7 +353,7 @@ public class Inventario extends javax.swing.JFrame {
 
     private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Ya se encuentra en el Menu De Ofertas");
+        controlador.btnOferta(this);
     }//GEN-LAST:event_btnOfertasActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed

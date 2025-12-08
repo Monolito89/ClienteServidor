@@ -218,7 +218,7 @@ public class CtrlAdmin {
         return lista;
     }   
     
-    // MÉTODO 6: BUSCAR PRODUCTO POR NOMBRE PARA LA BARRA DE BUSQUEDA
+    // MÉTODO 7: BUSCAR PRODUCTO POR NOMBRE PARA LA BARRA DE BUSQUEDA
     public boolean buscarProducto(Producto pro) {
         String sql = "SELECT * FROM productos WHERE LOWER(nombre) LIKE LOWER(?)";
 
@@ -249,7 +249,7 @@ public class CtrlAdmin {
         }
     }
     
-    // MÉTODO 7: Obtener productos ordenados por precio de menor a mayor
+    // MÉTODO 8: Obtener productos ordenados por precio de menor a mayor
     public java.util.List<Producto> listarProductosPorPrecio() {
         java.util.List<Producto> lista = new java.util.ArrayList<>();
         PreparedStatement ps = null;
@@ -285,7 +285,7 @@ public class CtrlAdmin {
         return lista;
     }
 
-    // MÉTODO 8: Obtener solo productos disponibles (stock > 0)
+    // MÉTODO 9: Obtener solo productos disponibles (stock > 0)
     public java.util.List<Producto> listarProductosDisponibles() {
         java.util.List<Producto> lista = new java.util.ArrayList<>();
         PreparedStatement ps = null;
@@ -321,38 +321,82 @@ public class CtrlAdmin {
         return lista;
     }
     
-    // MÉTODO 9: Obtener solo productos con descuento (descuento > 0)
+    // MÉTODO 10: Obtener solo productos con descuento (descuento > 0)
     public java.util.List<Producto> listarProductosConOferta() {
-    java.util.List<Producto> lista = new java.util.ArrayList<>();
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-    Connection con = conexion.getConexion();
+        java.util.List<Producto> lista = new java.util.ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = conexion.getConexion();
 
-    String sql = "SELECT id_producto, nombre, stock, precio, descuento FROM productos WHERE descuento > 0";
+        String sql = "SELECT id_producto, nombre, stock, precio, descuento FROM productos WHERE descuento > 0";
 
-    try {
-        ps = con.prepareStatement(sql);
-        rs = ps.executeQuery();
-
-        while (rs.next()) {
-            Producto pro = new Producto();
-            pro.setIdProducto(rs.getInt("id_producto"));
-            pro.setNombre(rs.getString("nombre"));
-            pro.setStock(rs.getInt("stock"));
-            pro.setPrecio(rs.getDouble("precio"));
-            pro.setDescuento(rs.getDouble("descuento"));
-            lista.add(pro);
-        }
-    } catch (SQLException e) {
-        System.err.println("Error al listar productos con oferta: " + e);
-    } finally {
         try {
-            if (con != null) con.close();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Producto pro = new Producto();
+                pro.setIdProducto(rs.getInt("id_producto"));
+                pro.setNombre(rs.getString("nombre"));
+                pro.setStock(rs.getInt("stock"));
+                pro.setPrecio(rs.getDouble("precio"));
+                pro.setDescuento(rs.getDouble("descuento"));
+                lista.add(pro);
+            }
         } catch (SQLException e) {
-            System.err.println(e);
+            System.err.println("Error al listar productos con oferta: " + e);
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return lista;
+    }
+    
+    // MÉTODO 11: Revisar el stock antes de una venta
+    public int revisarStock(int idProducto) {
+        String sql = "SELECT stock FROM productos WHERE id_producto = ?";
+
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idProducto);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("stock");
+                } else {
+                    return -1;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
         }
     }
-    return lista;
-}
+
+    // MÉTODO 12: Actualizar el stock despues de la venta
+    public boolean actualizarStock(int idProducto, int cantidad) {
+        String sql = "UPDATE productos SET stock = stock - ? WHERE id_producto = ?";
+
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, cantidad);
+            ps.setInt(2, idProducto);
+
+            int filas = ps.executeUpdate();
+
+            return filas > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     
 }

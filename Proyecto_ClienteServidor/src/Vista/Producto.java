@@ -111,6 +111,16 @@ public class Producto extends javax.swing.JFrame {
         txtSubtotal.setText(String.valueOf(precio));
     }
     
+    
+    public boolean confirmarStock(int id, int cantidad){
+        int stock = controlador.getCtrlAdmin().revisarStock(id);
+        
+        if (cantidad <= stock)return true;
+        
+        else return false;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -645,32 +655,66 @@ public class Producto extends javax.swing.JFrame {
 
     private void btnAñadirCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirCarritoActionPerformed
         // TODO add your handling code here:
-        if(controlador.getCtrlUsuarios().getUsuarioActual() != null){
-            controlador.getCarrito().Agregar(producto.getIdProducto(), producto.getNombre(), producto.getPrecio(), Integer.parseInt(txtCantidad.getText()), precio, getFecha());
-        controlador.getCarrito().cargarCarrito();
-        } else {
+        if (Integer.parseInt(txtCantidad.getText()) <= 0){
             javax.swing.JOptionPane.showMessageDialog(null,
-                    "Necesita Logearse para poder Comprar Productos");
-        }  
+                            "La Cantidad no puede ser igual o menor a 0");
+              
+        } else {
+            if(controlador.getCtrlUsuarios().getUsuarioActual() != null){
+
+                if (confirmarStock(producto.getIdProducto(), Integer.parseInt(txtCantidad.getText()))){
+                    controlador.getCarrito().cargarCliente();
+                    controlador.getCarrito().Agregar(producto.getIdProducto(), 
+                            producto.getNombre(), producto.getPrecio(), 
+                            Integer.parseInt(txtCantidad.getText()), 
+                            precio, getFecha());
+
+                    controlador.getCarrito().cargarCarrito();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(null,
+                            "No hay suficientes productos disponibles");
+                }
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(null,
+                        "Necesita Logearse para poder Comprar Productos");
+            } 
+        }     
     }//GEN-LAST:event_btnAñadirCarritoActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        if(controlador.getCtrlUsuarios().getUsuarioActual() != null){
-
-            String cliente = controlador.getCtrlUsuarios().getUsuarioActual().getCorreo();
-            String nombreProducto = producto.getNombre();
-            double subtotal = Double.parseDouble(txtSubtotal.getText());
-            LocalDate fecha = getFecha();
-
-            controlador.getVenta().cargarVentaDirecta(cliente, nombreProducto, subtotal, fecha);
+        if (Integer.parseInt(txtCantidad.getText()) <= 0){
             javax.swing.JOptionPane.showMessageDialog(null,
-                    "Compra Exitosa de Los Productos");
-            
+                            "La Cantidad no puede ser igual o menor a 0");
+              
         } else {
-            javax.swing.JOptionPane.showMessageDialog(null,
-                    "Necesita Logearse para poder Comprar Productos");
-        }  
+            
+            if(controlador.getCtrlUsuarios().getUsuarioActual() != null){
+                if (confirmarStock(producto.getIdProducto(), Integer.parseInt(txtCantidad.getText()))){
+
+                    String cliente = controlador.getCtrlUsuarios().getUsuarioActual().getCorreo();
+                    String nombreProducto = producto.getNombre();
+                    double subtotal = Double.parseDouble(txtSubtotal.getText());
+                    LocalDate fecha = getFecha();
+
+                    controlador.getVenta().cargarVentaDirecta(cliente, nombreProducto, subtotal, fecha, producto.getIdProducto(), Integer.parseInt(txtCantidad.getText()));
+                    javax.swing.JOptionPane.showMessageDialog(null,
+                            "Compra Exitosa de Los Productos");
+
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(null,
+                            "No hay suficientes productos disponibles");
+                }
+
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(null,
+                        "Necesita Logearse para poder Comprar Productos");
+            }
+            
+        }
+        
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
