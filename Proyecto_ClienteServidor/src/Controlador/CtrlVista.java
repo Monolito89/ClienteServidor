@@ -229,6 +229,7 @@ public class CtrlVista {
     
     public void btnPerfil(JFrame actual){
         if (sesion == true){
+                perfil.cargarDatosUsuario();
                 perfil.setVisible(true);
                 perfil.setLocationRelativeTo(actual);
         } else {
