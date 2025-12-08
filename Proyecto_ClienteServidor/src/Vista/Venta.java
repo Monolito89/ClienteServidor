@@ -56,6 +56,20 @@ public class Venta extends javax.swing.JFrame {
 
         tblVenta.setModel(modelo);
     }
+    
+    public void cargarVentaDirecta(String cliente, String producto, double subtotal, LocalDate fecha) {
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Cliente", "Producto", "Subtotal", "Fecha"});
+
+        modelo.addRow(new Object[]{
+            cliente,
+            producto,
+            subtotal,
+            fecha
+        });
+
+        tblVenta.setModel(modelo);
+    }
 
 
     /**
@@ -355,7 +369,7 @@ public class Venta extends javax.swing.JFrame {
 
     private void btnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritoActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Ya se encuentra en el Carrito De Compras");
+        controlador.btnCarrito(this);
     }//GEN-LAST:event_btnCarritoActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed

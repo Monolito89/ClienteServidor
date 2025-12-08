@@ -101,6 +101,12 @@ public class Producto extends javax.swing.JFrame {
     }
     
     public void actualizarSubtotal(){
+        
+        if (txtCantidad.getText().isEmpty() || !txtCantidad.getText().matches("\\d+")) {
+        txtSubtotal.setText("0");
+        return;
+        }
+        
         this.precio = precioConDescuento * Double.parseDouble(txtCantidad.getText());
         txtSubtotal.setText(String.valueOf(precio));
     }
@@ -650,7 +656,21 @@ public class Producto extends javax.swing.JFrame {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        
+        if(controlador.getCtrlUsuarios().getUsuarioActual() != null){
+
+            String cliente = controlador.getCtrlUsuarios().getUsuarioActual().getCorreo();
+            String nombreProducto = producto.getNombre();
+            double subtotal = Double.parseDouble(txtSubtotal.getText());
+            LocalDate fecha = getFecha();
+
+            controlador.getVenta().cargarVentaDirecta(cliente, nombreProducto, subtotal, fecha);
+            javax.swing.JOptionPane.showMessageDialog(null,
+                    "Compra Exitosa de Los Productos");
+            
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null,
+                    "Necesita Logearse para poder Comprar Productos");
+        }  
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed

@@ -505,7 +505,7 @@ public class Carrito extends javax.swing.JFrame {
         // TODO add your handling code here:
         controlador.getVenta().cargarVenta(Venta());
         javax.swing.JOptionPane.showMessageDialog(null, 
-                "Compra Exitosa");
+                "Compra Exitosa de Los Productos");
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
