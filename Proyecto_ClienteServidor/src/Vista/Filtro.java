@@ -39,6 +39,67 @@ public class Filtro extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
     }
+    
+    //Metodos para los filtros
+    // Metodo para llenar tabla con productos ordenados por precio
+    private void cargarProductosPorPrecio() {
+        java.util.List<Modelo.Producto> productos = controlador.getCtrlAdmin().listarProductosPorPrecio();
+
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Producto", "Precio Unitario", "Descuento", "Nuevo Precio"});
+
+        for (Modelo.Producto p : productos) {
+            double precioFinal = p.getPrecio() * (1 - p.getDescuento());
+            modelo.addRow(new Object[]{
+                p.getNombre(),
+                String.format("$%.2f", p.getPrecio()),
+                String.format("%.0f%%", p.getDescuento() * 100),
+                String.format("$%.2f", precioFinal)
+            });
+        }
+
+        tblCarrito.setModel(modelo);
+    }
+ 
+    // Metodo para llenar tabla con productos disponibles
+    private void cargarProductosDisponibles() {
+        java.util.List<Modelo.Producto> productos = controlador.getCtrlAdmin().listarProductosDisponibles();
+
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Producto", "Stock Disponible", "Precio Unitario", "Descuento"});
+
+        for (Modelo.Producto p : productos) {
+            modelo.addRow(new Object[]{
+                p.getNombre(),
+                p.getStock() + " unidades",
+                String.format("$%.2f", p.getPrecio()),
+                String.format("%.0f%%", p.getDescuento() * 100)
+            });
+        }
+
+        tblCarrito.setModel(modelo);
+    }
+
+    // MÉTODO para llenar tabla con productos en oferta
+    private void cargarProductosEnOferta() {
+        java.util.List<Modelo.Producto> productos = controlador.getCtrlAdmin().listarProductosConOferta();
+
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Producto", "Precio Original", "Descuento", "Precio Final"});
+
+        for (Modelo.Producto p : productos) {
+            double precioFinal = p.getPrecio() * (1 - p.getDescuento());
+            double ahorroMonto = p.getPrecio() - precioFinal;
+            modelo.addRow(new Object[]{
+                p.getNombre(),
+                String.format("$%.2f", p.getPrecio()),
+                String.format("%.0f%% (-$%.2f)", p.getDescuento() * 100, ahorroMonto),
+                String.format("$%.2f", precioFinal)
+            });
+        }
+
+        tblCarrito.setModel(modelo);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -238,8 +299,8 @@ public class Filtro extends javax.swing.JFrame {
                 .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(btnFiltroPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(265, 265, 265)
+                .addComponent(btnFiltroPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnFiltroDisp, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
@@ -416,14 +477,17 @@ public class Filtro extends javax.swing.JFrame {
 
     private void btnFiltroOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroOfertaActionPerformed
         // TODO add your handling code here:
+        cargarProductosEnOferta();
     }//GEN-LAST:event_btnFiltroOfertaActionPerformed
 
     private void btnFiltroPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroPrecioActionPerformed
         // TODO add your handling code here:
+        cargarProductosPorPrecio();
     }//GEN-LAST:event_btnFiltroPrecioActionPerformed
 
     private void btnFiltroDispActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroDispActionPerformed
         // TODO add your handling code here:
+        cargarProductosDisponibles();
     }//GEN-LAST:event_btnFiltroDispActionPerformed
 
     /**
