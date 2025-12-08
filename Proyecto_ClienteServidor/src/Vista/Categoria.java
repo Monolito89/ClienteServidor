@@ -3,6 +3,7 @@ package Vista;
 import javax.swing.JFrame;
 import Controlador.CtrlVista;
 import Modelo.ConsultasCategoria;
+import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,9 @@ public class Categoria extends javax.swing.JFrame {
     
     private CtrlVista controlador;
     
+    // Aquí se guardan los IDs de las categorías que están en el combo
+    private java.util.List<Integer> idsCategorias = new java.util.ArrayList<>();
+    
     public CtrlVista getControlador() {
         return controlador;
     }
@@ -31,7 +35,23 @@ public class Categoria extends javax.swing.JFrame {
         this.controlador = controlador;
         initComponents();
         this.setResizable(false);
-        cargarCategorias();
+
+        // Esto llena combo con categorías desde la BD
+        cargarComboCategorias();
+
+        // Si hay al menos una categoría, seleccionamos la primera y cargamos la tabla
+        if (cmbCategoria.getItemCount() > 0) {
+            cmbCategoria.setSelectedIndex(0);
+            actualizarTablaSegunCombo();
+        }
+
+        // Cada vez que cambie el combo, actualizamos los productos
+        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarTablaSegunCombo();
+            }
+        });
     }
     
     public Categoria() {
@@ -53,9 +73,9 @@ public class Categoria extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnLogo = new javax.swing.JButton();
         txtBarraBusqueda = new javax.swing.JTextField();
-        btnBuscar1 = new javax.swing.JButton();
         btnAdministrar = new javax.swing.JButton();
         btnCarrito = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCategoria = new javax.swing.JTable();
@@ -97,14 +117,6 @@ public class Categoria extends javax.swing.JFrame {
             }
         });
 
-        btnBuscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/buscar 2.png"))); // NOI18N
-        btnBuscar1.setPreferredSize(new java.awt.Dimension(100, 40));
-        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscar1ActionPerformed(evt);
-            }
-        });
-
         btnAdministrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Historial.png"))); // NOI18N
         btnAdministrar.setText("Administrar");
@@ -131,6 +143,14 @@ public class Categoria extends javax.swing.JFrame {
             }
         });
 
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/buscar 2.png"))); // NOI18N
+        btnBuscar.setPreferredSize(new java.awt.Dimension(100, 40));
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -140,8 +160,8 @@ public class Categoria extends javax.swing.JFrame {
                 .addGap(83, 83, 83)
                 .addComponent(txtBarraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79)
                 .addComponent(btnAdministrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -150,20 +170,20 @@ public class Categoria extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnAdministrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtBarraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAdministrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -301,6 +321,11 @@ public class Categoria extends javax.swing.JFrame {
         jLabel1.setVerifyInputWhenFocusTarget(false);
 
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCategoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -380,26 +405,70 @@ public class Categoria extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Ya se encuentra en el Menu De Categorias");
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
-    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
+    private void cmbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCategoriaActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         controlador.btnBuscar(txtBarraBusqueda.getText(), this);
-    }//GEN-LAST:event_btnBuscar1ActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
-private void cargarCategorias() {
-    /*DefaultTableModel modelo = (DefaultTableModel) tblCategoria.getModel();
-    modelo.setRowCount(0);
+// Llena el combo con los nombres de las categorías desde la BD
+private void cargarComboCategorias() {
+    try {
+        // Limpiar combo y lista de IDs
+        cmbCategoria.removeAllItems();
+        idsCategorias.clear();
 
-    ConsultasCategoria consultas = new ConsultasCategoria();
-    java.util.List<Modelo.Categoria> lista = consultas.listar();
+        ConsultasCategoria consultas = new ConsultasCategoria();
+        java.util.List<Modelo.Categoria> lista = consultas.listar();
 
-    for (Modelo.Categoria c : lista) {
-        Object[] fila = new Object[2];
-        fila[0] = c.getIdCategoria();
-        fila[1] = c.getNombre();
-        modelo.addRow(fila);
-    }*/
+        for (Modelo.Categoria c : lista) {
+            // Mostramos el nombre en el combo
+            cmbCategoria.addItem(c.getNombre());
+            // Guardamos el id en la lista paralela
+            idsCategorias.add(c.getIdCategoria());
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,
+                "Error al cargar categorías: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+    }
 }
-    /**
+
+// Lee la categoría seleccionada en el combo, busca sus productos y llena la tabla
+    private void actualizarTablaSegunCombo() {
+    int index = cmbCategoria.getSelectedIndex();
+    if (index < 0) {
+        return; // nada seleccionado
+    }
+
+    // Recuperamos el id_categoria correspondiente a la opción del combo
+    int idCategoria = idsCategorias.get(index);
+
+    // Pedir los productos al CtrlAdmin
+    java.util.List<Modelo.Producto> lista = controlador.getCtrlAdmin().listarProductosPorCategoria(idCategoria);
+
+    DefaultTableModel modelo = (DefaultTableModel) tblCategoria.getModel();
+    modelo.setRowCount(0); // limpiar tabla
+
+    for (Modelo.Producto p : lista) {
+        Object[] fila = new Object[4];
+        fila[0] = p.getNombre();          // "Producto"
+        fila[1] = p.getPrecio();          // "Precio Unitario"
+        fila[2] = p.getDescuento();       // "Descuento"
+
+        // Si 'descuento' es un PORCENTAJE:
+        double nuevoPrecio = p.getPrecio() - (p.getPrecio() * p.getDescuento() / 100.0);
+        // Si fuera un MONTO FIJO, usarías: double nuevoPrecio = p.getPrecio() - p.getDescuento();
+
+        fila[3] = nuevoPrecio;            // "Nuevo Precio"
+
+        modelo.addRow(fila);
+    }
+}   /**   
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -440,7 +509,7 @@ private void cargarCategorias() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdministrar;
     private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnBuscar1;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCarrito;
     private javax.swing.JButton btnCategorias;
     private javax.swing.JButton btnLogo;

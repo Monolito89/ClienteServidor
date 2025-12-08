@@ -70,9 +70,6 @@ public class CtrlVista {
         this.esAdmin = esAdmin;
     }
 
-    public CtrlAdmin getCtrlAdmin() {
-        return ctrlAdmin;
-    }
 
     public void setCtrlAdmin(CtrlAdmin ctrlAdmin) {
         this.ctrlAdmin = ctrlAdmin;
@@ -154,6 +151,9 @@ public class CtrlVista {
         return ctrlUsuarios;
     }
     
+    public CtrlAdmin getCtrlAdmin() {
+        return ctrlAdmin;
+    }  
     public JFrame getFrameAnterior() {
         return frameAnterior;
     }
@@ -166,6 +166,7 @@ public class CtrlVista {
         return sesion;
     }
 
+    
     public void setSesion(boolean sesion) {
         this.sesion = sesion;
     }
