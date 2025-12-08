@@ -270,6 +270,7 @@ public class CtrlVista {
     
     public void btnInventario(JFrame actual){
         inventario.setLocationRelativeTo(null);
+        inventario.mostrarAlertaStockBajo();
         inventario.setVisible(true);
         actual.dispose();
         setFrameAnterior(actual);
