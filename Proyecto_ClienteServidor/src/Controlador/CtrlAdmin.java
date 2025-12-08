@@ -146,4 +146,37 @@ public class CtrlAdmin {
             }
         }
     }
+
+    // MÉTODO 5: LISTAR TODOS LOS PRODUCTOS (para tabla de inventario)
+    public java.util.List<Producto> listarProductos() {
+        java.util.List<Producto> lista = new java.util.ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = conexion.getConexion();
+
+        String sql = "SELECT id_producto, nombre, stock, precio FROM productos";
+
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Producto pro = new Producto();
+                pro.setIdProducto(rs.getInt("id_producto"));
+                pro.setNombre(rs.getString("nombre"));
+                pro.setStock(rs.getInt("stock"));
+                pro.setPrecio(rs.getDouble("precio"));
+                lista.add(pro);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar productos: " + e);
+        } finally {
+            try {
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return lista;
+    }
 }

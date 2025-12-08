@@ -25,6 +25,7 @@ public class CtrlVista {
     private Categoria categoria = new Categoria(this);
     private Administrar administrar = new Administrar(this);
     private AgregarAdmin agregarAdmin = new AgregarAdmin(this);
+    private Inventario inventario = new Inventario(this);
     private JFrame frameAnterior = menuInicio;
     private boolean sesion = false;
     
@@ -37,6 +38,14 @@ public class CtrlVista {
     public CtrlVista() {
         menuInicio.setVisible(true);
         menuInicio.setLocationRelativeTo(null);
+    }
+
+    public CtrlAdmin getCtrlAdmin() {
+        return ctrlAdmin;
+    }
+
+    public void setCtrlAdmin(CtrlAdmin ctrlAdmin) {
+        this.ctrlAdmin = ctrlAdmin;
     }
 
     public MenuInicio getMenuInicio() {
@@ -101,6 +110,14 @@ public class CtrlVista {
 
     public void setAgregarAdmin(AgregarAdmin agregarAdmin) {
         this.agregarAdmin = agregarAdmin;
+    }
+    
+    public Inventario getInventario() {
+        return inventario;
+    }
+
+    public void setInventario(Inventario inventario) {
+        this.inventario = inventario;
     }
     
     public CtrlUsuarios getCtrlUsuarios() {
@@ -210,6 +227,13 @@ public class CtrlVista {
         
         agregarAdmin.setLocationRelativeTo(null);
         agregarAdmin.setVisible(true);
+        actual.dispose();
+        setFrameAnterior(actual);
+    }
+    
+    public void btnInventario(JFrame actual){
+        inventario.setLocationRelativeTo(null);
+        inventario.setVisible(true);
         actual.dispose();
         setFrameAnterior(actual);
     }

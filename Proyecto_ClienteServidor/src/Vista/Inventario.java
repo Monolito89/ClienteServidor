@@ -33,6 +33,7 @@ public class Inventario extends javax.swing.JFrame {
         this.controlador = controlador;
         initComponents();
         this.setResizable(false);
+        cargarProductosEnTabla();
     }
     
     public Inventario() {
@@ -422,5 +423,35 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JTextField txtBarraBusqueda;
     // End of variables declaration//GEN-END:variables
 
+    // Método para cargar productos en la tabla
+    private void cargarProductosEnTabla() {
+        // Obteniene la lista de productos del controlador
+        java.util.List<Modelo.Producto> productos = controlador.getCtrlAdmin().listarProductos();
+        
+        // Crea el modelo de la tabla
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"ID", "Producto", "Stock", "Precio"});
+        
+        // Llena la tabla con los datos
+        for (Modelo.Producto p : productos) {
+            // Convierte el stock a Boolean: si stock > 0 = true (hay stock), si stock = 0 = false (sin stock)
+            boolean hayStock = p.getStock() > 0;
+            modelo.addRow(new Object[]{
+                p.getIdProducto(),
+                p.getNombre(),
+                hayStock,
+                p.getPrecio()
+            });
+        }
+        
+        // Asigna el modelo a la tabla
+        tblCarrito.setModel(modelo);
+        
+        // ajusta el ancho de columnas
+        tblCarrito.getColumnModel().getColumn(0).setPreferredWidth(50);   // ID
+        tblCarrito.getColumnModel().getColumn(1).setPreferredWidth(400);  // Producto
+        tblCarrito.getColumnModel().getColumn(2).setPreferredWidth(80);   // Stock (Boolean)
+        tblCarrito.getColumnModel().getColumn(3).setPreferredWidth(100);  // Precio
+    }
     
 }
