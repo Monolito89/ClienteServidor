@@ -249,4 +249,110 @@ public class CtrlAdmin {
         }
     }
     
+    // MÉTODO 7: Obtener productos ordenados por precio de menor a mayor
+    public java.util.List<Producto> listarProductosPorPrecio() {
+        java.util.List<Producto> lista = new java.util.ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = conexion.getConexion();
+
+        String sql = "SELECT id_producto, nombre, stock, precio, descuento FROM productos ORDER BY precio ASC";
+
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Producto pro = new Producto();
+                pro.setIdProducto(rs.getInt("id_producto"));
+                pro.setNombre(rs.getString("nombre"));
+                pro.setStock(rs.getInt("stock"));
+                pro.setPrecio(rs.getDouble("precio"));
+                pro.setDescuento(rs.getDouble("descuento"));
+                lista.add(pro);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar productos por precio: " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return lista;
+    }
+
+    // MÉTODO 8: Obtener solo productos disponibles (stock > 0)
+    public java.util.List<Producto> listarProductosDisponibles() {
+        java.util.List<Producto> lista = new java.util.ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = conexion.getConexion();
+
+        String sql = "SELECT id_producto, nombre, stock, precio, descuento FROM productos WHERE stock > 0";
+
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Producto pro = new Producto();
+                pro.setIdProducto(rs.getInt("id_producto"));
+                pro.setNombre(rs.getString("nombre"));
+                pro.setStock(rs.getInt("stock"));
+                pro.setPrecio(rs.getDouble("precio"));
+                pro.setDescuento(rs.getDouble("descuento"));
+                lista.add(pro);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar productos disponibles: " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return lista;
+    }
+    
+    // MÉTODO 9: Obtener solo productos con descuento (descuento > 0)
+    public java.util.List<Producto> listarProductosConOferta() {
+    java.util.List<Producto> lista = new java.util.ArrayList<>();
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    Connection con = conexion.getConexion();
+
+    String sql = "SELECT id_producto, nombre, stock, precio, descuento FROM productos WHERE descuento > 0";
+
+    try {
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Producto pro = new Producto();
+            pro.setIdProducto(rs.getInt("id_producto"));
+            pro.setNombre(rs.getString("nombre"));
+            pro.setStock(rs.getInt("stock"));
+            pro.setPrecio(rs.getDouble("precio"));
+            pro.setDescuento(rs.getDouble("descuento"));
+            lista.add(pro);
+        }
+    } catch (SQLException e) {
+        System.err.println("Error al listar productos con oferta: " + e);
+    } finally {
+        try {
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
+    return lista;
+}
+    
 }
