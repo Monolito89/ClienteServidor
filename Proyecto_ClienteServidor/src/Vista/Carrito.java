@@ -73,6 +73,10 @@ public class Carrito extends javax.swing.JFrame {
         this.setResizable(false);
     }
     
+    public void cargarCliente(){
+        txtCliente.setText(usuario.getNombre());
+    }
+    
     public void Agregar(int id, String nombre, double precio, int cantidad, double subtotal ,LocalDate fecha){
         CarritoProducto item = new CarritoProducto(id, nombre, cantidad, precio, subtotal);
         listaCarrito.add(item);
@@ -82,7 +86,7 @@ public class Carrito extends javax.swing.JFrame {
     }
     
     
-    public void cargarTablaCarrito() {
+    public void cargarCarrito() {
 
         javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
         modelo.setColumnIdentifiers(new Object[]{"Producto", "Cantidad", "Precio", "Subtotal"});

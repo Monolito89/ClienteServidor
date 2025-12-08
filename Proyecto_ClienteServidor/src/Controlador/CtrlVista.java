@@ -204,6 +204,7 @@ public class CtrlVista {
             carrito.setLocationRelativeTo(null);
             carrito.setVisible(true);
             carrito.setUsuario(ctrlUsuarios.getUsuarioActual());
+            carrito.cargarCliente();
             actual.dispose();
             setFrameAnterior(actual);
         } else {
