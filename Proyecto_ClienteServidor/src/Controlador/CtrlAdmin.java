@@ -64,14 +64,13 @@ public class CtrlAdmin {
     
     // MÉTODO 2: MODIFICAR (ACTUALIZAR) PRODUCTO 
     public boolean modificar(Producto pro) {
-        PreparedStatement ps = null;
-        Connection con = conexion.getConexion();
 
-        // SQL
-        String sql = "UPDATE productos SET nombre=?, descripcion=?, precio=?, descuento=?, stock=?, id_categoria=?, id_proveedor=? WHERE id_producto=?";
+        String sql = "UPDATE productos SET nombre = ?, descripcion = ?, precio = ?, descuento = ?, "
+                   + "stock = ?, id_categoria = ?, id_proveedor = ? WHERE id_producto = ?";
 
-        try {
-            ps = con.prepareStatement(sql);
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
             ps.setString(1, pro.getNombre());
             ps.setString(2, pro.getDescripcion());
             ps.setDouble(3, pro.getPrecio());
@@ -81,45 +80,34 @@ public class CtrlAdmin {
             ps.setInt(7, pro.getIdProveedor());
             ps.setInt(8, pro.getIdProducto());
 
-            ps.execute();
-            return true;
+            int filas = ps.executeUpdate();
+            return filas > 0;
+
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
         }
     }
-
-    // MÉTODO 3: ELIMINAR PRODUCTO 
+    
+    // MÉTODO 3: ELIMINAR PRODUCTO DE LA BASE DE DATOS
     public boolean eliminar(Producto pro) {
-        PreparedStatement ps = null;
-        Connection con = conexion.getConexion();
 
-        // SQL 
-        String sql = "DELETE FROM productos WHERE id_producto=?";
+        String sql = "DELETE FROM productos WHERE id_producto = ?";
 
-        try {
-            ps = con.prepareStatement(sql);
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
             ps.setInt(1, pro.getIdProducto());
-            ps.execute();
-            return true;
+
+            int filas = ps.executeUpdate();
+            return filas > 0;
+
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
         }
     }
-
+    
     // MÉTODO 4: BUSCAR PRODUCTO POR CÓDIGO 
     public boolean buscar(Producto pro) {
         PreparedStatement ps = null;

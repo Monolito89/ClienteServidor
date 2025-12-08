@@ -42,6 +42,17 @@ public class Administrar extends javax.swing.JFrame {
         setResizable(false);
         
     }
+    
+    public void Limpiar(){
+        txtID.setText("");
+        txtProducto.setText("");
+        txtPrecio.setText("");
+        txtStock.setText("");
+        txtCategoria.setText("");
+        txtProveedor.setText("");
+        txtDescuento.setText("");
+        txtADescripcion.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -712,10 +723,24 @@ public class Administrar extends javax.swing.JFrame {
 
     private void btnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProductoActionPerformed
         // TODO add your handling code here:
+        producto = new Modelo.Producto();
+        producto.setIdProducto(Integer.parseInt(txtID.getText()));
+        producto.setNombre(txtProducto.getText());
+        producto.setPrecio(Double.valueOf(txtPrecio.getText()));
+        producto.setStock(Integer.parseInt(txtStock.getText()));
+        producto.setIdCategoria(Integer.parseInt(txtCategoria.getText()));
+        producto.setIdProveedor(Integer.parseInt(txtProveedor.getText()));
+        producto.setDescuento(Double.parseDouble(txtDescuento.getText()));
+        producto.setDescripcion(txtADescripcion.getText());
+        controlador.btnActualizarProducto(producto);
     }//GEN-LAST:event_btnEditarProductoActionPerformed
 
     private void btnEliminarProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProducto1ActionPerformed
         // TODO add your handling code here:
+        producto = new Modelo.Producto();
+        producto.setIdProducto(Integer.parseInt(txtID.getText()));
+        controlador.btnEliminarProducto(producto);
+        Limpiar();
     }//GEN-LAST:event_btnEliminarProducto1ActionPerformed
 
     private void btnBuscarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarIDActionPerformed

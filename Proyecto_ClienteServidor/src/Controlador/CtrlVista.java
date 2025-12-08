@@ -240,4 +240,31 @@ public class CtrlVista {
         }
     }
     
+    public void btnActualizarProducto(Modelo.Producto producto){
+        boolean registro = ctrlAdmin.modificar(producto);
+        if (registro== true){
+            JOptionPane.showMessageDialog(null, "Producto fue Actualizado "
+                    + "Exitosamente");
+            administrar.setProducto(proTemp);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: El Producto no pudo "
+                    + "ser Actualizado");
+            administrar.setProducto(null);
+        }
+    }
+    
+    public void btnEliminarProducto(Modelo.Producto producto){
+        boolean registro = ctrlAdmin.eliminar(producto);
+        if (registro== true){
+            JOptionPane.showMessageDialog(null, "El Producto Fue Eliminado "
+                    + "Exitosamente");
+            administrar.setProducto(proTemp);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: El Producto no pudo "
+                    + "ser Eliminado");
+            administrar.setProducto(null);
+        }
+    }
 }
