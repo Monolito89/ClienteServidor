@@ -3,6 +3,7 @@ package Vista;
 import javax.swing.JFrame;
 import Controlador.CtrlVista;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -20,6 +21,7 @@ public class Inventario extends javax.swing.JFrame {
      */
     
     private CtrlVista controlador;
+    private Timer timerActualizacion;
     
     public CtrlVista getControlador() {
         return controlador;
@@ -34,6 +36,7 @@ public class Inventario extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         cargarProductosEnTabla();
+        iniciarActualizacionAutomatica();
     }
     
     public Inventario() {
@@ -434,12 +437,11 @@ public class Inventario extends javax.swing.JFrame {
         
         // Llena la tabla con los datos
         for (Modelo.Producto p : productos) {
-            // Convierte el stock a Boolean: si stock > 0 = true (hay stock), si stock = 0 = false (sin stock)
-            boolean hayStock = p.getStock() > 0;
+            // Muestra la cantidad real de stock en lugar de un booleano
             modelo.addRow(new Object[]{
                 p.getIdProducto(),
                 p.getNombre(),
-                hayStock,
+                p.getStock(),
                 p.getPrecio()
             });
         }
@@ -450,8 +452,26 @@ public class Inventario extends javax.swing.JFrame {
         // ajusta el ancho de columnas
         tblCarrito.getColumnModel().getColumn(0).setPreferredWidth(50);   // ID
         tblCarrito.getColumnModel().getColumn(1).setPreferredWidth(400);  // Producto
-        tblCarrito.getColumnModel().getColumn(2).setPreferredWidth(80);   // Stock (Boolean)
+        tblCarrito.getColumnModel().getColumn(2).setPreferredWidth(80);   // Stock (Cantidad)
         tblCarrito.getColumnModel().getColumn(3).setPreferredWidth(100);  // Precio
+    }
+    
+    private void iniciarActualizacionAutomatica() {
+        // Crea un Timer que se ejecuta cada 3 segundos (3000 milisegundos)
+        timerActualizacion = new Timer(3000, evt -> {
+            cargarProductosEnTabla();
+        });
+        timerActualizacion.start();
+        
+        // Detener el Timer cuando se cierre la ventana
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                if (timerActualizacion != null && timerActualizacion.isRunning()) {
+                    timerActualizacion.stop();
+                }
+            }
+        });
     }
     
 }
