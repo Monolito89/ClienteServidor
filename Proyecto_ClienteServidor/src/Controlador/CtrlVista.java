@@ -213,7 +213,7 @@ public class CtrlVista {
         }
     }
     
-    public void btnOferta(JFrame actual){
+    public void btnFiltros(JFrame actual){
         oferta.setLocationRelativeTo(null);
         oferta.setVisible(true);
         actual.dispose();

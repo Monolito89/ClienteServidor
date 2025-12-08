@@ -94,7 +94,7 @@ public class Venta extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         tlbOpciones = new javax.swing.JToolBar();
         btnPerfil = new javax.swing.JButton();
-        btnOfertas = new javax.swing.JButton();
+        btnFiltros = new javax.swing.JButton();
         btnCategorias = new javax.swing.JButton();
         tlbProducto = new javax.swing.JToolBar();
         btnAtras = new javax.swing.JButton();
@@ -110,7 +110,7 @@ public class Venta extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255)));
         jPanel2.setPreferredSize(new java.awt.Dimension(1280, 80));
 
-        btnLogo.setText("Logo");
+        btnLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/logo.png"))); // NOI18N
         btnLogo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogo.setMaximumSize(new java.awt.Dimension(256, 80));
         btnLogo.setPreferredSize(new java.awt.Dimension(256, 80));
@@ -167,7 +167,7 @@ public class Venta extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(btnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
+                .addGap(78, 78, 78)
                 .addComponent(txtBarraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,17 +181,17 @@ public class Venta extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnAdministrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAdministrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtBarraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtBarraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -268,21 +268,21 @@ public class Venta extends javax.swing.JFrame {
         btnPerfil.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tlbOpciones.add(btnPerfil);
 
-        btnOfertas.setBackground(new java.awt.Color(102, 102, 255));
-        btnOfertas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnOfertas.setForeground(new java.awt.Color(255, 255, 255));
-        btnOfertas.setText("Ofertas");
-        btnOfertas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 20));
-        btnOfertas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnOfertas.setMaximumSize(new java.awt.Dimension(160, 60));
-        btnOfertas.setPreferredSize(new java.awt.Dimension(85, 60));
-        btnOfertas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnOfertas.addActionListener(new java.awt.event.ActionListener() {
+        btnFiltros.setBackground(new java.awt.Color(102, 102, 255));
+        btnFiltros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnFiltros.setForeground(new java.awt.Color(255, 255, 255));
+        btnFiltros.setText("Filtros");
+        btnFiltros.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 20));
+        btnFiltros.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFiltros.setMaximumSize(new java.awt.Dimension(160, 60));
+        btnFiltros.setPreferredSize(new java.awt.Dimension(85, 60));
+        btnFiltros.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFiltros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOfertasActionPerformed(evt);
+                btnFiltrosActionPerformed(evt);
             }
         });
-        tlbOpciones.add(btnOfertas);
+        tlbOpciones.add(btnFiltros);
 
         btnCategorias.setBackground(new java.awt.Color(102, 102, 255));
         btnCategorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -377,10 +377,10 @@ public class Venta extends javax.swing.JFrame {
         controlador.btnAtras(this);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
-    private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
+    private void btnFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrosActionPerformed
         // TODO add your handling code here:
-        controlador.btnOferta(this);
-    }//GEN-LAST:event_btnOfertasActionPerformed
+        controlador.btnFiltros(this);
+    }//GEN-LAST:event_btnFiltrosActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
         // TODO add your handling code here:
@@ -436,8 +436,8 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnCarrito;
     private javax.swing.JButton btnCategorias;
+    private javax.swing.JButton btnFiltros;
     private javax.swing.JButton btnLogo;
-    private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

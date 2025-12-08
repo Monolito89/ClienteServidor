@@ -66,7 +66,7 @@ public class Inventario extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         tlbOpciones = new javax.swing.JToolBar();
         btnPerfil = new javax.swing.JButton();
-        btnOfertas = new javax.swing.JButton();
+        btnFiltros = new javax.swing.JButton();
         btnCategorias = new javax.swing.JButton();
         tlbProducto = new javax.swing.JToolBar();
         btnAtras = new javax.swing.JButton();
@@ -82,7 +82,7 @@ public class Inventario extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255)));
         jPanel2.setPreferredSize(new java.awt.Dimension(1280, 80));
 
-        btnLogo.setText("Logo");
+        btnLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/logo.png"))); // NOI18N
         btnLogo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogo.setMaximumSize(new java.awt.Dimension(256, 80));
         btnLogo.setPreferredSize(new java.awt.Dimension(256, 80));
@@ -240,21 +240,21 @@ public class Inventario extends javax.swing.JFrame {
         btnPerfil.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         tlbOpciones.add(btnPerfil);
 
-        btnOfertas.setBackground(new java.awt.Color(102, 102, 255));
-        btnOfertas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnOfertas.setForeground(new java.awt.Color(255, 255, 255));
-        btnOfertas.setText("Ofertas");
-        btnOfertas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 20));
-        btnOfertas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnOfertas.setMaximumSize(new java.awt.Dimension(160, 60));
-        btnOfertas.setPreferredSize(new java.awt.Dimension(85, 60));
-        btnOfertas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnOfertas.addActionListener(new java.awt.event.ActionListener() {
+        btnFiltros.setBackground(new java.awt.Color(102, 102, 255));
+        btnFiltros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnFiltros.setForeground(new java.awt.Color(255, 255, 255));
+        btnFiltros.setText("Filtros");
+        btnFiltros.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 20));
+        btnFiltros.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFiltros.setMaximumSize(new java.awt.Dimension(160, 60));
+        btnFiltros.setPreferredSize(new java.awt.Dimension(85, 60));
+        btnFiltros.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFiltros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOfertasActionPerformed(evt);
+                btnFiltrosActionPerformed(evt);
             }
         });
-        tlbOpciones.add(btnOfertas);
+        tlbOpciones.add(btnFiltros);
 
         btnCategorias.setBackground(new java.awt.Color(102, 102, 255));
         btnCategorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -297,14 +297,14 @@ public class Inventario extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1292, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tlbOpciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tlbProducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tlbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(tlbOpciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,10 +354,10 @@ public class Inventario extends javax.swing.JFrame {
         controlador.btnCategoria(this);
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
-    private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
+    private void btnFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrosActionPerformed
         // TODO add your handling code here:
-        controlador.btnOferta(this);
-    }//GEN-LAST:event_btnOfertasActionPerformed
+        controlador.btnFiltros(this);
+    }//GEN-LAST:event_btnFiltrosActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         // TODO add your handling code here:
@@ -412,8 +412,8 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnCarrito;
     private javax.swing.JButton btnCategorias;
+    private javax.swing.JButton btnFiltros;
     private javax.swing.JButton btnLogo;
-    private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

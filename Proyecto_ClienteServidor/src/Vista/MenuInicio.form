@@ -177,7 +177,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnLogo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Logo"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Recursos/logo.png"/>
+                </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[256, 80]"/>
@@ -194,6 +196,9 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Recursos/Carrito.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Carrito"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -213,6 +218,9 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Recursos/Historial.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Administrar"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -293,7 +301,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ofertas"/>
+                <Property name="text" type="java.lang.String" value="Filtros"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                     <EmptyBorder bottom="1" left="20" right="20" top="1"/>
@@ -427,7 +435,6 @@
         <Component class="javax.swing.JButton" name="btnProducto2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Mouse inal&#xe1;mbrico"/>
-            <Property name="actionCommand" type="java.lang.String" value="Mouse inal&#xe1;mbrico"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
@@ -485,7 +492,6 @@
         <Component class="javax.swing.JButton" name="btnProducto6">
           <Properties>
             <Property name="text" type="java.lang.String" value="Aud&#xed;fonos Bluetooth"/>
-            <Property name="actionCommand" type="java.lang.String" value="Aud&#xed;fonos Bluetooth"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>

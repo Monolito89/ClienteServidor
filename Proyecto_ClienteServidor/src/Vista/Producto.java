@@ -159,7 +159,7 @@ public class Producto extends javax.swing.JFrame {
         btnAdministrar = new javax.swing.JButton();
         tlbOpciones = new javax.swing.JToolBar();
         btnPerfil = new javax.swing.JButton();
-        btnOfertas = new javax.swing.JButton();
+        btnFiltros = new javax.swing.JButton();
         btnCategorias = new javax.swing.JButton();
         tlbAtras = new javax.swing.JToolBar();
         btnAtras = new javax.swing.JButton();
@@ -210,7 +210,7 @@ public class Producto extends javax.swing.JFrame {
             }
         });
 
-        btnLogo.setText("Logo");
+        btnLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/logo.png"))); // NOI18N
         btnLogo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogo.setMaximumSize(new java.awt.Dimension(256, 80));
         btnLogo.setPreferredSize(new java.awt.Dimension(256, 80));
@@ -304,21 +304,21 @@ public class Producto extends javax.swing.JFrame {
         });
         tlbOpciones.add(btnPerfil);
 
-        btnOfertas.setBackground(new java.awt.Color(102, 102, 255));
-        btnOfertas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnOfertas.setForeground(new java.awt.Color(255, 255, 255));
-        btnOfertas.setText("Ofertas");
-        btnOfertas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 20));
-        btnOfertas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnOfertas.setMaximumSize(new java.awt.Dimension(160, 60));
-        btnOfertas.setPreferredSize(new java.awt.Dimension(85, 60));
-        btnOfertas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnOfertas.addActionListener(new java.awt.event.ActionListener() {
+        btnFiltros.setBackground(new java.awt.Color(102, 102, 255));
+        btnFiltros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnFiltros.setForeground(new java.awt.Color(255, 255, 255));
+        btnFiltros.setText("Filtros");
+        btnFiltros.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 20));
+        btnFiltros.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFiltros.setMaximumSize(new java.awt.Dimension(160, 60));
+        btnFiltros.setPreferredSize(new java.awt.Dimension(85, 60));
+        btnFiltros.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFiltros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOfertasActionPerformed(evt);
+                btnFiltrosActionPerformed(evt);
             }
         });
-        tlbOpciones.add(btnOfertas);
+        tlbOpciones.add(btnFiltros);
 
         btnCategorias.setBackground(new java.awt.Color(102, 102, 255));
         btnCategorias.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -638,10 +638,10 @@ public class Producto extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtBarraBusquedaActionPerformed
 
-    private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
+    private void btnFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrosActionPerformed
         // TODO add your handling code here:
-        controlador.btnOferta(this);
-    }//GEN-LAST:event_btnOfertasActionPerformed
+        controlador.btnFiltros(this);
+    }//GEN-LAST:event_btnFiltrosActionPerformed
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
         // TODO add your handling code here:
@@ -816,8 +816,8 @@ public class Producto extends javax.swing.JFrame {
     private javax.swing.JButton btnCarrito;
     private javax.swing.JButton btnCategorias;
     private javax.swing.JButton btnComprar;
+    private javax.swing.JButton btnFiltros;
     private javax.swing.JButton btnLogo;
-    private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;

@@ -96,7 +96,7 @@ public class MenuInicio extends javax.swing.JFrame {
             }
         });
 
-        btnLogo.setText("Logo");
+        btnLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/logo.png"))); // NOI18N
         btnLogo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogo.setMaximumSize(new java.awt.Dimension(256, 80));
         btnLogo.setPreferredSize(new java.awt.Dimension(256, 80));
@@ -107,6 +107,7 @@ public class MenuInicio extends javax.swing.JFrame {
         });
 
         btnCarrito.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCarrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Carrito.png"))); // NOI18N
         btnCarrito.setText("Carrito");
         btnCarrito.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCarrito.setMaximumSize(new java.awt.Dimension(170, 80));
@@ -119,6 +120,7 @@ public class MenuInicio extends javax.swing.JFrame {
         });
 
         btnAdministrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdministrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Historial.png"))); // NOI18N
         btnAdministrar.setText("Administrar");
         btnAdministrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAdministrar.setMaximumSize(new java.awt.Dimension(120, 60));
@@ -190,7 +192,7 @@ public class MenuInicio extends javax.swing.JFrame {
         btnOfertas.setBackground(new java.awt.Color(102, 102, 255));
         btnOfertas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnOfertas.setForeground(new java.awt.Color(255, 255, 255));
-        btnOfertas.setText("Ofertas");
+        btnOfertas.setText("Filtros");
         btnOfertas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 20));
         btnOfertas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnOfertas.setMaximumSize(new java.awt.Dimension(160, 60));
@@ -255,7 +257,6 @@ public class MenuInicio extends javax.swing.JFrame {
         });
 
         btnProducto2.setText("Mouse inalámbrico");
-        btnProducto2.setActionCommand("Mouse inalámbrico");
         btnProducto2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnProducto2.setMaximumSize(new java.awt.Dimension(296, 202));
         btnProducto2.setPreferredSize(new java.awt.Dimension(296, 202));
@@ -286,7 +287,6 @@ public class MenuInicio extends javax.swing.JFrame {
         });
 
         btnProducto6.setText("Audífonos Bluetooth");
-        btnProducto6.setActionCommand("Audífonos Bluetooth");
         btnProducto6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnProducto6.setMaximumSize(new java.awt.Dimension(296, 202));
         btnProducto6.setPreferredSize(new java.awt.Dimension(296, 202));
@@ -350,7 +350,7 @@ public class MenuInicio extends javax.swing.JFrame {
 
     private void btnOfertasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertasActionPerformed
         // TODO add your handling code here:
-        controlador.btnOferta(this);
+        controlador.btnFiltros(this);
     }//GEN-LAST:event_btnOfertasActionPerformed
 
     private void btnLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoActionPerformed
