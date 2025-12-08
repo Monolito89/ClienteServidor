@@ -64,7 +64,6 @@ public class Perfil extends javax.swing.JFrame {
         txtCorreo = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         btnCerrarSesion = new javax.swing.JButton();
-        btnHistorial = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(854, 480));
@@ -301,19 +300,6 @@ public class Perfil extends javax.swing.JFrame {
             }
         });
 
-        btnHistorial.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Historial.png"))); // NOI18N
-        btnHistorial.setText("Historial de Compras");
-        btnHistorial.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHistorial.setMaximumSize(new java.awt.Dimension(120, 60));
-        btnHistorial.setPreferredSize(new java.awt.Dimension(120, 60));
-        btnHistorial.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlPantallaLayout = new javax.swing.GroupLayout(pnlPantalla);
         pnlPantalla.setLayout(pnlPantallaLayout);
         pnlPantallaLayout.setHorizontalGroup(
@@ -340,13 +326,13 @@ public class Perfil extends javax.swing.JFrame {
                                     .addGroup(pnlPantallaLayout.createSequentialGroup()
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(pnlPantallaLayout.createSequentialGroup()
-                                        .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(80, 80, 80)
-                                        .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPantallaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(555, 555, 555))
         );
         pnlPantallaLayout.setVerticalGroup(
             pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,11 +352,9 @@ public class Perfil extends javax.swing.JFrame {
                 .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
-                .addGroup(pnlPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlPantalla, java.awt.BorderLayout.CENTER);
@@ -422,10 +406,6 @@ public class Perfil extends javax.swing.JFrame {
         controlador.setSesion(false);
         controlador.btnLogo(this);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
-
-    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnHistorialActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
@@ -486,7 +466,6 @@ public class Perfil extends javax.swing.JFrame {
     private javax.swing.JButton btnCarrito;
     private javax.swing.JButton btnCategorias;
     private javax.swing.JButton btnCerrarSesion;
-    private javax.swing.JButton btnHistorial;
     private javax.swing.JButton btnLogo;
     private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;
