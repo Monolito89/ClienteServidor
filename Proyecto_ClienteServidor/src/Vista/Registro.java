@@ -400,7 +400,7 @@ public class Registro extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Nombre de Usuario:");
+        jLabel7.setText("Correo Electrónico:");
         jLabel7.setMaximumSize(new java.awt.Dimension(100000, 10000));
         jLabel7.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel7.setPreferredSize(new java.awt.Dimension(175, 24));
