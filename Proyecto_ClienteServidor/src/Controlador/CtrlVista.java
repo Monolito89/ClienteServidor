@@ -355,5 +355,19 @@ public class CtrlVista {
         actual.dispose();
         setFrameAnterior(actual);
     }
+    //Es para el menu inicio los botones de productos
+    public void btnProductoDestacado(int id, JFrame actual){
+        proTemp.setIdProducto(id);
+        boolean busqueda = ctrlAdmin.buscar(proTemp);
+        if (busqueda == true){
+            producto.setLocationRelativeTo(null);
+            producto.ProductoDestacado(proTemp);
+            producto.setVisible(true);
+            actual.dispose();
+            setFrameAnterior(actual);
+        } else {
+            JOptionPane.showMessageDialog(actual, "Error: Producto no encontrado");
+        }
+    }
     
 }
