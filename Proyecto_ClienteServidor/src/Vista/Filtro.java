@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author barre
  */
-public class Oferta extends javax.swing.JFrame {
+public class Filtro extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuInicio
@@ -29,13 +29,13 @@ public class Oferta extends javax.swing.JFrame {
         this.controlador = controlador;
     }
     
-    public Oferta(CtrlVista controlador) {
+    public Filtro(CtrlVista controlador) {
         this.controlador = controlador;
         initComponents();
         this.setResizable(false);
     }
     
-    public Oferta() {
+    public Filtro() {
         initComponents();
         this.setResizable(false);
     }
@@ -59,6 +59,9 @@ public class Oferta extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCarrito = new javax.swing.JTable();
+        btnFiltroOferta = new javax.swing.JButton();
+        btnFiltroPrecio = new javax.swing.JButton();
+        btnFiltroDisp = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         tlbOpciones = new javax.swing.JToolBar();
         btnPerfil = new javax.swing.JButton();
@@ -190,6 +193,42 @@ public class Oferta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblCarrito);
 
+        btnFiltroOferta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnFiltroOferta.setText("Filtrar Por Ofertas");
+        btnFiltroOferta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFiltroOferta.setMaximumSize(new java.awt.Dimension(120, 60));
+        btnFiltroOferta.setPreferredSize(new java.awt.Dimension(120, 60));
+        btnFiltroOferta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFiltroOferta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltroOfertaActionPerformed(evt);
+            }
+        });
+
+        btnFiltroPrecio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnFiltroPrecio.setText("Filtrar Por Precio");
+        btnFiltroPrecio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFiltroPrecio.setMaximumSize(new java.awt.Dimension(120, 60));
+        btnFiltroPrecio.setPreferredSize(new java.awt.Dimension(120, 60));
+        btnFiltroPrecio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFiltroPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltroPrecioActionPerformed(evt);
+            }
+        });
+
+        btnFiltroDisp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnFiltroDisp.setText("Filtrar Por Disponibilidad");
+        btnFiltroDisp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFiltroDisp.setMaximumSize(new java.awt.Dimension(120, 60));
+        btnFiltroDisp.setPreferredSize(new java.awt.Dimension(120, 60));
+        btnFiltroDisp.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFiltroDisp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltroDispActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -198,10 +237,25 @@ public class Oferta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(290, 290, 290)
+                .addComponent(btnFiltroPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFiltroDisp, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(btnFiltroOferta, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(349, 349, 349))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFiltroOferta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFiltroPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFiltroDisp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel5.setBackground(new java.awt.Color(102, 102, 255));
@@ -357,8 +411,20 @@ public class Oferta extends javax.swing.JFrame {
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         // TODO add your handling code here:
-        controlador.btnBuscar(this);
+        controlador.btnBuscar(txtBarraBusqueda.getText(), this);
     }//GEN-LAST:event_btnBuscar1ActionPerformed
+
+    private void btnFiltroOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroOfertaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFiltroOfertaActionPerformed
+
+    private void btnFiltroPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFiltroPrecioActionPerformed
+
+    private void btnFiltroDispActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroDispActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFiltroDispActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,14 +443,18 @@ public class Oferta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Oferta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Filtro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Oferta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Filtro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Oferta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Filtro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Oferta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Filtro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -393,7 +463,7 @@ public class Oferta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Oferta().setVisible(true);
+                new Filtro().setVisible(true);
             }
         });
     }
@@ -404,6 +474,9 @@ public class Oferta extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnCarrito;
     private javax.swing.JButton btnCategorias;
+    private javax.swing.JButton btnFiltroDisp;
+    private javax.swing.JButton btnFiltroOferta;
+    private javax.swing.JButton btnFiltroPrecio;
     private javax.swing.JButton btnLogo;
     private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;

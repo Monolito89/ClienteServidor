@@ -218,4 +218,35 @@ public class CtrlAdmin {
         return lista;
     }   
     
+    // MÉTODO 6: BUSCAR PRODUCTO POR NOMBRE PARA LA BARRA DE BUSQUEDA
+    public boolean buscarProducto(Producto pro) {
+        String sql = "SELECT * FROM productos WHERE LOWER(nombre) LIKE LOWER(?)";
+
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + pro.getNombre().trim() + "%");
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    pro.setIdProducto(rs.getInt("id_producto"));
+                    pro.setNombre(rs.getString("nombre"));
+                    pro.setDescripcion(rs.getString("descripcion"));
+                    pro.setPrecio(rs.getDouble("precio"));
+                    pro.setDescuento(rs.getDouble("descuento"));
+                    pro.setStock(rs.getInt("stock"));
+                    pro.setIdCategoria(rs.getInt("id_categoria"));
+                    pro.setIdProveedor(rs.getInt("id_proveedor"));
+                    return true;
+                }
+            }
+
+            return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
 }

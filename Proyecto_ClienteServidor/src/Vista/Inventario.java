@@ -358,7 +358,7 @@ public class Inventario extends javax.swing.JFrame {
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         // TODO add your handling code here:
-        controlador.btnBuscar(this);
+        controlador.btnBuscar(txtBarraBusqueda.getText(), this);
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     /**
