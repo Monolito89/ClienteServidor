@@ -432,6 +432,17 @@ public class Perfil extends javax.swing.JFrame {
         controlador.btnAtras(this);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
+    // Método para cargar los datos del usuario actual
+    public void cargarDatosUsuario() {
+        if (controlador != null && controlador.getCtrlUsuarios() != null) {
+            Modelo.Usuario usuarioActual = controlador.getCtrlUsuarios().getUsuarioActual();
+            if (usuarioActual != null) {
+                txtUsuario.setText(usuarioActual.getNombre());
+                txtCorreo.setText(usuarioActual.getCorreo());
+            }
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
