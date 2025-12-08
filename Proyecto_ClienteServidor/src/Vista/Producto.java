@@ -20,6 +20,7 @@ public class Producto extends javax.swing.JFrame {
     private Modelo.Producto producto;
     private double descuento;
     private double precio;
+    double precioConDescuento = 0;
     private LocalDate Fecha;
 
     
@@ -66,6 +67,11 @@ public class Producto extends javax.swing.JFrame {
     public Producto(CtrlVista controlador) {
         this.controlador = controlador;
         initComponents();
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+        @Override
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            actualizarSubtotal();
+        }});
         setResizable(false);
     }
     
@@ -84,14 +90,21 @@ public class Producto extends javax.swing.JFrame {
         txtADescripcion.setText(producto.getDescripcion());
         txtCantidad.setText("1");
         
-        this.precio = (producto.getPrecio() - descuento) * Double.parseDouble(txtCantidad.getText());
-        txtPrecio.setText(String.valueOf(precio));
+        this.precioConDescuento = producto.getPrecio() - descuento;
+        txtPrecio.setText(String.valueOf(precioConDescuento));
+        
+        this.precio = precioConDescuento * Double.parseDouble(txtCantidad.getText());
         txtSubtotal.setText(String.valueOf(precio));
         
         this.Fecha = LocalDate.now();
         txtFecha.setText(Fecha.toString());
     }
-
+    
+    public void actualizarSubtotal(){
+        this.precio = precioConDescuento * Double.parseDouble(txtCantidad.getText());
+        txtSubtotal.setText(String.valueOf(precio));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -641,8 +654,13 @@ public class Producto extends javax.swing.JFrame {
 
     private void btnAñadirCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirCarritoActionPerformed
         // TODO add your handling code here:
-        controlador.getCarrito().Agregar(producto.getIdProducto(), producto.getNombre(), producto.getPrecio(), Integer.parseInt(txtCantidad.getText()), precio, getFecha());
+        if(controlador.getCtrlUsuarios().getUsuarioActual() != null){
+            controlador.getCarrito().Agregar(producto.getIdProducto(), producto.getNombre(), producto.getPrecio(), Integer.parseInt(txtCantidad.getText()), precio, getFecha());
         controlador.getCarrito().cargarTablaCarrito();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null,
+                    "Necesita Logearse para poder Comprar Productos");
+        }  
     }//GEN-LAST:event_btnAñadirCarritoActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed

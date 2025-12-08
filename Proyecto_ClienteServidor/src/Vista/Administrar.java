@@ -96,7 +96,7 @@ public class Administrar extends javax.swing.JFrame {
         txtProveedor = new javax.swing.JTextField();
         txtCategoria = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        btnHistorial = new javax.swing.JButton();
+        btnVenta = new javax.swing.JButton();
         btnAgregarAdmin = new javax.swing.JButton();
         btnInventario = new javax.swing.JButton();
         btnNuevoProducto = new javax.swing.JButton();
@@ -291,7 +291,6 @@ public class Administrar extends javax.swing.JFrame {
             }
         });
 
-        txtProducto.setBackground(new java.awt.Color(255, 255, 255));
         txtProducto.setPreferredSize(new java.awt.Dimension(192, 24));
         txtProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,7 +319,6 @@ public class Administrar extends javax.swing.JFrame {
         jLabel3.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel3.setPreferredSize(new java.awt.Dimension(175, 24));
 
-        txtStock.setBackground(new java.awt.Color(255, 255, 255));
         txtStock.setPreferredSize(new java.awt.Dimension(192, 24));
         txtStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -342,7 +340,6 @@ public class Administrar extends javax.swing.JFrame {
         jLabel7.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel7.setPreferredSize(new java.awt.Dimension(175, 24));
 
-        txtPrecio.setBackground(new java.awt.Color(255, 255, 255));
         txtPrecio.setPreferredSize(new java.awt.Dimension(192, 24));
         txtPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,7 +361,6 @@ public class Administrar extends javax.swing.JFrame {
         jLabel8.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel8.setPreferredSize(new java.awt.Dimension(175, 24));
 
-        txtDescuento.setBackground(new java.awt.Color(255, 255, 255));
         txtDescuento.setPreferredSize(new java.awt.Dimension(192, 24));
         txtDescuento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,7 +368,6 @@ public class Administrar extends javax.swing.JFrame {
             }
         });
 
-        txtADescripcion.setBackground(new java.awt.Color(255, 255, 255));
         txtADescripcion.setColumns(20);
         txtADescripcion.setRows(5);
         jScrollPane1.setViewportView(txtADescripcion);
@@ -391,7 +386,6 @@ public class Administrar extends javax.swing.JFrame {
         jLabel10.setMinimumSize(new java.awt.Dimension(175, 24));
         jLabel10.setPreferredSize(new java.awt.Dimension(175, 24));
 
-        txtProveedor.setBackground(new java.awt.Color(255, 255, 255));
         txtProveedor.setPreferredSize(new java.awt.Dimension(192, 24));
         txtProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -399,7 +393,6 @@ public class Administrar extends javax.swing.JFrame {
             }
         });
 
-        txtCategoria.setBackground(new java.awt.Color(255, 255, 255));
         txtCategoria.setPreferredSize(new java.awt.Dimension(192, 24));
         txtCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -505,15 +498,15 @@ public class Administrar extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(360, 266));
         jPanel2.setRequestFocusEnabled(false);
 
-        btnHistorial.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnHistorial.setText("Historial de Ventas");
-        btnHistorial.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnHistorial.setMaximumSize(new java.awt.Dimension(120, 60));
-        btnHistorial.setPreferredSize(new java.awt.Dimension(120, 60));
-        btnHistorial.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
+        btnVenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnVenta.setText("Historial de Ventas");
+        btnVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnVenta.setMaximumSize(new java.awt.Dimension(120, 60));
+        btnVenta.setPreferredSize(new java.awt.Dimension(120, 60));
+        btnVenta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistorialActionPerformed(evt);
+                btnVentaActionPerformed(evt);
             }
         });
 
@@ -587,7 +580,7 @@ public class Administrar extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEliminarProducto1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -606,7 +599,7 @@ public class Administrar extends javax.swing.JFrame {
                     .addComponent(btnAgregarAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38))
         );
 
@@ -681,10 +674,10 @@ public class Administrar extends javax.swing.JFrame {
         controlador.btnPerfil(this);
     }//GEN-LAST:event_btnPerfilActionPerformed
 
-    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
+    private void btnVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaActionPerformed
         // TODO add your handling code here:
-        controlador.btnAgregarAdmin(this);
-}//GEN-LAST:event_btnHistorialActionPerformed
+        controlador.btnVenta(this);
+}//GEN-LAST:event_btnVentaActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
@@ -843,12 +836,12 @@ public class Administrar extends javax.swing.JFrame {
     private javax.swing.JButton btnCategorias;
     private javax.swing.JButton btnEditarProducto;
     private javax.swing.JButton btnEliminarProducto1;
-    private javax.swing.JButton btnHistorial;
     private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnLogo;
     private javax.swing.JButton btnNuevoProducto;
     private javax.swing.JButton btnOfertas;
     private javax.swing.JButton btnPerfil;
+    private javax.swing.JButton btnVenta;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

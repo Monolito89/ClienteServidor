@@ -787,7 +787,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnInventario" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnHistorial" min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="btnVenta" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnEliminarProducto1" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -808,7 +808,7 @@
                           <Component id="btnAgregarAdmin" min="-2" max="-2" attributes="0"/>
                           <Component id="btnNuevoProducto" min="-2" max="-2" attributes="0"/>
                           <Component id="btnInventario" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnHistorial" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVenta" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
@@ -816,7 +816,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnHistorial">
+            <Component class="javax.swing.JButton" name="btnVenta">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -832,7 +832,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistorialActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVentaActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAgregarAdmin">

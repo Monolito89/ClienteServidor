@@ -28,23 +28,18 @@ public class CtrlVista {
     private Administrar administrar = new Administrar(this);
     private AgregarAdmin agregarAdmin = new AgregarAdmin(this);
     private Inventario inventario = new Inventario(this);
+    private Venta venta = new Venta(this);
     
     private JFrame frameAnterior = menuInicio;
     private boolean sesion = false;
     private boolean esAdmin = false;
     
-    
-    
-    
+
     
     public CtrlVista() {
         menuInicio.setVisible(true);
         menuInicio.setLocationRelativeTo(null);
     }
-    
-    
-    
-    
     
     public Modelo.Producto getProTemp() {
         return proTemp;
@@ -180,7 +175,13 @@ public class CtrlVista {
         this.esAdmin = esAdmin;
     }  
     
-    
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
     
     
     
@@ -198,12 +199,17 @@ public class CtrlVista {
         setFrameAnterior(actual);
     }
 
-    public void btnCarrito(JFrame actual){
-        carrito.setLocationRelativeTo(null);
-        carrito.setVisible(true);
-        carrito.setUsuario(ctrlUsuarios.getUsuarioActual());
-        actual.dispose();
-        setFrameAnterior(actual);
+    public void btnCarrito(JFrame actual){ 
+        if(ctrlUsuarios.getUsuarioActual() != null){
+            carrito.setLocationRelativeTo(null);
+            carrito.setVisible(true);
+            carrito.setUsuario(ctrlUsuarios.getUsuarioActual());
+            actual.dispose();
+            setFrameAnterior(actual);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(actual,
+                    "Necesita Logearse para poder acceder al Carrito de Compras");
+        }
     }
     
     public void btnOferta(JFrame actual){
@@ -326,12 +332,13 @@ public class CtrlVista {
         boolean busqueda = ctrlAdmin.buscarProducto(proTemp);
         if (busqueda == true){
             administrar.setProducto(proTemp);
+            actual.dispose();
+            setFrameAnterior(actual);
             producto.setLocationRelativeTo(null);
             producto.setVisible(true);
             producto.setCarrito(carrito);
             producto.Iniciar(proTemp);
-            actual.dispose();
-            setFrameAnterior(actual);
+            
             
         } else {
             JOptionPane.showMessageDialog(null, "Error: ID no coincide con "
@@ -340,6 +347,11 @@ public class CtrlVista {
         }
     }
 
-    
+    public void btnVenta(JFrame actual){
+        venta.setLocationRelativeTo(null);
+        venta.setVisible(true);
+        actual.dispose();
+        setFrameAnterior(actual);
+    }
     
 }
